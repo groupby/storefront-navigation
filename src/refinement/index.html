@@ -1,0 +1,9 @@
+<yield>
+  <!-- <label onclick="{ $refinement.onClick }"> -->
+  <label>
+    <span if="{ !$navigationDisplay.or && $refinement.selected }">&times;</span>
+    <input type="{ $navigationDisplay.or ? 'checkbox' : 'button' }" checked="{ $refinement.selected }">
+    <span>{ JSON.stringify($refinement) }</span>
+    <!-- <gb-badge if="{ $navigable.badge && !$refinement.selected }">{ $refinement.count }</gb-badge> -->
+  </label>
+</yield>
