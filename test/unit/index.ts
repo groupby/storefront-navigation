@@ -1,4 +1,4 @@
-import pkg = require('../../src');
+import * as pkg from '../../src';
 import Navigation from '../../src/navigation';
 import NavigationDisplay from '../../src/navigation-display';
 import NavigationList from '../../src/navigation-list';

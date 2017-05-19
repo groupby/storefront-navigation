@@ -4,7 +4,7 @@ import NavigationList from './navigation-list';
 import Refinement from './refinement';
 import RefinementList from './refinement-list';
 
-export = {
+export {
   Navigation,
   NavigationDisplay,
   NavigationList,
