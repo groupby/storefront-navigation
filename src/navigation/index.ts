@@ -5,7 +5,9 @@ import { view, Component, Events, Store } from '@storefront/core';
 @view('gb-navigation', require('./index.html'))
 class Navigation extends Component {
 
-  state: Navigation.State = { fields: [] };
+  state: Navigation.State = {
+    fields: []
+  };
 
   constructor() {
     super();
