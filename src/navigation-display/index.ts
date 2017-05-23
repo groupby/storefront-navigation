@@ -6,10 +6,6 @@ class NavigationDisplay extends Component {
   props: NavigationDisplay.Props;
   state: NavigationDisplay.State;
 
-  constructor() {
-    super();
-  }
-
   onBeforeMount() {
     this.root.classList.add(`gb-navigation-${this.props.field}`);
     this.updateNavigation();
