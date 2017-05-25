@@ -5,6 +5,10 @@ import { view, Component, Store } from '@storefront/core';
 ])
 class RefinementList extends Component {
   props: RefinementList.Props;
+
+  onBeforeMount() {
+    this.expose('refinements', this.props.refinements);
+  }
 }
 
 namespace RefinementList {
