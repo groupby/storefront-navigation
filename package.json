@@ -16,8 +16,7 @@
   "homepage": "https://github.com/groupby/storefront-navigation#readme",
   "license": "MIT",
   "main": "dist/index.js",
-  "jsnext:main": "esnext/index.js",
-  "module": "esnext/index.js",
+  "module:esnext": "esnext/index.js",
   "files": [
     "dist/",
     "esnext/"
