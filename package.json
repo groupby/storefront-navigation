@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "start": "start-runner -p re-start/presets/typescript",
-    "esnext": "npm start build -- -- --compileOpts.configFile tsconfig.esnext.json --outDir esnext --copyDir esnext",
+    "esnext": "npm start build -- -- --compileOpts.configFile tsconfig.esnext.json --outDir esnext",
     "dev": "npm start dev",
     "test": "npm start test",
     "tdd": "npm start tdd",
@@ -61,7 +61,7 @@
     "husky": "^0.13.3",
     "mocha-suite": "^1.0.9",
     "mock-require": "^2.0.2",
-    "re-start": "^1.14.0",
+    "re-start": "^1.14.1",
     "sinon": "^2.2.0",
     "start-babel-cli": "^4.0.1",
     "tslint": "^5.2.0",
