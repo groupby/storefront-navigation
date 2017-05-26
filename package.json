@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "start": "start-runner -p re-start/presets/typescript",
-    "esnext": "npm start build -- -- --compileOpts.configFile tsconfig.esnext.json --outDir esnext",
+    "esnext": "npm start build -- -- --compileOpts.configFile tsconfig.esnext.json --outDir esnext --copyDir esnext",
     "dev": "npm start dev",
     "test": "npm start test",
     "tdd": "npm start tdd",
