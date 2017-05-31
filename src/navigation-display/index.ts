@@ -1,10 +1,10 @@
-import { view, Component, Events, Store } from '@storefront/core';
+import { tag, Events, Store, Tag } from '@storefront/core';
 import { Selectors } from '@storefront/flux-capacitor';
 
-@view('gb-navigation-display', require('./index.html'))
-class NavigationDisplay extends Component {
+@tag('gb-navigation-display', require('./index.html'))
+class NavigationDisplay {
+
   field: string;
-  props: NavigationDisplay.Props;
   state: NavigationDisplay.State = {
     onClick: (index) => this.flux[this.isSelected(index) ? 'unrefine' : 'refine'](this.field, index)
   };
@@ -45,10 +45,12 @@ class NavigationDisplay extends Component {
   }
 }
 
+interface NavigationDisplay extends Tag<NavigationDisplay.Props, NavigationDisplay.State> { }
 namespace NavigationDisplay {
   export interface Props {
     field: string;
   }
+
   export interface State {
     label?: string;
     more?: boolean;

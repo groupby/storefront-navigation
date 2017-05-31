@@ -1,66 +1,50 @@
-import { Component, Events } from '@storefront/core';
+import { Events } from '@storefront/core';
 import Navigation from '../../src/navigation';
 import suite from './_suite';
 
 suite('Navigation', ({ expect, spy }) => {
+  let navigation: Navigation;
 
-  describe('constructor()', () => {
-    afterEach(() => {
-      delete Component.prototype.expose;
-      delete Component.prototype.flux;
-    });
+  beforeEach(() => navigation = new Navigation());
 
+  describe('init()', () => {
     it('should set initial fields', () => {
-      Component.prototype.expose = () => null;
-      Component.prototype.flux = <any>{ on: () => null };
+      navigation.expose = () => null;
+      navigation.flux = <any>{ on: () => null };
 
-      const navigation = new Navigation();
+      navigation.init();
 
       expect(navigation.state.fields).to.eql([]);
     });
 
     it('should call expose()', () => {
-      const expose = Component.prototype.expose = spy();
-      Component.prototype.flux = <any>{ on: () => null };
+      const expose = navigation.expose = spy();
+      navigation.flux = <any>{ on: () => null };
 
-      new Navigation();
+      navigation.init();
 
       expect(expose.calledWith('navigation')).to.be.true;
     });
 
     it('should listen for NAVIGATIONS_UPDATED', () => {
       const on = spy();
-      Component.prototype.flux = <any>{ on };
-      Component.prototype.expose = () => null;
+      navigation.flux = <any>{ on };
+      navigation.expose = () => null;
 
-      const navigation = new Navigation();
+      navigation.init();
 
       expect(on.calledWith(Events.NAVIGATIONS_UPDATED, navigation.updateFields)).to.be.true;
     });
   });
 
-  describe('actions', () => {
-    let navigation: Navigation;
+  describe('updateFields()', () => {
+    it('should set fields', () => {
+      const fields = ['a', 'b'];
+      const set = navigation.set = spy();
 
-    before(() => {
-      Component.prototype.expose = () => null;
-      Component.prototype.flux = <any>{ on: () => null };
-    });
-    after(() => {
-      delete Component.prototype.expose;
-      delete Component.prototype.flux;
-    });
-    beforeEach(() => navigation = new Navigation());
+      navigation.updateFields(<any>{ allIds: fields });
 
-    describe('updateFields()', () => {
-      it('should set fields', () => {
-        const fields = ['a', 'b'];
-        const set = navigation.set = spy();
-
-        navigation.updateFields(<any>{ allIds: fields });
-
-        expect(set.calledWith({ fields }));
-      });
+      expect(set.calledWith({ fields }));
     });
   });
 });

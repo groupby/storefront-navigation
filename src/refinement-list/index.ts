@@ -1,20 +1,21 @@
-import { view, Component, Store } from '@storefront/core';
+import { tag, Store, Tag } from '@storefront/core';
 
-@view('gb-refinement-list', require('./index.html'), [
+@tag('gb-refinement-list', require('./index.html'), [
   { name: 'refinements', default: [] }
 ])
-class RefinementList extends Component {
-  props: RefinementList.Props;
+class RefinementList {
 
   onBeforeMount() {
     this.expose('refinements', this.props.refinements);
   }
 }
 
+interface RefinementList extends Tag<RefinementList.Props> { }
 namespace RefinementList {
   export interface Props {
     refinements: Refinement[];
   }
+
   export type Refinement = Store.Refinement & { selected: boolean };
 }
 
