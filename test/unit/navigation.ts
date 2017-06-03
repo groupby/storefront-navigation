@@ -17,15 +17,6 @@ suite('Navigation', ({ expect, spy }) => {
       expect(navigation.state.fields).to.eql([]);
     });
 
-    it('should call expose()', () => {
-      const expose = navigation.expose = spy();
-      navigation.flux = <any>{ on: () => null };
-
-      navigation.init();
-
-      expect(expose.calledWith('navigation')).to.be.true;
-    });
-
     it('should listen for NAVIGATIONS_UPDATED', () => {
       const on = spy();
       navigation.flux = <any>{ on };

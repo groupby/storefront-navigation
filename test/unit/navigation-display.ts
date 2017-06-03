@@ -7,18 +7,17 @@ suite('NavigationDisplay', ({ expect, spy }) => {
 
   beforeEach(() => navigationDisplay = new NavigationDisplay());
 
-  describe('onBeforeMount()', () => {
-    it('should add a unique class', () => {
-      const add = spy();
-      navigationDisplay.root = <any>{ classList: { add } };
-      navigationDisplay.props = { field: 'brand' };
-      navigationDisplay.flux = <any>{ on: () => null };
+  describe('init()', () => {
+    it('should set field', () => {
+      const field = 'brand';
       navigationDisplay.updateNavigation = () => null;
-      navigationDisplay.expose = () => null;
+      navigationDisplay.root = <any>{ classList: { add: () => null } };
+      navigationDisplay.flux = <any>{ on: () => null };
+      navigationDisplay.props = <any>{ field };
 
-      navigationDisplay.onBeforeMount();
+      navigationDisplay.init();
 
-      expect(add.calledWith('gb-navigation-brand')).to.be.true;
+      expect(navigationDisplay.field).to.eq(field);
     });
 
     it('should call updateNavigation()', () => {
@@ -26,11 +25,22 @@ suite('NavigationDisplay', ({ expect, spy }) => {
       navigationDisplay.root = <any>{ classList: { add: () => null } };
       navigationDisplay.props = <any>{};
       navigationDisplay.flux = <any>{ on: () => null };
-      navigationDisplay.expose = () => null;
 
-      navigationDisplay.onBeforeMount();
+      navigationDisplay.init();
 
       expect(updateNavigation.called).to.be.true;
+    });
+
+    it('should add a unique class', () => {
+      const add = spy();
+      navigationDisplay.root = <any>{ classList: { add } };
+      navigationDisplay.props = { field: 'brand' };
+      navigationDisplay.flux = <any>{ on: () => null };
+      navigationDisplay.updateNavigation = () => null;
+
+      navigationDisplay.init();
+
+      expect(add.calledWith('gb-navigation-brand')).to.be.true;
     });
 
     it('should listen for SELECTED_REFINEMENTS_UPDATED', () => {
@@ -39,33 +49,22 @@ suite('NavigationDisplay', ({ expect, spy }) => {
       navigationDisplay.root = <any>{ classList: { add: () => null } };
       navigationDisplay.props = <any>{ field: 'colour' };
       navigationDisplay.flux = <any>{ on };
-      navigationDisplay.expose = () => null;
 
-      navigationDisplay.onBeforeMount();
+      navigationDisplay.init();
 
       expect(on.calledWith(`${Events.SELECTED_REFINEMENTS_UPDATED}:colour`)).to.be.true;
-    });
-
-    it('should call expose()', () => {
-      const expose = navigationDisplay.expose = spy();
-      navigationDisplay.updateNavigation = () => null;
-      navigationDisplay.root = <any>{ classList: { add: () => null } };
-      navigationDisplay.flux = <any>{ on: () => null };
-      navigationDisplay.props = <any>{};
-
-      navigationDisplay.onBeforeMount();
-
-      expect(expose.calledWith('navigationDisplay')).to.be.true;
     });
   });
 
   describe('onUpdate()', () => {
     it('should call updateNavigation()', () => {
+      const field = 'colour';
       const updateNavigation = navigationDisplay.updateNavigation = spy();
-      navigationDisplay.props = { field: 'colour' };
+      navigationDisplay.props = { field };
 
       navigationDisplay.onUpdate();
 
+      expect(navigationDisplay.field).to.eq(field);
       expect(updateNavigation.called).to.be.true;
     });
 
@@ -79,30 +78,18 @@ suite('NavigationDisplay', ({ expect, spy }) => {
   });
 
   describe('updateNavigation()', () => {
-    it('should update the state', () => {
+    it('should set the state', () => {
       const state = { a: 'b' };
-      const extractNavigation = navigationDisplay.extractNavigation = spy(() => ({ c: 'd' }));
-      navigationDisplay.state = <any>{ e: 'f' };
+      const extracted = { c: 'd' };
+      const set = navigationDisplay.set = spy();
+      const extractNavigation = navigationDisplay.extractNavigation = spy(() => extracted);
       navigationDisplay.flux = <any>{ store: { getState: () => state } };
-      navigationDisplay.props = <any>{ field: 'brand' };
+      navigationDisplay.field = 'brand';
 
       navigationDisplay.updateNavigation();
 
-      expect(navigationDisplay.state).to.eql({ c: 'd', e: 'f' });
       expect(extractNavigation.calledWith(state, 'brand'));
-    });
-
-    it('should update field', () => {
-      const field = 'brand';
-      navigationDisplay.field = 'colour';
-      navigationDisplay.extractNavigation = () => null;
-      navigationDisplay.state = <any>{ e: 'f' };
-      navigationDisplay.flux = <any>{ store: { getState: () => null } };
-      navigationDisplay.props = <any>{ field };
-
-      navigationDisplay.updateNavigation();
-
-      expect(navigationDisplay.field).to.eq(field);
+      expect(set.calledWith(extracted)).to.be.true;
     });
   });
 

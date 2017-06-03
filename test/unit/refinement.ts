@@ -6,12 +6,12 @@ suite('Refinement', ({ expect, spy, stub }) => {
 
   beforeEach(() => refinement = new Refinement());
 
-  describe('onBeforeMount()', () => {
+  describe('init()', () => {
     it('should call expose', () => {
       const expose = refinement.expose = spy();
       const ref = refinement.refinement = <any>{ a: 'b' };
 
-      refinement.onBeforeMount();
+      refinement.init();
 
       expect(expose.calledWith('refinement', refinement));
     });
