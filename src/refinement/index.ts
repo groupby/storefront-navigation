@@ -8,8 +8,7 @@ class Refinement {
   $navigationDisplay: NavigationDisplay.State;
   refinement: RefinementList.Refinement;
 
-  onBeforeMount() {
-    // TODO: having this in init() it was not inheritable, should it have been?
+  init() {
     this.expose('refinement', this.refinement);
   }
 

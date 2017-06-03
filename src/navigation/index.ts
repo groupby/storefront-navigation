@@ -1,7 +1,8 @@
-import { tag, Events, Store, Tag } from '@storefront/core';
+import { alias, tag, Events, Store, Tag } from '@storefront/core';
 
 // TODO can we rename this? hard to have alias for navigation component
-// vs alias for a navigtion object
+// vs alias for a navigation object
+@alias('navigation')
 @tag('gb-navigation', require('./index.html'))
 class Navigation {
 
@@ -10,7 +11,6 @@ class Navigation {
   };
 
   init() {
-    this.expose('navigation');
     this.flux.on(Events.NAVIGATIONS_UPDATED, this.updateFields);
   }
 

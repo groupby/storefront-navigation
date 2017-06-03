@@ -1,11 +1,13 @@
 import { tag, Store, Tag } from '@storefront/core';
 
-@tag('gb-refinement-list', require('./index.html'), [
-  { name: 'refinements', default: [] }
-])
+@tag('gb-refinement-list', require('./index.html'))
 class RefinementList {
 
-  onBeforeMount() {
+  props: RefinementList.Props = {
+    refinements: []
+  };
+
+  init() {
     this.expose('refinements', this.props.refinements);
   }
 }

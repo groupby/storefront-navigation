@@ -1,6 +1,6 @@
-import { tag, Events, Store, Tag } from '@storefront/core';
-import { Selectors } from '@storefront/flux-capacitor';
+import { alias, tag, Events, Selectors, Store, Tag } from '@storefront/core';
 
+@alias('navigationDisplay')
 @tag('gb-navigation-display', require('./index.html'))
 class NavigationDisplay {
 
@@ -9,25 +9,22 @@ class NavigationDisplay {
     onClick: (index) => this.flux[this.isSelected(index) ? 'unrefine' : 'refine'](this.field, index)
   };
 
-  onBeforeMount() {
-    this.root.classList.add(`gb-navigation-${this.props.field}`);
+  init() {
+    this.field = this.props.field;
     this.updateNavigation();
-    this.flux.on(`${Events.SELECTED_REFINEMENTS_UPDATED}:${this.props.field}`, this.updateNavigation);
-    this.expose('navigationDisplay');
+    this.root.classList.add(`gb-navigation-${this.field}`);
+    this.flux.on(`${Events.SELECTED_REFINEMENTS_UPDATED}:${this.field}`, this.updateNavigation);
   }
 
   onUpdate() {
     if (this.field !== this.props.field) {
+      this.field = this.props.field;
       this.updateNavigation();
     }
   }
 
-  updateNavigation = () => {
-    this.state = {
-      ...this.state,
-      ...this.extractNavigation(this.flux.store.getState(), this.field = this.props.field)
-    };
-  }
+  updateNavigation = () =>
+    this.set(this.extractNavigation(this.flux.store.getState(), this.field))
 
   extractNavigation(state: Store.State, field: string) {
     const navigation = state.data.navigations.byId[field];
