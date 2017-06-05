@@ -10,6 +10,10 @@ class RefinementList {
   init() {
     this.expose('refinements', this.props.refinements);
   }
+
+  onUpdate() {
+    this.updateAlias('refinements', this.props.refinements);
+  }
 }
 
 interface RefinementList extends Tag<RefinementList.Props> { }

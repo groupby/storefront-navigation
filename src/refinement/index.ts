@@ -12,6 +12,10 @@ class Refinement {
     this.expose('refinement', this.refinement);
   }
 
+  onUpdate() {
+    this.updateAlias('refinement', this.refinement);
+  }
+
   onClick(event: Refinement.IndexedClickEvent) {
     event.preventUpdate = true;
     if (this.$navigationDisplay.onClick) {
