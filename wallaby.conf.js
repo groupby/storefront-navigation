@@ -6,7 +6,7 @@ module.exports = function(wallaby) {
     testFramework: 'mocha',
 
     files: [
-      'src/**/*.{ts,html}',
+      'src/**/*.{ts,html,css}',
       {
         pattern: 'test/**/_suite.ts',
         instrument: false
@@ -14,7 +14,7 @@ module.exports = function(wallaby) {
     ],
     tests: ['test/unit/**/*.ts'],
     preprocessors: {
-      '**/*.html': (file) => ({ code: `module.exports = ${JSON.stringify(file.content)};` })
+      '**/*.{html,css}': (file) => ({ code: `module.exports = ${JSON.stringify(file.content)};` })
     },
     setup() {
       const chai = require('chai');
