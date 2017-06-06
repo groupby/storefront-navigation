@@ -28,7 +28,7 @@ suite('NavigationDisplay', ({ expect, spy }) => {
 
       navigationDisplay.init();
 
-      expect(updateNavigation.called).to.be.true;
+      expect(updateNavigation).to.be.called;
     });
 
     it('should listen for SELECTED_REFINEMENTS_UPDATED', () => {
@@ -41,7 +41,7 @@ suite('NavigationDisplay', ({ expect, spy }) => {
 
       navigationDisplay.init();
 
-      expect(on.calledWith(`${Events.SELECTED_REFINEMENTS_UPDATED}:colour`)).to.be.true;
+      expect(on).to.be.calledWith(`${Events.SELECTED_REFINEMENTS_UPDATED}:colour`);
     });
   });
 

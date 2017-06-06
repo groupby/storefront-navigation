@@ -24,7 +24,7 @@ suite('Navigation', ({ expect, spy }) => {
 
       navigation.init();
 
-      expect(on.calledWith(Events.NAVIGATIONS_UPDATED, navigation.updateFields)).to.be.true;
+      expect(on).to.be.calledWith(Events.NAVIGATIONS_UPDATED, navigation.updateFields);
     });
   });
 
@@ -35,7 +35,7 @@ suite('Navigation', ({ expect, spy }) => {
 
       navigation.updateFields(<any>{ allIds: fields });
 
-      expect(set.calledWith({ fields }));
+      expect(set).to.be.calledWith({ fields });
     });
   });
 });
