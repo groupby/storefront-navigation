@@ -36,8 +36,8 @@
     github-url-from-git "^1.4.0"
 
 "@storefront/core@dev":
-  version "0.0.28-development"
-  resolved "https://registry.yarnpkg.com/@storefront/core/-/core-0.0.28-development.tgz#860b21daa36d550a63a9c63e2b7c33d3af3b38c4"
+  version "0.0.29-development"
+  resolved "https://registry.yarnpkg.com/@storefront/core/-/core-0.0.29-development.tgz#7df963693b581df1bf129602a5577a293208b76b"
   dependencies:
     "@storefront/core" dev
     "@storefront/flux-capacitor" dev
@@ -59,14 +59,12 @@
     urijs "^1.18.10"
 
 "@storefront/flux-capacitor@dev":
-  version "0.0.23-development"
-  resolved "https://registry.yarnpkg.com/@storefront/flux-capacitor/-/flux-capacitor-0.0.23-development.tgz#25f67d8d40a192692cf9b49c6dd6b19379c6b97e"
+  version "0.0.26-development"
+  resolved "https://registry.yarnpkg.com/@storefront/flux-capacitor/-/flux-capacitor-0.0.26-development.tgz#e4dc00922de74e1080b5d702be7ef2ad0fc74d2a"
   dependencies:
-    "@types/redux-logger" "^3.0.0"
     "@types/uuid" "^2.0.29"
     eventemitter3 "^2.0.3"
     groupby-api dev
-    lodash.range "^3.2.0"
     redux "^3.6.0"
     redux-thunk "^2.2.0"
     sayt "^0.1.7"
@@ -76,7 +74,7 @@
   version "0.9.36"
   resolved "https://registry.yarnpkg.com/@types/axios/-/axios-0.9.36.tgz#94d156269562c726ce38115aeb8f34f09bfa3cd8"
 
-"@types/chai@^3.5.2":
+"@types/chai@*", "@types/chai@^3.5.2":
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-3.5.2.tgz#c11cd2817d3a401b7ba0f5a420f35c56139b1c1e"
 
@@ -120,17 +118,18 @@
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/@types/query-string/-/query-string-4.3.1.tgz#59ea5c75d425817370158789aa4f6197e5abd987"
 
-"@types/redux-logger@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@types/redux-logger/-/redux-logger-3.0.0.tgz#abe464fe812d03c3580ec56e6b5b375861439fca"
-  dependencies:
-    redux "^3.6.0"
-
 "@types/riot@^2.6.2":
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/@types/riot/-/riot-2.6.2.tgz#5721ee98fd20916a0e85e292291a74f72692c0da"
 
-"@types/sinon@^2.2.2":
+"@types/sinon-chai@^2.7.28":
+  version "2.7.28"
+  resolved "https://registry.yarnpkg.com/@types/sinon-chai/-/sinon-chai-2.7.28.tgz#c9f775dee3bd27717f3aa94af3c0c9348e8a8c32"
+  dependencies:
+    "@types/chai" "*"
+    "@types/sinon" "*"
+
+"@types/sinon@*", "@types/sinon@^2.2.2":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-2.3.0.tgz#2cd3a0d53991d7a7b2a9179633c2a73795d853b6"
 
@@ -1530,8 +1529,8 @@ es-to-primitive@^1.1.1:
     is-symbol "^1.0.1"
 
 es5-ext@^0.10.14, es5-ext@^0.10.9, es5-ext@~0.10.14:
-  version "0.10.22"
-  resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.22.tgz#1876c51f990769c112c781ea3ebe89f84fd39071"
+  version "0.10.23"
+  resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.23.tgz#7578b51be974207a5487821b56538c224e4e7b38"
   dependencies:
     es6-iterator "2"
     es6-symbol "~3.1"
@@ -2766,10 +2765,6 @@ lodash.padstart@^4.1.0:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/lodash.padstart/-/lodash.padstart-4.6.1.tgz#d2e3eebff0d9d39ad50f5cbd1b52a7bce6bb611b"
 
-lodash.range@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/lodash.range/-/lodash.range-3.2.0.tgz#f461e588f66683f7eadeade513e38a69a565a15d"
-
 lodash.restparam@^3.0.0:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
@@ -3918,6 +3913,10 @@ simple-html-tokenizer@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/simple-html-tokenizer/-/simple-html-tokenizer-0.4.1.tgz#028988bb7fe8b2e6645676d82052587d440b02d3"
 
+sinon-chai@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/sinon-chai/-/sinon-chai-2.10.0.tgz#6ab3008bb8cae9929e744d766574b4cf35f34b5b"
+
 sinon@^2.2.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/sinon/-/sinon-2.3.2.tgz#c43a9c570f32baac1159505cfeed19108855df89"
@@ -4255,7 +4254,7 @@ strip-json-comments@^2.0.0, strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
-supports-color@3.1.2:
+supports-color@3.1.2, supports-color@^3.1.0, supports-color@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-3.1.2.tgz#72a262894d9d408b956ca05ff37b2ed8a6e2a2d5"
   dependencies:
@@ -4264,12 +4263,6 @@ supports-color@3.1.2:
 supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
-
-supports-color@^3.1.0, supports-color@^3.1.2:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-3.2.3.tgz#65ac0504b3954171d8a64946b2ae3cbb8a5f54f6"
-  dependencies:
-    has-flag "^1.0.0"
 
 symbol-observable@^1.0.2:
   version "1.0.4"

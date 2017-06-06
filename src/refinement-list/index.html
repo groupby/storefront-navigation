@@ -1,3 +1,6 @@
-<ul>
+<gb-list items="{ $refinements }" item-alias="refinement">
+  <gb-refinement class="{ gb-selected: $refinement.selected }"></gb-refinement>
+</gb-list>
+<!-- <ul>
   <li data-is="gb-refinement" if="{ !refinement.selected }" each="{ refinement, index in $refinements }" class="{ gb-selected: refinement.selected }"></li>
-</ul>
+</ul> -->

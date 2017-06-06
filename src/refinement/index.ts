@@ -6,20 +6,11 @@ import RefinementList from '../refinement-list';
 class Refinement {
 
   $navigationDisplay: NavigationDisplay.State;
-  refinement: RefinementList.Refinement;
-
-  init() {
-    this.expose('refinement', this.refinement);
-  }
-
-  onUpdate() {
-    this.updateAlias('refinement', this.refinement);
-  }
 
   onClick(event: Refinement.IndexedClickEvent) {
     event.preventUpdate = true;
     if (this.$navigationDisplay.onClick) {
-      this.$navigationDisplay.onClick(event.item.index);
+      this.$navigationDisplay.onClick(event.item.i);
     }
   }
 }
@@ -27,7 +18,7 @@ class Refinement {
 interface Refinement extends Tag { }
 namespace Refinement {
   export interface IndexedClickEvent extends Event, Tag.Event {
-    item: { index: number };
+    item: { i: number };
   }
 }
 
