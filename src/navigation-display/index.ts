@@ -19,7 +19,6 @@ class NavigationDisplay {
   init() {
     this.updateField(this.props.field);
     this.updateNavigation();
-    this.flux.on(`${Events.SELECTED_REFINEMENTS_UPDATED}:${this.field}`, this.updateNavigation);
   }
 
   onUpdate() {
@@ -31,8 +30,11 @@ class NavigationDisplay {
   }
 
   updateField(field: string) {
+    this.flux.off(`${Events.SELECTED_REFINEMENTS_UPDATED}:${this.field}`, this.updateNavigation);
     this.root.classList.remove(`gb-navigation-${this.field}`);
-    this.root.classList.add(`gb-navigation-${this.field = field}`);
+    this.field = field;
+    this.root.classList.add(`gb-navigation-${field}`);
+    this.flux.on(`${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`, this.updateNavigation);
   }
 
   updateNavigation = () => this.set(this.selectNavigation());

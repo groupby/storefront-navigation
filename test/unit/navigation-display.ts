@@ -1,8 +1,8 @@
-import { Events } from '@storefront/core';
+import { Events, Selectors } from '@storefront/core';
 import NavigationDisplay from '../../src/navigation-display';
 import suite from './_suite';
 
-suite('NavigationDisplay', ({ expect, spy }) => {
+suite('NavigationDisplay', ({ expect, spy, stub }) => {
   let navigationDisplay: NavigationDisplay;
 
   beforeEach(() => navigationDisplay = new NavigationDisplay());
@@ -29,19 +29,6 @@ suite('NavigationDisplay', ({ expect, spy }) => {
       navigationDisplay.init();
 
       expect(updateNavigation).to.be.called;
-    });
-
-    it('should listen for SELECTED_REFINEMENTS_UPDATED', () => {
-      const on = spy();
-      navigationDisplay.updateNavigation = () => null;
-      navigationDisplay.updateField = () => null;
-      navigationDisplay.field = 'colour';
-      navigationDisplay.flux = <any>{ on };
-      navigationDisplay.props = <any>{};
-
-      navigationDisplay.init();
-
-      expect(on).to.be.calledWith(`${Events.SELECTED_REFINEMENTS_UPDATED}:colour`);
     });
   });
 
@@ -87,6 +74,7 @@ suite('NavigationDisplay', ({ expect, spy }) => {
     it('should remove old class', () => {
       const remove = spy();
       const field = navigationDisplay.field = 'price';
+      navigationDisplay.flux = <any>{ on: () => null, off: () => null };
       navigationDisplay.root = <any>{ classList: { remove, add: () => null } };
 
       navigationDisplay.updateField(field);
@@ -97,6 +85,7 @@ suite('NavigationDisplay', ({ expect, spy }) => {
     it('should add new class', () => {
       const add = spy();
       const field = 'brand';
+      navigationDisplay.flux = <any>{ on: () => null, off: () => null };
       navigationDisplay.field = 'price';
       navigationDisplay.root = <any>{ classList: { add, remove: () => null } };
 
@@ -104,6 +93,31 @@ suite('NavigationDisplay', ({ expect, spy }) => {
 
       expect(add).to.be.calledWith('gb-navigation-brand');
       expect(navigationDisplay.field).to.eq(field);
+    });
+
+    it('should remove old listener', () => {
+      const off = spy();
+      const field = navigationDisplay.field = 'price';
+      navigationDisplay.flux = <any>{ on: () => null, off };
+      navigationDisplay.root = <any>{ classList: { add: () => null, remove: () => null } };
+
+      navigationDisplay.updateField('brand');
+
+      // tslint:disable-next-line max-line-length
+      expect(off).to.be.calledWith(`${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`, navigationDisplay.updateNavigation);
+    });
+
+    it('should listen for SELECTED_REFINEMENTS_UPDATED', () => {
+      const on = spy();
+      const field = 'brand';
+      navigationDisplay.field = 'price';
+      navigationDisplay.flux = <any>{ off: () => null, on };
+      navigationDisplay.root = <any>{ classList: { add: () => null, remove: () => null } };
+
+      navigationDisplay.updateField(field);
+
+      // tslint:disable-next-line max-line-length
+      expect(on).to.be.calledWith(`${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`, navigationDisplay.updateNavigation);
     });
   });
 
@@ -145,6 +159,21 @@ suite('NavigationDisplay', ({ expect, spy }) => {
         selected: [0, 2],
         g: 'h'
       });
+    });
+  });
+
+  describe('isSelected()', () => {
+    it('should check if refinement is selected', () => {
+      const index = 99;
+      const state = { a: 'b' };
+      const field = navigationDisplay.field = 'colour';
+      const isRefinementSelected = stub(Selectors, 'isRefinementSelected').returns(true);
+      navigationDisplay.flux = <any>{ store: { getState: () => state } };
+
+      const selected = navigationDisplay.isSelected(index);
+
+      expect(selected).to.be.true;
+      expect(isRefinementSelected).to.be.calledWith(state, field, index);
     });
   });
 });
