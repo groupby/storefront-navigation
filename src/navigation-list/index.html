@@ -1,5 +1,5 @@
-<ul>
-  <li data-is="gb-navigation-display" each="{ field in props.fields }" field="{ field }">
+<gb-list items="{ props.fields }">
+  <gb-navigation-display field="{ item }">
     <yield/>
-  </li>
-</ul>
+  </gb-navigation-display>
+</gb-list>

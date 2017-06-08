@@ -6,14 +6,25 @@ suite('Refinement', ({ expect, spy, stub }) => {
 
   beforeEach(() => refinement = new Refinement());
 
-  describe('init()', () => {
-    it('should call expose', () => {
-      const expose = refinement.expose = spy();
-      const ref = refinement.refinement = <any>{ a: 'b' };
+  describe('onClick()', () => {
+    it('should set preventUpdate', () => {
+      const event: any = {};
+      refinement.$navigationDisplay = <any>{};
 
-      refinement.init();
+      refinement.onClick(event);
 
-      expect(expose.calledWith('refinement', refinement));
+      expect(event.preventUpdate).to.be.true;
+    });
+
+    it('should call $navigationDisplay.onClick()', () => {
+      const i = 8;
+      const onClick = spy();
+      const event: any = { item: { i } };
+      refinement.$navigationDisplay = <any>{ onClick };
+
+      refinement.onClick(event);
+
+      expect(onClick).to.be.calledWith(i);
     });
   });
 });

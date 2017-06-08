@@ -6,28 +6,41 @@ class NavigationDisplay {
 
   field: string;
   state: NavigationDisplay.State = {
-    onClick: (index) => this.flux[this.isSelected(index) ? 'unrefine' : 'refine'](this.field, index)
+    onClick: (index) => {
+      if (this.isSelected(index)) {
+        this.flux.unrefine(this.field, index);
+      } else {
+        this.flux.refine(this.field, index);
+      }
+    },
+    moreRefinements: () => this.flux.moreRefinements(this.field)
   };
 
   init() {
-    this.field = this.props.field;
+    this.updateField(this.props.field);
     this.updateNavigation();
-    this.root.classList.add(`gb-navigation-${this.field}`);
-    this.flux.on(`${Events.SELECTED_REFINEMENTS_UPDATED}:${this.field}`, this.updateNavigation);
   }
 
   onUpdate() {
-    if (this.field !== this.props.field) {
-      this.field = this.props.field;
-      this.updateNavigation();
+    if (this.props.field !== this.field) {
+      this.updateField(this.props.field);
+      this.state = { ...this.state, ...this.selectNavigation() };
+      this.updateAlias('navigationDisplay', this.state);
     }
   }
 
-  updateNavigation = () =>
-    this.set(this.extractNavigation(this.flux.store.getState(), this.field))
+  updateField(field: string) {
+    this.flux.off(`${Events.SELECTED_REFINEMENTS_UPDATED}:${this.field}`, this.updateNavigation);
+    this.root.classList.remove(`gb-navigation-${this.field}`);
+    this.field = field;
+    this.root.classList.add(`gb-navigation-${field}`);
+    this.flux.on(`${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`, this.updateNavigation);
+  }
 
-  extractNavigation(state: Store.State, field: string) {
-    const navigation = state.data.navigations.byId[field];
+  updateNavigation = () => this.set(this.selectNavigation());
+
+  selectNavigation() {
+    const navigation = this.flux.store.getState().data.navigations.byId[this.field];
     return {
       ...navigation,
       refinements: navigation.refinements.map((value, index) => ({
@@ -52,6 +65,7 @@ namespace NavigationDisplay {
     label?: string;
     more?: boolean;
     onClick(index: number): void;
+    moreRefinements(): void;
   }
 }
 
