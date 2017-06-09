@@ -22,11 +22,9 @@ class NavigationDisplay {
   }
 
   onUpdate() {
-    if (this.props.field !== this.field) {
-      this.updateField(this.props.field);
-      this.state = { ...this.state, ...this.selectNavigation() };
-      this.updateAlias('navigationDisplay', this.state);
-    }
+    this.updateField(this.props.field);
+    this.state = { ...this.state, ...this.selectNavigation() };
+    this.updateAlias('navigationDisplay', this.state);
   }
 
   updateField(field: string) {

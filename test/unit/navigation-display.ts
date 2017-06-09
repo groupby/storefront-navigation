@@ -60,14 +60,6 @@ suite('NavigationDisplay', ({ expect, spy, stub }) => {
       expect(updateAlias).to.be.calledWith('navigationDisplay', { a: 'b', c: 'd' });
       expect(navigationDisplay.state).to.eql({ a: 'b', c: 'd' });
     });
-
-    it('should not call updateField() if field is the same', () => {
-      navigationDisplay.updateNavigation = () => expect.fail();
-      navigationDisplay.props = { field: 'colour' };
-      navigationDisplay.field = 'colour';
-
-      navigationDisplay.onUpdate();
-    });
   });
 
   describe('updateField()', () => {
