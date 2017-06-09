@@ -1,6 +1,6 @@
 {
   "name": "@storefront/navigation",
-  "version": "0.0.14-development",
+  "version": "0.0.15-development",
   "description": "StoreFront navigation component",
   "keywords": [
     "storefront",
