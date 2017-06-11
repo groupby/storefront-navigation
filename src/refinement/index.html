@@ -1,0 +1,8 @@
+<yield>
+  <label>
+    <span if="{ !$navigationDisplay.or && $refinement.selected }">&times;</span>
+    <input show="{ $navigationDisplay.or }" type="{ $navigationDisplay.or ? 'checkbox' : 'button' }" checked="{ $refinement.selected }" onclick="{ onClick }">
+    <span class="gb-refinement__label">{ $navigationDisplay.range ? $refinement.low + ' - ' + $refinement.high : $refinement.value }</span>
+    <gb-badge if="{ !$refinement.selected }">{ $refinement.total }</gb-badge>
+  </label>
+</yield>
