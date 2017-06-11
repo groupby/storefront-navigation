@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.0.0",
-    "@types/node": "^7.0.22",
+    "@types/node": "^7.0.29",
     "@types/sinon": "^2.2.2",
     "@types/sinon-chai": "^2.7.28",
     "chai": "^4.0.2",
