@@ -8,12 +8,12 @@ class NavigationDisplay {
   state: NavigationDisplay.State = {
     onClick: (index) => {
       if (this.isSelected(index)) {
-        this.flux.unrefine(this.field, index);
+        this.actions.deselectRefinement(this.field, index);
       } else {
-        this.flux.refine(this.field, index);
+        this.actions.selectRefinement(this.field, index);
       }
     },
-    moreRefinements: () => this.flux.moreRefinements(this.field)
+    moreRefinements: () => this.actions.fetchMoreRefinements(this.field)
   };
 
   init() {

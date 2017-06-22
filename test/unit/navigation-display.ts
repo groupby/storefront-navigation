@@ -7,6 +7,49 @@ suite('NavigationDisplay', ({ expect, spy, stub }) => {
 
   beforeEach(() => navigationDisplay = new NavigationDisplay());
 
+  describe('constructor()', () => {
+    describe('state', () => {
+      describe('onClick()', () => {
+        it('should call actions.deselectRefinement() if selected', () => {
+          const index = 8;
+          const deselectRefinement = spy();
+          const isSelected = navigationDisplay.isSelected = spy(() => true);
+          const field = navigationDisplay.field = 'myfield';
+          navigationDisplay.actions = <any>{ deselectRefinement };
+
+          navigationDisplay.state.onClick(index);
+
+          expect(isSelected).to.be.calledWith(index);
+          expect(deselectRefinement).to.be.calledWith(field, index);
+        });
+
+        it('should call actions.selectRefinement() if not selected', () => {
+          const index = 8;
+          const selectRefinement = spy();
+          const field = navigationDisplay.field = 'myfield';
+          navigationDisplay.isSelected = spy(() => false);
+          navigationDisplay.actions = <any>{ selectRefinement };
+
+          navigationDisplay.state.onClick(index);
+
+          expect(selectRefinement).to.be.calledWith(field, index);
+        });
+      });
+
+      describe('moreRefinements()', () => {
+        it('should call actions.fetchMoreRefinements()', () => {
+          const fetchMoreRefinements = spy();
+          const field = navigationDisplay.field = 'myfield';
+          navigationDisplay.actions = <any>{ fetchMoreRefinements };
+
+          navigationDisplay.state.moreRefinements();
+
+          expect(fetchMoreRefinements).to.be.calledWith(field);
+        });
+      });
+    });
+  });
+
   describe('init()', () => {
     it('should call updateField()', () => {
       const field = 'brand';
