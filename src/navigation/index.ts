@@ -1,8 +1,9 @@
-import { alias, tag, Events, Store, Tag } from '@storefront/core';
+import { alias, origin, tag, Events, Store, Tag } from '@storefront/core';
 
 // TODO can we rename this? hard to have alias for navigation component
 // vs alias for a navigation object
 @alias('navigation')
+@origin('navigation')
 @tag('gb-navigation', require('./index.html'))
 class Navigation {
 
