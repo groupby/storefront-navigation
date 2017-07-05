@@ -38,7 +38,7 @@ class NavigationDisplay {
   updateNavigation = () => this.set(this.selectNavigation());
 
   selectNavigation() {
-    const navigation = this.flux.store.getState().data.navigations.byId[this.field];
+    const navigation = Selectors.navigation(this.flux.store.getState(), this.field);
     return {
       ...navigation,
       refinements: navigation.refinements.map((value, index) => ({
