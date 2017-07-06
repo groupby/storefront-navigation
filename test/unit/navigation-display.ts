@@ -176,12 +176,10 @@ suite('NavigationDisplay', ({ expect, spy, stub }) => {
         selected: [0, 2],
         g: 'h'
       };
-      navigationDisplay.field = 'brand';
-      navigationDisplay.flux = <any>{
-        store: {
-          getState: () => ({ data: { navigations: { byId: { brand: navigation } } } })
-        }
-      };
+      const state = { i: 'j' };
+      const navigationSelector = stub(Selectors, 'navigation').returns(navigation);
+      const field = navigationDisplay.field = 'brand';
+      navigationDisplay.flux = <any>{ store: { getState: () => state } };
 
       const refinements = navigationDisplay.selectNavigation();
 
@@ -194,6 +192,7 @@ suite('NavigationDisplay', ({ expect, spy, stub }) => {
         selected: [0, 2],
         g: 'h'
       });
+      expect(navigationSelector).to.be.calledWithExactly(state, field);
     });
   });
 
