@@ -16,6 +16,11 @@ class RangeInput {
   init() {
     this.expose('rangeInput', this);
   }
+
+  search = () => {
+    const lowValue = this.refs.low.value;
+    const highValue = this.refs.high.value;
+  }
 }
 
 interface RangeInput extends Tag { }

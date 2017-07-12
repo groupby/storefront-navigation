@@ -1,7 +1,7 @@
 <yield>
   <h4>Header</h4>
   <input ref="low" type="text" placeholder="{ props.lowPlaceholder }"/>
-  <div>to</div>
+  to
   <input ref="high" type="text" placeholder="{ props.highPlaceholder }" />
-  <gb-button>{ $rangeInput.props.buttonValue }</gb-button>
+  <gb-button on-click="{ $rangeInput.search }">{ $rangeInput.props.buttonValue }</gb-button>
 </yield>
