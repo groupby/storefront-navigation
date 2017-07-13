@@ -1,7 +1,7 @@
 import RangeInput from '../../src/range-input';
 import suite from './_suite';
 
-suite('RangeInput', ({ expect }) => {
+suite('RangeInput', ({ expect, spy }) => {
   let rangeInput: RangeInput;
 
   beforeEach(() => rangeInput = new RangeInput());
@@ -14,6 +14,16 @@ suite('RangeInput', ({ expect }) => {
           highPlaceholder: 'Max',
           buttonValue: 'Go'
         });
+      });
+    });
+
+    describe('init()', () => {
+      it('should expose rangeInput', () => {
+        const expose = rangeInput.expose = spy();
+
+        rangeInput.init();
+
+        expect(expose).to.be.calledWith('rangeInput', rangeInput);
       });
     });
   });
