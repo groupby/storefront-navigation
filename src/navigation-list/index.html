@@ -1,5 +1,9 @@
 <gb-list items="{ props.fields }">
-  <gb-navigation-display field="{ item }">
+  <gb-navigation-display if="{ item !== 'variants.ReleaseDate' }" field="{ item }">
     <yield/>
   </gb-navigation-display>
+  <gb-range-input if="{ item == 'variants.ReleaseDate' }" field="{ item }">
+{ console.log(this) }
+    <yield/>
+  </gb-range-input>
 </gb-list>

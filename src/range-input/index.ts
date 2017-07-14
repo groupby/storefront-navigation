@@ -1,8 +1,10 @@
-import { alias, tag, Tag } from '@storefront/core';
+import { alias, tag, Events, Selectors, Store, Tag } from '@storefront/core';
 
 @alias('rangeInput')
 @tag('gb-range-input', require('./index.html'))
 class RangeInput {
+
+  label: string;
   refs: {
     low: HTMLInputElement,
     high: HTMLInputElement
@@ -10,11 +12,15 @@ class RangeInput {
   props: RangeInput.Props = {
     lowPlaceholder: 'Min',
     highPlaceholder: 'Max',
-    buttonValue: 'Go'
+    buttonValue: 'Go',
   };
 
   init() {
     this.expose('rangeInput', this);
+    if (!this.props.field)
+      return;
+    const navigation = this.flux.store.getState().data.navigations.byId[this.props.field];
+    this.label = navigation.label;
   }
 
   search = () => {
@@ -29,6 +35,7 @@ namespace RangeInput {
     lowPlaceholder?: string;
     highPlaceholder?: string;
     buttonValue?: string;
+    field?: string;
   }
 }
 
