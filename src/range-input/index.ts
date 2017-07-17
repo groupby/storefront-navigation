@@ -1,4 +1,4 @@
-import { alias, tag, Events, Selectors, Store, Tag } from '@storefront/core';
+import { alias, tag, Tag } from '@storefront/core';
 
 @alias('rangeInput')
 @tag('gb-range-input', require('./index.html'))
@@ -24,8 +24,14 @@ class RangeInput {
   }
 
   search = () => {
-    const lowValue = this.refs.low.value;
-    const highValue = this.refs.high.value;
+    const low = this.refs.low.value;
+    const high = this.refs.high.value;
+    this.actions.updateSearch({
+      navigationId: this.props.field,
+      high,
+      low
+    });
+    console.log(this.actions)
   }
 }
 
