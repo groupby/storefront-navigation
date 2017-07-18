@@ -26,7 +26,6 @@ class RangeInput {
   search = () => {
     const low = parseFloat(this.refs.low.value);
     const high = parseFloat(this.refs.high.value);
-    console.log('range: ', low, high)
     this.actions.updateSearch({
       query: Selectors.query(this.flux.store.getState()),
       navigationId: this.props.field,

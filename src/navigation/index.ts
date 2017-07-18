@@ -9,7 +9,7 @@ import { alias, configurable, origin, tag, Events, Store, Tag } from '@storefron
 class Navigation {
 
   props: Navigation.Props = {
-    rangeInput: []
+    rangeInput: ['variants.ReleaseDate', 'variants.popularity_7days']
   };
   state: Navigation.State = {
     fields: []
