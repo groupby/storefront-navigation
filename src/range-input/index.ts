@@ -1,4 +1,4 @@
-import { alias, tag, Tag } from '@storefront/core';
+import { alias, tag, Selectors, Tag } from '@storefront/core';
 
 @alias('rangeInput')
 @tag('gb-range-input', require('./index.html'))
@@ -24,14 +24,16 @@ class RangeInput {
   }
 
   search = () => {
-    const low = this.refs.low.value;
-    const high = this.refs.high.value;
+    const low = parseFloat(this.refs.low.value);
+    const high = parseFloat(this.refs.high.value);
+    console.log('range: ', low, high)
     this.actions.updateSearch({
+      query: Selectors.query(this.flux.store.getState()),
       navigationId: this.props.field,
+      low,
       high,
-      low
+      range: true
     });
-    console.log(this.actions)
   }
 }
 
