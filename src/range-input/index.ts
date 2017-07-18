@@ -17,8 +17,6 @@ class RangeInput {
 
   init() {
     this.expose('rangeInput', this);
-    if (!this.props.field)
-      return;
     const navigation = this.flux.store.getState().data.navigations.byId[this.props.field];
     this.label = navigation.label;
   }
@@ -30,7 +28,8 @@ class RangeInput {
       query: Selectors.query(this.flux.store.getState()),
       navigationId: this.props.field,
       low,
-      high
+      high,
+      range: true
     });
   }
 }
