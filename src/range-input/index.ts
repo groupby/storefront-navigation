@@ -30,8 +30,7 @@ class RangeInput {
       query: Selectors.query(this.flux.store.getState()),
       navigationId: this.props.field,
       low,
-      high,
-      range: true
+      high
     });
   }
 }
