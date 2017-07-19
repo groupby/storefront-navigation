@@ -1,5 +1,6 @@
-import { alias, origin, tag, Events, Store, Tag } from '@storefront/core';
+import { alias, configurable, origin, tag, Events, Store, Tag } from '@storefront/core';
 
+@configurable
 // TODO can we rename this? hard to have alias for navigation component
 // vs alias for a navigation object
 @alias('navigation')
