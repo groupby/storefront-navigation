@@ -2,10 +2,13 @@ import { Events } from '@storefront/core';
 import Navigation from '../../src/navigation';
 import suite from './_suite';
 
-suite('Navigation', ({ expect, spy }) => {
+suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias }) => {
   let navigation: Navigation;
 
   beforeEach(() => navigation = new Navigation());
+
+  itShouldBeConfigurable(Navigation);
+  itShouldHaveAlias(Navigation, 'navigation');
 
   describe('init()', () => {
     it('should set initial fields', () => {
