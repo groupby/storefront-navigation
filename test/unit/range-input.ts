@@ -64,9 +64,6 @@ suite('RangeInput', ({ expect, spy, stub }) => {
 
   describe('search()', () => {
     it('should update search', () => {
-      rangeInput['actions'] = {
-        updateSearch: null
-      };
       rangeInput.refs = {
         low: {
           value: '10'
@@ -75,24 +72,13 @@ suite('RangeInput', ({ expect, spy, stub }) => {
           value: '20'
         }
       };
-      const updateSearch = rangeInput.actions.updateSearch = spy();
-      const query = { a: 'b' };
       rangeInput.props.field = 'Age Range';
-      stub(Selectors, 'query').returns(query);
-      rangeInput['flux'] = {
-        store: {
-          getState: () => null
-        }
-      };
+      const addRefinement = spy();
+      rangeInput.actions = <any>{ addRefinement };
 
       rangeInput.search();
 
-      expect(updateSearch).to.be.calledWith({
-        query,
-        navigationId: 'Age Range',
-        low: 10,
-        high: 20
-      });
+      expect(addRefinement).to.be.calledWith('Age Range', 10, 20);
     });
   });
 });

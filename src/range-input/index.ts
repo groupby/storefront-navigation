@@ -17,20 +17,13 @@ class RangeInput {
 
   init() {
     this.expose('rangeInput', this);
-    const navigation = this.flux.store.getState().data.navigations.byId[this.props.field];
-    this.label = navigation.label;
+    this.label = this.flux.store.getState().data.navigations.byId[this.props.field].label;
   }
 
   search = () => {
     const low = parseFloat(this.refs.low.value);
     const high = parseFloat(this.refs.high.value);
-    this.actions.updateSearch({
-      query: Selectors.query(this.flux.store.getState()),
-      navigationId: this.props.field,
-      low,
-      high,
-      range: true
-    });
+    this.actions.addRefinement(this.props.field, low, high);
   }
 }
 
