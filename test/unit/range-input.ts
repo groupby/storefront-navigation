@@ -73,12 +73,23 @@ suite('RangeInput', ({ expect, spy, stub }) => {
         }
       };
       rangeInput.props.field = 'Age Range';
-      const addRefinement = spy();
-      rangeInput.actions = <any>{ addRefinement };
+      // const addRefinement = spy();
+      // rangeInput.actions = <any>{ addRefinement };
+
+      // rangeInput.search();
+
+      // expect(addRefinement).to.be.calledWith('Age Range', 10, 20);
+      const updateSearch = spy();
+      rangeInput.actions = { updateSearch };
 
       rangeInput.search();
 
-      expect(addRefinement).to.be.calledWith('Age Range', 10, 20);
+      expect(updateSearch).to.be.calledWith({
+        navigationId: 'Age Range',
+        high: 20,
+        low: 10,
+        range: true
+      });
     });
   });
 });

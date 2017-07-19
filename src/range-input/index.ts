@@ -23,7 +23,13 @@ class RangeInput {
   search = () => {
     const low = parseFloat(this.refs.low.value);
     const high = parseFloat(this.refs.high.value);
-    this.actions.addRefinement(this.props.field, low, high);
+    // this.actions.addRefinement(this.props.field, low, high);
+    this.actions.updateSearch({
+      navigationId: this.props.field,
+      high,
+      low,
+      range: true
+    });
   }
 }
 
