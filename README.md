@@ -1,6 +1,6 @@
 # StoreFront navigation
 
-StoreFront <gb-navigation> component
+StoreFront `<gb-navigation>` component
 
 [![npm (scoped with tag)](https://img.shields.io/npm/v/@storefront/navigation.svg?style=flat-square)](https://www.npmjs.com/package/@storefront/navigation)
 [![CircleCI branch](https://img.shields.io/circleci/project/github/groupby/storefront-navigation/master.svg?style=flat-square)](https://circleci.com/gh/groupby/storefront-navigation/tree/master)
