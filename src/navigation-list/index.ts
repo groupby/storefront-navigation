@@ -27,7 +27,7 @@ class NavigationList {
   }
 }
 
-interface NavigationList extends Tag { }
+interface NavigationList extends Tag<NavigationList.Props> { }
 namespace NavigationList {
   export interface Props {
     fields: string[];
