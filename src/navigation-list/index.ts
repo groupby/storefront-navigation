@@ -8,7 +8,7 @@ class NavigationList {
   rangeInput: any = {};
   defaultRangeInput: any = { 'variants.ReleaseDate': 'range', 'variants.popularity_7days': 'range' };
   props: NavigationList.Props = {
-    fields: [],
+    fields: []
   };
 
   init() {
