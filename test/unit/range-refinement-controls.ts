@@ -1,11 +1,11 @@
 import { Selectors } from '@storefront/core';
-import RangeRefinemnetControls from '../../src/range-refinement-controls';
+import RangeRefinementControls from '../../src/range-refinement-controls';
 import suite from './_suite';
 
 suite('RangeRefinementControls', ({ expect, spy, stub }) => {
   let rangeRefinementControls;
 
-  beforeEach(() => rangeRefinementControls = new RangeRefinemnetControls());
+  beforeEach(() => rangeRefinementControls = new RangeRefinementControls());
 
   describe('constructor', () => {
     describe('props', () => {

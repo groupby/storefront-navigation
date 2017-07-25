@@ -1,14 +1,14 @@
 import { alias, tag, Selectors, Tag } from '@storefront/core';
 
 @tag('gb-range-refinement-controls', require('./index.html'))
-class RangeRefinemnetControls {
+class RangeRefinementControls {
 
   label: string;
   refs: {
     low: HTMLInputElement,
     high: HTMLInputElement
   };
-  props: RangeRefinemnetControls.Props = {
+  props: RangeRefinementControls.Props = {
     buttonValue: 'Go',
     labels: {
       low: 'Min',
@@ -28,8 +28,8 @@ class RangeRefinemnetControls {
   }
 }
 
-interface RangeRefinemnetControls extends Tag { }
-namespace RangeRefinemnetControls {
+interface RangeRefinementControls extends Tag { }
+namespace RangeRefinementControls {
   export interface Props {
     buttonValue: string;
     field?: string;
@@ -40,4 +40,4 @@ namespace RangeRefinemnetControls {
   }
 }
 
-export default RangeRefinemnetControls;
+export default RangeRefinementControls;
