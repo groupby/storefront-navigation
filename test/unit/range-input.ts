@@ -19,32 +19,11 @@ suite('RangeInput', ({ expect, spy, stub }) => {
     });
 
     describe('init()', () => {
-      beforeEach(() => {
-        const state = {
-          data: {
-            navigations: {
-              byId: {
-                age_range: {
-                  label: 'Age Range'
-                }
-              }
-            }
-          }
-        };
-        rangeInput['flux'] = <any>{
-          store: {
-            getState: () => null
-          }
-        };
-        rangeInput.props = {
-          field: 'age_range'
-        };
-        rangeInput['label'] = '';
-        stub(rangeInput.flux.store, 'getState').returns(state);
-      });
-
       it('should expose rangeInput', () => {
         const expose = rangeInput.expose = spy();
+        stub(Selectors, 'navigation').returns({ label: '' });
+        rangeInput.flux = <any>{ store: { getState: () => null } };
+        rangeInput.props = <any>{ field: '' };
 
         rangeInput.init();
 
@@ -53,11 +32,13 @@ suite('RangeInput', ({ expect, spy, stub }) => {
 
       it('should set label', () => {
         rangeInput.expose = () => null;
-
+        stub(Selectors, 'navigation').returns({ label: 'nav' });
+        rangeInput.flux = <any>{ store: { getState: () => null } };
+        rangeInput.props = <any>{ field: '' };
 
         rangeInput.init();
 
-        expect(rangeInput.label).to.eq('Age Range');
+        expect(rangeInput.label).to.be.eq('nav');
       });
     });
   });
