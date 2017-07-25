@@ -11,17 +11,17 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
     describe('props', () => {
       it('should set initial value', () => {
         expect(rangeRefinementControls.props).to.eql({
-          buttonValue: 'Go',
           labels: {
             low: 'Min',
-            high: 'Max'
+            high: 'Max',
+            submit: 'Submit'
           }
         });
       });
     });
 
     describe('init()', () => {
-      it('should expose rangeRefinementControls', () => {
+      it('should expose rangeControls', () => {
         const expose = rangeRefinementControls.expose = spy();
         stub(Selectors, 'navigation').returns({ label: '' });
         rangeRefinementControls.flux = <any>{ store: { getState: () => null } };
@@ -29,7 +29,7 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
 
         rangeRefinementControls.init();
 
-        expect(expose).to.be.calledWith('rangeRefinementControls', rangeRefinementControls.props);
+        expect(expose).to.be.calledWith('rangeControls', rangeRefinementControls.props);
       });
 
       it('should set label', () => {

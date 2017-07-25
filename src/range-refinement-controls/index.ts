@@ -9,15 +9,15 @@ class RangeRefinementControls {
     high: HTMLInputElement
   };
   props: RangeRefinementControls.Props = {
-    buttonValue: 'Go',
     labels: {
       low: 'Min',
-      high: 'Max'
+      high: 'Max',
+      submit: 'Submit'
     }
   };
 
   init() {
-    this.expose('rangeRefinementControls', this.props);
+    this.expose('rangeControls', this.props);
     this.label = Selectors.navigation(this.flux.store.getState(), this.props.field).label;
   }
 
@@ -31,11 +31,11 @@ class RangeRefinementControls {
 interface RangeRefinementControls extends Tag { }
 namespace RangeRefinementControls {
   export interface Props {
-    buttonValue: string;
     field?: string;
     labels: {
       low: string;
       high: string;
+      submit: string;
     }
   }
 }
