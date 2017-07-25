@@ -176,9 +176,10 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
         selected: [0, 2],
         g: 'h'
       };
-      const getState = () => null;
-      valueRefinementControls.flux = <any>{ store: { getState } };
-      stub(Selectors, 'navigation').withArgs(getState(), valueRefinementControls.field).returns(navigation);
+      const state = { i: 'j' };
+      const navigationSelector = stub(Selectors, 'navigation').returns(navigation);
+      const field = valueRefinementControls.field = 'brand';
+      valueRefinementControls.flux = <any>{ store: { getState: () => state } };
 
       const refinements = valueRefinementControls.selectNavigation();
 
@@ -191,6 +192,7 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
         selected: [0, 2],
         g: 'h'
       });
+      expect(navigationSelector).to.be.calledWithExactly(state, field);
     });
   });
 
