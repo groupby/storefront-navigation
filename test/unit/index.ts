@@ -1,7 +1,7 @@
 import * as pkg from '../../src';
 import Navigation from '../../src/navigation';
 import NavigationList from '../../src/navigation-list';
-import RangeRefinemnetControls from '../../src/range-refinement-controls';
+import RangeRefinementControls from '../../src/range-refinement-controls';
 import Refinement from '../../src/refinement';
 import RefinementList from '../../src/refinement-list';
 import suite from './_suite';
@@ -17,7 +17,7 @@ suite('package', ({ expect }) => {
   });
 
   it('should expose RangeValueRefinement', () => {
-    expect(pkg.RangeRefinemnetControls).to.eq(RangeRefinemnetControls);
+    expect(pkg.RangeRefinementControls).to.eq(RangeRefinementControls);
   });
 
   it('should expose Refinement', () => {
