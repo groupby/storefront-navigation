@@ -1,15 +1,15 @@
 import Navigation from './navigation';
-import NavigationDisplay from './navigation-display';
+import ValueRefinementControls from './value-refinement-controls';
 import NavigationList from './navigation-list';
-import RangeInput from './range-input';
+import RangeRefinemnetControls from './range-refinement-controls';
 import Refinement from './refinement';
 import RefinementList from './refinement-list';
 
 export {
   Navigation,
-  NavigationDisplay,
+  ValueRefinementControls,
   NavigationList,
-  RangeInput,
+  RangeRefinemnetControls,
   Refinement,
   RefinementList
 };

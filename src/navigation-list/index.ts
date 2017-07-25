@@ -1,20 +1,18 @@
 import { alias, tag, Tag } from '@storefront/core';
 import Navigation from '../navigation'
 
-@alias('navigationList')
 @tag('gb-navigation-list', require('./index.html'))
 class NavigationList {
 
   $navigation: Navigation;
   rangeInput: any = {};
-  defaultRangeInput: any = { 'variants.ReleaseDate': 'variants.ReleaseDate', 'variants.popularity_7days': 'variants.popularity_7days' };
+  defaultRangeInput: any = { 'variants.ReleaseDate': 'range', 'variants.popularity_7days': 'range' };
   props: NavigationList.Props = {
     fields: [],
   };
 
   init() {
     this.expose('navigationList', this);
-
     const navigationRangeInput = this.$navigation.props.rangeInput;
     this.rangeInput = navigationRangeInput ? navigationRangeInput : this.defaultRangeInput;
   }

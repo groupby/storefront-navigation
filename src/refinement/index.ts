@@ -1,5 +1,5 @@
 import { tag, Tag } from '@storefront/core';
-import NavigationDisplay from '../navigation-display';
+import NavigationDisplay from '../value-refinement-controls';
 import RefinementList from '../refinement-list';
 
 @tag('gb-refinement', require('./index.html'))

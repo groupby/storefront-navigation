@@ -1,21 +1,21 @@
 import { alias, tag, Selectors, Tag } from '@storefront/core';
 
-@tag('gb-range-input', require('./index.html'))
-class RangeInput {
+@tag('gb-range-refinement-controls', require('./index.html'))
+class RangeRefinemnetControls {
 
   label: string;
   refs: {
     low: HTMLInputElement,
     high: HTMLInputElement
   };
-  props: RangeInput.Props = {
+  props: RangeRefinemnetControls.Props = {
     lowPlaceholder: 'Min',
     highPlaceholder: 'Max',
     buttonValue: 'Go',
   };
 
   init() {
-    this.expose('rangeInput', this);
+    this.expose('rangeRefinementControls', this);
     this.label = Selectors.navigation(this.flux.store.getState(), this.props.field).label;
   }
 
@@ -32,8 +32,8 @@ class RangeInput {
   }
 }
 
-interface RangeInput extends Tag { }
-namespace RangeInput {
+interface RangeRefinemnetControls extends Tag { }
+namespace RangeRefinemnetControls {
   export interface Props {
     lowPlaceholder?: string;
     highPlaceholder?: string;
@@ -42,4 +42,4 @@ namespace RangeInput {
   }
 }
 
-export default RangeInput;
+export default RangeRefinemnetControls;

@@ -24,8 +24,8 @@ suite('NavigationList', ({ expect, spy }) => {
         navigationList.init();
 
         expect(navigationList.rangeInput).to.eql({
-          'variants.ReleaseDate': 'variants.ReleaseDate',
-          'variants.popularity_7days': 'variants.popularity_7days'
+          'variants.ReleaseDate': 'range',
+          'variants.popularity_7days': 'range'
         });
       });
 

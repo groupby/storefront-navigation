@@ -1,5 +1,5 @@
 <gb-list items="{ props.fields }">
-  <div data-is="{ $navigationList.useRangeInput(item) ? 'gb-range-input' : 'gb-navigation-display' }" field="{ item }">
+  <div data-is="gb-{ $navigationList.rangeInput[item] || 'value' }-refinement-controls" field="{ item }">
     <yield/>
   </div>
 </gb-list>
