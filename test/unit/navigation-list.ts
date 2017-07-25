@@ -7,6 +7,12 @@ suite('NavigationList', ({ expect, spy }) => {
   beforeEach(() => navigationList = new NavigationList());
 
   describe('constructor()', () => {
+    describe('props', () => {
+      it('should set props', () => {
+        expect(navigationList.props).eql(<any>{ display: {}, fields: [] });
+      });
+    });
+
     describe('init()', () => {
       it('should expose navigationList.props', () => {
         const expose = navigationList.expose = spy();

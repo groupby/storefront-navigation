@@ -7,9 +7,6 @@ import { alias, configurable, origin, tag, Events, Store, Tag } from '@storefron
 @tag('gb-navigation', require('./index.html'))
 class Navigation {
 
-  props: Navigation.Props = {
-    display: {}
-  };
   state: Navigation.State = {
     fields: []
   };
@@ -23,7 +20,7 @@ class Navigation {
     this.set({ fields: navigations.allIds })
 }
 
-interface Navigation extends Tag<any, Navigation.State> { }
+interface Navigation extends Tag<Navigation.Props, Navigation.State> { }
 namespace Navigation {
   export interface Props {
     display?: { [key: string]: string};

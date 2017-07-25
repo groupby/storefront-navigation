@@ -5,6 +5,7 @@ import Navigation from '../navigation'
 class NavigationList {
 
   props: NavigationList.Props = {
+    display: {},
     fields: []
   };
 

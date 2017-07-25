@@ -17,7 +17,6 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
       navigation.init();
 
       expect(navigation.state.fields).to.eql([]);
-      expect(navigation.props.display).to.eql({});
     });
 
     it('should expose navigation', () => {
