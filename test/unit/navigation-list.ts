@@ -7,32 +7,36 @@ suite('NavigationList', ({ expect, spy }) => {
   beforeEach(() => navigationList = new NavigationList());
 
   describe('constructor()', () => {
-    describe('props', () => {
-      it('should set props to default', () => {
-        expect(navigationList.props.fields).to.eql([]);
-        expect(navigationList.props.rangeInput).to.eql([]);
-      });
-    });
-
     describe('init()', () => {
       it('should expose navigationList', () => {
         const expose = navigationList.expose = spy();
+        navigationList.$navigation = <any>{ props: {} };
 
         navigationList.init();
 
         expect(expose).to.be.calledWith('navigationList', navigationList);
       });
 
-      it('should initialize rangeInput', () => {
+      it('should initialize rangeInput to default if range-input is not passed to navigation', () => {
         navigationList.expose = () => null;
-        navigationList.props.rangeInput = ['a', 'b', 'c'];
+        navigationList.$navigation = <any>{ props: {} };
 
         navigationList.init();
 
         expect(navigationList.rangeInput).to.eql({
-          a: 'a',
-          b: 'b',
-          c: 'c'
+          'variants.ReleaseDate': 'variants.ReleaseDate',
+          'variants.popularity_7days': 'variants.popularity_7days'
+        });
+      });
+
+      it('should initialize rangeInput to default if range-input is passed to navigation', () => {
+        navigationList.expose = () => null;
+        navigationList.$navigation = <any>{ props: { rangeInput: ['a'] } };
+
+        navigationList.init();
+
+        expect(navigationList.rangeInput).to.eql({
+          a: 'a'
         });
       });
     });
