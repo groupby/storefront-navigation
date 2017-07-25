@@ -27,7 +27,7 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
 
         rangeRefinementControls.init();
 
-        expect(expose).to.be.calledWith('rangeRefinementControls', rangeRefinementControls);
+        expect(expose).to.be.calledWith('rangeRefinementControls', rangeRefinementControls.props);
       });
 
       it('should set label', () => {

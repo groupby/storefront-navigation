@@ -15,7 +15,7 @@ class RangeRefinemnetControls {
   };
 
   init() {
-    this.expose('rangeRefinementControls', this);
+    this.expose('rangeRefinementControls', this.props);
     this.label = Selectors.navigation(this.flux.store.getState(), this.props.field).label;
   }
 
