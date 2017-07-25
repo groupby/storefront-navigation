@@ -19,13 +19,14 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
       expect(navigation.state.fields).to.eql([]);
     });
 
-    it('should expose navigation', () => {
+    it('should expose navigationProps and navigationState', () => {
       const expose = navigation.expose = spy();
       navigation.flux = <any>{ on: () => null };
 
       navigation.init();
 
-      expect(expose).to.be.calledWith('navigation', navigation);
+      expect(expose).to.be.calledWith('navigationProps', navigation.props);
+      expect(expose).to.be.calledWith('navigationState', navigation.state);
     });
 
     it('should listen for NAVIGATIONS_UPDATED', () => {

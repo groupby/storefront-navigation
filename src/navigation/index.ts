@@ -12,7 +12,8 @@ class Navigation {
   };
 
   init() {
-    this.expose('navigation', this);
+    this.expose('navigationProps', this.props);
+    this.expose('navigationState', this.state);
     this.flux.on(Events.NAVIGATIONS_UPDATED, this.updateFields);
   }
 
