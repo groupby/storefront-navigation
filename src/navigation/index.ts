@@ -24,7 +24,7 @@ class Navigation {
 interface Navigation extends Tag<any, Navigation.State> { }
 namespace Navigation {
   export interface Props {
-    rangeInput?: string[];
+    rangeInput?: any;
   }
 
   export interface State {

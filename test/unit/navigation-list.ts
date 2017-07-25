@@ -31,7 +31,7 @@ suite('NavigationList', ({ expect, spy }) => {
 
       it('should initialize rangeInput to default if range-input is passed to navigation', () => {
         navigationList.expose = () => null;
-        navigationList.$navigation = <any>{ props: { rangeInput: ['a'] } };
+        navigationList.$navigation = <any>{ props: { rangeInput: { a: 'a' } } };
 
         navigationList.init();
 
@@ -39,18 +39,6 @@ suite('NavigationList', ({ expect, spy }) => {
           a: 'a'
         });
       });
-    });
-  });
-
-  describe('useRangeInput()', () => {
-    it('should return true if item is in rangeInput, false otherwise', () => {
-      navigationList.rangeInput = {};
-
-      expect(navigationList.useRangeInput('a')).to.be.false;
-
-      navigationList.rangeInput = { a: 'a' };
-
-      expect(navigationList.useRangeInput('a')).to.be.true;
     });
   });
 });

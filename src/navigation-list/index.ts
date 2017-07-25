@@ -7,7 +7,7 @@ class NavigationList {
 
   $navigation: Navigation;
   rangeInput: any = {};
-  defaultRangeInput: string[] = ['variants.ReleaseDate', 'variants.popularity_7days'];
+  defaultRangeInput: any = { 'variants.ReleaseDate': 'variants.ReleaseDate', 'variants.popularity_7days': 'variants.popularity_7days' };
   props: NavigationList.Props = {
     fields: [],
   };
@@ -16,14 +16,7 @@ class NavigationList {
     this.expose('navigationList', this);
 
     const navigationRangeInput = this.$navigation.props.rangeInput;
-    const rangeInput = navigationRangeInput ? navigationRangeInput : this.defaultRangeInput;
-    rangeInput.forEach((value) => {
-      this.rangeInput[value] = value;
-    });
-  }
-
-  useRangeInput(item) {
-    return item in this.rangeInput;
+    this.rangeInput = navigationRangeInput ? navigationRangeInput : this.defaultRangeInput;
   }
 }
 
