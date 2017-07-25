@@ -55,24 +55,14 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
           value: '20'
         }
       };
+
       rangeRefinementControls.props.field = 'Age Range';
-      // const addRefinement = spy();
-      // rangeRefinementControls.actions = <any>{ addRefinement };
-
-      // rangeRefinementControls.search();
-
-      // expect(addRefinement).to.be.calledWith('Age Range', 10, 20);
-      const updateSearch = spy();
-      rangeRefinementControls.actions = { updateSearch };
+      const addRefinement = spy();
+      rangeRefinementControls.actions = <any>{ addRefinement };
 
       rangeRefinementControls.search();
 
-      expect(updateSearch).to.be.calledWith({
-        navigationId: 'Age Range',
-        high: 20,
-        low: 10,
-        range: true
-      });
+      expect(addRefinement).to.be.calledWith('Age Range', 10, 20);
     });
   });
 });
