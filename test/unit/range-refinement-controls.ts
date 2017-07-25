@@ -11,9 +11,11 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
     describe('props', () => {
       it('should set initial value', () => {
         expect(rangeRefinementControls.props).to.eql({
-          lowPlaceholder: 'Min',
-          highPlaceholder: 'Max',
-          buttonValue: 'Go'
+          buttonValue: 'Go',
+          labels: {
+            low: 'Min',
+            high: 'Max'
+          }
         });
       });
     });

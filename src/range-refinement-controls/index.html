@@ -1,7 +1,7 @@
 <yield>
   <h4>{ label }</h4>
-  <input ref="low" type="text" placeholder="{ props.lowPlaceholder }"/>
+  <input ref="low" type="text" placeholder="{ props.labels.low }"/>
   to
-  <input ref="high" type="text" placeholder="{ props.highPlaceholder }"/>
+  <input ref="high" type="text" placeholder="{ props.labels.high }"/>
   <gb-button on-click="{ search }">{ $rangeRefinementControls.buttonValue }</gb-button>
 </yield>

@@ -9,9 +9,11 @@ class RangeRefinemnetControls {
     high: HTMLInputElement
   };
   props: RangeRefinemnetControls.Props = {
-    lowPlaceholder: 'Min',
-    highPlaceholder: 'Max',
     buttonValue: 'Go',
+    labels: {
+      low: 'Min',
+      high: 'Max'
+    }
   };
 
   init() {
@@ -35,10 +37,12 @@ class RangeRefinemnetControls {
 interface RangeRefinemnetControls extends Tag { }
 namespace RangeRefinemnetControls {
   export interface Props {
-    lowPlaceholder?: string;
-    highPlaceholder?: string;
-    buttonValue?: string;
+    buttonValue: string;
     field?: string;
+    labels: {
+      low: string;
+      high: string;
+    }
   }
 }
 
