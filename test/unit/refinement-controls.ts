@@ -1,4 +1,4 @@
-import { Selectors } from '@storefront/core';
+import { Events, Selectors } from '@storefront/core';
 import RefinementControls from '../../src/refinement-controls';
 import suite from './_suite';
 
@@ -39,10 +39,9 @@ suite('RefinementControls', ({ expect, spy, stub }) => {
       expect(updateField).to.be.calledWith(field);
     });
 
-    it('should call updateAlias()', () => {
+    it('should update state', () => {
       const field = 'price';
       const selectNavigation = refinementControls.selectNavigation = spy(() => ({ c: 'd' }));
-      const updateAlias = refinementControls.updateAlias = spy();
       refinementControls.field = 'colour';
       refinementControls.updateField = () => null;
       refinementControls.state = <any>{ a: 'b' };
@@ -50,8 +49,58 @@ suite('RefinementControls', ({ expect, spy, stub }) => {
 
       refinementControls.onUpdate();
 
-      expect(updateAlias).to.be.calledWith('valueControls', { a: 'b', c: 'd' });
       expect(refinementControls.state).to.eql({ a: 'b', c: 'd' });
+    });
+  });
+
+  describe('updateField()', () => {
+    it('should remove old class', () => {
+      const remove = spy();
+      const field = refinementControls.field = 'price';
+      refinementControls.flux = <any>{ on: () => null, off: () => null };
+      refinementControls.root = <any>{ classList: { remove, add: () => null } };
+
+      refinementControls.updateField(field);
+
+      expect(remove).to.be.calledWith('gb-navigation-price');
+    });
+
+    it('should add new class', () => {
+      const add = spy();
+      const field = 'brand';
+      refinementControls.flux = <any>{ on: () => null, off: () => null };
+      refinementControls.field = 'price';
+      refinementControls.root = <any>{ classList: { add, remove: () => null } };
+
+      refinementControls.updateField(field);
+
+      expect(add).to.be.calledWith('gb-navigation-brand');
+      expect(refinementControls.field).to.eq(field);
+    });
+
+    it('should remove old listener', () => {
+      const off = spy();
+      const field = refinementControls.field = 'price';
+      refinementControls.flux = <any>{ on: () => null, off };
+      refinementControls.root = <any>{ classList: { add: () => null, remove: () => null } };
+
+      refinementControls.updateField('brand');
+
+      // tslint:disable-next-line max-line-length
+      expect(off).to.be.calledWith(`${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`, refinementControls.updateNavigation);
+    });
+
+    it('should listen for SELECTED_REFINEMENTS_UPDATED', () => {
+      const on = spy();
+      const field = 'brand';
+      refinementControls.field = 'price';
+      refinementControls.flux = <any>{ off: () => null, on };
+      refinementControls.root = <any>{ classList: { add: () => null, remove: () => null } };
+
+      refinementControls.updateField(field);
+
+      // tslint:disable-next-line max-line-length
+      expect(on).to.be.calledWith(`${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`, refinementControls.updateNavigation);
     });
   });
 

@@ -1,4 +1,11 @@
+import { Events, Selectors, Tag } from '@storefront/core';
+
 abstract class RefinementControls {
+
+  field: string;
+  props: RefinementControls.Props;
+  state: RefinementControls.State;
+
   init() {
     this.updateField(this.props.field);
   }
@@ -6,7 +13,6 @@ abstract class RefinementControls {
   onUpdate() {
     this.updateField(this.props.field);
     this.state = { ...this.state, ...this.selectNavigation() };
-    this.updateAlias('valueControls', this.state);
   }
 
   updateField(field: string) {
@@ -32,6 +38,7 @@ abstract class RefinementControls {
 
 }
 
+interface RefinementControls extends Tag<RefinementControls.Props, RefinementControls.State> { }
 namespace RefinementControls {
   export interface Props {
     field: string;
@@ -39,9 +46,6 @@ namespace RefinementControls {
 
   export interface State {
     label?: string;
-    more?: boolean;
-    onClick(index: number): void;
-    moreRefinements(): void;
   }
 }
 
