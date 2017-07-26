@@ -34,12 +34,14 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
 
       it('should set label', () => {
         rangeRefinementControls.expose = () => null;
-        stub(Selectors, 'navigation').returns({ label: 'nav' });
-        rangeRefinementControls.flux = <any>{ store: { getState: () => null } };
+        const navigation = stub(Selectors, 'navigation').returns({ label: 'nav' });
+        const result = 'some result';
+        rangeRefinementControls.flux = <any>{ store: { getState: () => result } };
         rangeRefinementControls.props = <any>{ field: '' };
 
         rangeRefinementControls.init();
 
+        expect(navigation).to.be.calledWith(result);
         expect(rangeRefinementControls.label).to.be.eq('nav');
       });
     });
