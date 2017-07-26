@@ -39,28 +39,29 @@
     conventional-changelog "0.0.17"
     github-url-from-git "^1.4.0"
 
-"@storefront/core@1.9.0":
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/@storefront/core/-/core-1.9.0.tgz#10a86aae08284b624538e42837cc1021f5cfe485"
+"@storefront/core@~1.9.0":
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/@storefront/core/-/core-1.9.3.tgz#2e65d9b039e03a88f796c3e70df91c9a636dc017"
   dependencies:
-    "@storefront/flux-capacitor" "1.3.0"
+    "@storefront/flux-capacitor" "1.4.0"
     "@types/clone" "^0.1.30"
     "@types/deep-assign" "^0.1.0"
     "@types/js-cookie" "^2.0.28"
-    "@types/lodash.camelcase" "^4.3.2"
+    "@types/lodash" "^4.14.70"
     "@types/loglevel" "^1.4.29"
     "@types/riot" "^2.6.2"
     clone "^2.1.1"
     deep-assign "^2.0.0"
     gb-tracker-client "^3.4.3"
     js-cookie "^2.1.4"
+    lodash.camelcase "^4.3.0"
     loglevel "^1.4.1"
     riot "^3.4.4"
     url-parse "^1.1.9"
 
-"@storefront/flux-capacitor@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@storefront/flux-capacitor/-/flux-capacitor-1.3.0.tgz#441965e261fedddd7c6fb1484252e9c1247b345b"
+"@storefront/flux-capacitor@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@storefront/flux-capacitor/-/flux-capacitor-1.4.0.tgz#af15c5dadc10f23641f54a0121da03d22176d07c"
   dependencies:
     "@manaflair/redux-batch" "^0.1.0"
     "@types/redux-logger" "^3.0.0"
@@ -98,15 +99,9 @@
   version "2.0.28"
   resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-2.0.28.tgz#d6a9136d699257970fc74d899cd7b12a608d14da"
 
-"@types/lodash.camelcase@^4.3.2":
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/@types/lodash.camelcase/-/lodash.camelcase-4.3.2.tgz#fd195ae81b02c6d50f82f25e0d238ee8a76eb006"
-  dependencies:
-    "@types/lodash" "*"
-
-"@types/lodash@*":
-  version "4.14.67"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.67.tgz#4714714434da110306b9862fbd36b30b55eb850a"
+"@types/lodash@^4.14.70":
+  version "4.14.71"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.71.tgz#0dc383f78981216ac76e2f2c3afd998e0450e4c1"
 
 "@types/loglevel@^1.4.29":
   version "1.4.29"
@@ -2287,6 +2282,10 @@ lodash.assign@^3.0.0:
     lodash._baseassign "^3.0.0"
     lodash._createassigner "^3.0.0"
     lodash.keys "^3.0.0"
+
+lodash.camelcase@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
 
 lodash.create@3.1.1:
   version "3.1.1"
