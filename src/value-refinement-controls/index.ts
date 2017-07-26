@@ -1,6 +1,6 @@
 import { alias, tag, Events, Selectors, Store, Tag } from '@storefront/core';
 
-@alias('valueRefinementControls')
+@alias('valueControls')
 @tag('gb-value-refinement-controls', require('./index.html'))
 class ValueRefinementControls {
 

@@ -9,18 +9,18 @@ suite('Refinement', ({ expect, spy, stub }) => {
   describe('onClick()', () => {
     it('should set preventUpdate', () => {
       const event: any = {};
-      refinement.$navigationDisplay = <any>{};
+      refinement.$valueControls = <any>{};
 
       refinement.onClick(event);
 
       expect(event.preventUpdate).to.be.true;
     });
 
-    it('should call $navigationDisplay.onClick()', () => {
+    it('should call $valueControls.onClick()', () => {
       const i = 8;
       const onClick = spy();
       const event: any = { item: { i } };
-      refinement.$navigationDisplay = <any>{ onClick };
+      refinement.$valueControls = <any>{ onClick };
 
       refinement.onClick(event);
 

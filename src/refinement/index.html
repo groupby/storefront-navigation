@@ -1,8 +1,8 @@
 <yield>
   <label>
-    <span if="{ !$valueRefinementControls.or && $refinement.selected }">&times;</span>
-    <input show="{ $valueRefinementControls.or }" type="{ $valueRefinementControls.or ? 'checkbox' : 'button' }" checked="{ $refinement.selected }" onclick="{ onClick }">
-    <span class="gb-refinement__label">{ $valueRefinementControls.range ? $refinement.low + ' - ' + $refinement.high : $refinement.value }</span>
+    <span if="{ !$valueControls.or && $refinement.selected }">&times;</span>
+    <input show="{ $valueControls.or }" type="{ $valueControls.or ? 'checkbox' : 'button' }" checked="{ $refinement.selected }" onclick="{ onClick }">
+    <span class="gb-refinement__label">{ $valueControls.range ? $refinement.low + ' - ' + $refinement.high : $refinement.value }</span>
     <gb-badge if="{ !$refinement.selected && $refinement.total > 0 }">{ $refinement.total }</gb-badge>
   </label>
 </yield>
