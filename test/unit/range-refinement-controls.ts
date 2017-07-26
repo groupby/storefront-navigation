@@ -49,17 +49,11 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
 
   describe('search()', () => {
     it('should update search', () => {
-      rangeRefinementControls.refs = {
-        low: {
-          value: '10'
-        },
-        high: {
-          value: '20'
-        }
-      };
-
-      rangeRefinementControls.props.field = 'Age Range';
+      const low = { value: '10' };
+      const high = { value: '20' };
       const addRefinement = spy();
+      rangeRefinementControls.refs = { low, high };
+      rangeRefinementControls.props.field = 'Age Range';
       rangeRefinementControls.actions = <any>{ addRefinement };
 
       rangeRefinementControls.search();
