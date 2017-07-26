@@ -100,7 +100,7 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
 
       valueRefinementControls.onUpdate();
 
-      expect(updateAlias).to.be.calledWith('valueRefinementControls', { a: 'b', c: 'd' });
+      expect(updateAlias).to.be.calledWith('valueControls', { a: 'b', c: 'd' });
       expect(valueRefinementControls.state).to.eql({ a: 'b', c: 'd' });
     });
   });

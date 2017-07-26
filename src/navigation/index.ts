@@ -3,6 +3,7 @@ import { alias, configurable, origin, tag, Events, Store, Tag } from '@storefron
 @configurable
 // TODO can we rename this? hard to have alias for navigation component
 // vs alias for a navigation object
+@alias('navigation')
 @origin('navigation')
 @tag('gb-navigation', require('./index.html'))
 class Navigation {
@@ -12,8 +13,6 @@ class Navigation {
   };
 
   init() {
-    this.expose('navigationProps', this.props);
-    this.expose('navigationState', this.state);
     this.flux.on(Events.NAVIGATIONS_UPDATED, this.updateFields);
   }
 

@@ -24,7 +24,7 @@ class ValueRefinementControls {
   onUpdate() {
     this.updateField(this.props.field);
     this.state = { ...this.state, ...this.selectNavigation() };
-    this.updateAlias('valueRefinementControls', this.state);
+    this.updateAlias('valueControls', this.state);
   }
 
   updateField(field: string) {

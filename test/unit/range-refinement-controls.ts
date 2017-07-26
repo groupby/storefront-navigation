@@ -33,9 +33,9 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
       });
 
       it('should set label', () => {
-        rangeRefinementControls.expose = () => null;
         const navigation = stub(Selectors, 'navigation').returns({ label: 'nav' });
         const result = 'some result';
+        rangeRefinementControls.expose = () => null;
         rangeRefinementControls.flux = <any>{ store: { getState: () => result } };
         rangeRefinementControls.props = <any>{ field: '' };
 

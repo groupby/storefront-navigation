@@ -8,10 +8,10 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
   beforeEach(() => navigation = new Navigation());
 
   itShouldBeConfigurable(Navigation);
+  itShouldHaveAlias(Navigation, 'navigation');
 
   describe('init()', () => {
     it('should set initial fields', () => {
-      navigation.expose = () => null;
       navigation.flux = <any>{ on: () => null };
 
       navigation.init();
@@ -19,20 +19,9 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
       expect(navigation.state.fields).to.eql([]);
     });
 
-    it('should expose navigationProps and navigationState', () => {
-      const expose = navigation.expose = spy();
-      navigation.flux = <any>{ on: () => null };
-
-      navigation.init();
-
-      expect(expose).to.be.calledWith('navigationProps', navigation.props);
-      expect(expose).to.be.calledWith('navigationState', navigation.state);
-    });
-
     it('should listen for NAVIGATIONS_UPDATED', () => {
       const on = spy();
       navigation.flux = <any>{ on };
-      navigation.expose = () => null;
 
       navigation.init();
 

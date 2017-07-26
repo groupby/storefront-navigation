@@ -1,4 +1,4 @@
-import { alias, tag, Tag } from '@storefront/core';
+import { tag, Tag } from '@storefront/core';
 import Navigation from '../navigation'
 
 @tag('gb-navigation-list', require('./index.html'))

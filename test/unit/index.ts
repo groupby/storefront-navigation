@@ -16,7 +16,7 @@ suite('package', ({ expect }) => {
     expect(pkg.NavigationList).to.eq(NavigationList);
   });
 
-  it('should expose RangeValueRefinement', () => {
+  it('should expose RangeRefinementControls', () => {
     expect(pkg.RangeRefinementControls).to.eq(RangeRefinementControls);
   });
 
