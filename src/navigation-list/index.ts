@@ -1,5 +1,5 @@
 import { tag, Tag } from '@storefront/core';
-import Navigation from '../navigation'
+import Navigation from '../navigation';
 
 @tag('gb-navigation-list', require('./index.html'))
 class NavigationList {

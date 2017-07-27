@@ -4,8 +4,8 @@ import NavigationList from '../../src/navigation-list';
 import RangeRefinementControls from '../../src/range-refinement-controls';
 import Refinement from '../../src/refinement';
 import RefinementList from '../../src/refinement-list';
-import suite from './_suite';
 import ValueRefinementControls from '../../src/value-refinement-controls';
+import suite from './_suite';
 
 suite('package', ({ expect }) => {
   it('should expose Navigation', () => {
