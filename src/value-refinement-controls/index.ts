@@ -1,8 +1,9 @@
 import { alias, tag, Events, Selectors, Store, Tag } from '@storefront/core';
+import RefinementControls from '../refinement-controls';
 
 @alias('valueControls')
 @tag('gb-value-refinement-controls', require('./index.html'))
-class ValueRefinementControls {
+class ValueRefinementControls extends RefinementControls<ValueRefinementControls.Props, ValueRefinementControls.State> {
 
   field: string;
   state: ValueRefinementControls.State = {
@@ -16,37 +17,38 @@ class ValueRefinementControls {
     moreRefinements: () => this.actions.fetchMoreRefinements(this.field)
   };
 
-  init() {
-    this.updateField(this.props.field);
-    this.updateNavigation();
-  }
+  // init() {
+  //   this.updateField(this.props.field);
+  //   this.updateNavigation();
+  // }
 
   onUpdate() {
-    this.updateField(this.props.field);
-    this.state = { ...this.state, ...this.selectNavigation() };
+    super.onUpdate();
+    // this.updateField(this.props.field);
+    // this.state = { ...this.state, ...this.selectNavigation() };
     this.updateAlias('valueControls', this.state);
   }
 
-  updateField(field: string) {
-    this.flux.off(`${Events.SELECTED_REFINEMENTS_UPDATED}:${this.field}`, this.updateNavigation);
-    this.root.classList.remove(`gb-navigation-${this.field}`);
-    this.field = field;
-    this.root.classList.add(`gb-navigation-${field}`);
-    this.flux.on(`${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`, this.updateNavigation);
-  }
+  // updateField(field: string) {
+  //   this.flux.off(`${Events.SELECTED_REFINEMENTS_UPDATED}:${this.field}`, this.updateNavigation);
+  //   this.root.classList.remove(`gb-navigation-${this.field}`);
+  //   this.field = field;
+  //   this.root.classList.add(`gb-navigation-${field}`);
+  //   this.flux.on(`${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`, this.updateNavigation);
+  // }
 
-  updateNavigation = () => this.set(this.selectNavigation());
-
-  selectNavigation() {
-    const navigation = Selectors.navigation(this.flux.store.getState(), this.field);
-    return {
-      ...navigation,
-      refinements: navigation.refinements.map((value, index) => ({
-        ...value,
-        selected: navigation.selected.includes(index)
-      }))
-    };
-  }
+  // updateNavigation = () => this.set(this.selectNavigation());
+  //
+  // selectNavigation() {
+  //   const navigation = Selectors.navigation(this.flux.store.getState(), this.field);
+  //   return {
+  //     ...navigation,
+  //     refinements: navigation.refinements.map((value, index) => ({
+  //       ...value,
+  //       selected: navigation.selected.includes(index)
+  //     }))
+  //   };
+  // }
 
   isSelected(index: number) {
     return Selectors.isRefinementSelected(this.flux.store.getState(), this.field, index);
@@ -55,12 +57,11 @@ class ValueRefinementControls {
 
 interface ValueRefinementControls extends Tag<ValueRefinementControls.Props, ValueRefinementControls.State> { }
 namespace ValueRefinementControls {
-  export interface Props {
+  export interface Props extends RefinementControls.Props {
     field: string;
   }
 
-  export interface State {
-    label?: string;
+  export interface State extends RefinementControls.State {
     more?: boolean;
     onClick(index: number): void;
     moreRefinements(): void;

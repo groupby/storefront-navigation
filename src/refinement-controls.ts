@@ -1,18 +1,17 @@
-import { Events, Selectors, Tag } from '@storefront/core';
+import { Events, Selectors, Store, Tag } from '@storefront/core';
 
-abstract class RefinementControls {
+abstract class RefinementControls<P extends RefinementControls.Props, S extends RefinementControls.State> {
 
   field: string;
-  props: RefinementControls.Props;
-  state: RefinementControls.State;
 
   init() {
     this.updateField(this.props.field);
+    this.updateNavigation();
   }
 
   onUpdate() {
     this.updateField(this.props.field);
-    this.state = { ...this.state, ...this.selectNavigation() };
+    this.state = { ...<any>this.state, ...<any>this.selectNavigation() };
   }
 
   updateField(field: string) {
@@ -25,9 +24,9 @@ abstract class RefinementControls {
 
   updateNavigation = () => this.set(this.selectNavigation());
 
-  selectNavigation() {
+  selectNavigation(): S {
     const navigation = Selectors.navigation(this.flux.store.getState(), this.field);
-    return {
+    return <any>{
       ...navigation,
       refinements: navigation.refinements.map((value, index) => ({
         ...value,
@@ -38,15 +37,18 @@ abstract class RefinementControls {
 
 }
 
-interface RefinementControls extends Tag<RefinementControls.Props, RefinementControls.State> { }
+// tslint:disable-next-line max-line-length
+interface RefinementControls<P extends RefinementControls.Props = RefinementControls.Props, S extends RefinementControls.State = RefinementControls.State> extends Tag<P, S> { }
 namespace RefinementControls {
   export interface Props {
-    field: string;
+    field?: string;
   }
 
-  export interface State {
-    label?: string;
+  export interface State extends Partial<Store.Navigation> {
+    refinements?: SelectedRefinement[];
   }
+
+  export type SelectedRefinement = Store.Refinement & { selected: boolean };
 }
 
 export default RefinementControls;

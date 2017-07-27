@@ -1,7 +1,8 @@
 import { alias, tag, Selectors, Tag } from '@storefront/core';
+import RefinementControls from '../refinement-controls';
 
 @tag('gb-range-refinement-controls', require('./index.html'))
-class RangeRefinementControls {
+class RangeRefinementControls extends RefinementControls<RangeRefinementControls.Props> {
 
   label: string;
   refs: {
@@ -28,15 +29,14 @@ class RangeRefinementControls {
   }
 }
 
-interface RangeRefinementControls extends Tag { }
+interface RangeRefinementControls extends RefinementControls<RangeRefinementControls.Props> { }
 namespace RangeRefinementControls {
-  export interface Props {
-    field?: string;
+  export interface Props extends RefinementControls.Props {
     labels: {
       low: string;
       high: string;
       submit: string;
-    }
+    };
   }
 }
 
