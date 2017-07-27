@@ -3,9 +3,8 @@ import RefinementControls from '../refinement-controls';
 
 @alias('valueControls')
 @tag('gb-value-refinement-controls', require('./index.html'))
-class ValueRefinementControls extends RefinementControls<ValueRefinementControls.Props, ValueRefinementControls.State> {
+class ValueRefinementControls extends RefinementControls<RefinementControls.Props, ValueRefinementControls.State> {
 
-  field: string;
   state: ValueRefinementControls.State = {
     onClick: (index) => {
       if (this.isSelected(index)) {
@@ -27,12 +26,8 @@ class ValueRefinementControls extends RefinementControls<ValueRefinementControls
   }
 }
 
-interface ValueRefinementControls extends Tag<ValueRefinementControls.Props, ValueRefinementControls.State> { }
+interface ValueRefinementControls extends Tag<RefinementControls.Props, ValueRefinementControls.State> { }
 namespace ValueRefinementControls {
-  export interface Props extends RefinementControls.Props {
-    field: string;
-  }
-
   export interface State extends RefinementControls.State {
     more?: boolean;
     onClick(index: number): void;
