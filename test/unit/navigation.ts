@@ -12,7 +12,6 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
 
   describe('init()', () => {
     it('should set initial fields', () => {
-      navigation.expose = () => null;
       navigation.flux = <any>{ on: () => null };
 
       navigation.init();
@@ -23,7 +22,6 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
     it('should listen for NAVIGATIONS_UPDATED', () => {
       const on = spy();
       navigation.flux = <any>{ on };
-      navigation.expose = () => null;
 
       navigation.init();
 

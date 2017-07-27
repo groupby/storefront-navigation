@@ -20,8 +20,12 @@ class Navigation {
     this.set({ fields: navigations.allIds })
 }
 
-interface Navigation extends Tag<any, Navigation.State> { }
+interface Navigation extends Tag<Navigation.Props, Navigation.State> { }
 namespace Navigation {
+  export interface Props {
+    display?: { [key: string]: string };
+  }
+
   export interface State {
     fields: string[];
   }

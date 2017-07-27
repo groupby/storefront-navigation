@@ -1,16 +1,16 @@
 import { tag, Tag } from '@storefront/core';
-import NavigationDisplay from '../navigation-display';
 import RefinementList from '../refinement-list';
+import ValueRefinementControls from '../value-refinement-controls';
 
 @tag('gb-refinement', require('./index.html'))
 class Refinement {
 
-  $navigationDisplay: NavigationDisplay.State;
+  $valueControls: ValueRefinementControls.State;
 
   onClick(event: Refinement.IndexedClickEvent) {
     event.preventUpdate = true;
-    if (this.$navigationDisplay.onClick) {
-      this.$navigationDisplay.onClick(event.item.i);
+    if (this.$valueControls.onClick) {
+      this.$valueControls.onClick(event.item.i);
     }
   }
 }
