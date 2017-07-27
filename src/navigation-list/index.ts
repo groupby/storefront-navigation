@@ -15,7 +15,7 @@ class NavigationList {
 
 interface NavigationList extends Tag<NavigationList.Props> { }
 namespace NavigationList {
-  export interface Props {
+  export interface Props extends Tag.Props {
     display?: { [key: string]: string };
     fields: string[];
   }

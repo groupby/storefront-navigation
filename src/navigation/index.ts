@@ -22,7 +22,7 @@ class Navigation {
 
 interface Navigation extends Tag<Navigation.Props, Navigation.State> { }
 namespace Navigation {
-  export interface Props {
+  export interface Props extends Tag.Props {
     display?: { [key: string]: string };
   }
 
