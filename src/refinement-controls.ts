@@ -40,7 +40,7 @@ abstract class RefinementControls<P extends RefinementControls.Props, S extends 
 // tslint:disable-next-line max-line-length
 interface RefinementControls<P extends RefinementControls.Props = RefinementControls.Props, S extends RefinementControls.State = RefinementControls.State> extends Tag<P, S> { }
 namespace RefinementControls {
-  export interface Props {
+  export interface Props extends Tag.Props {
     field?: string;
   }
 

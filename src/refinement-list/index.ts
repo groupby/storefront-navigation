@@ -18,7 +18,7 @@ class RefinementList {
 
 interface RefinementList extends Tag<RefinementList.Props> { }
 namespace RefinementList {
-  export interface Props {
+  export interface Props extends Tag.Props {
     refinements: Refinement[];
   }
 
