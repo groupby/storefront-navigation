@@ -62,8 +62,8 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
     });
 
     it('should call updateAlias()', () => {
-      const onUpdate = stub(RefinementControls.prototype, 'onUpdate');
       const updateAlias = valueRefinementControls.updateAlias = spy();
+      stub(RefinementControls.prototype, 'onUpdate');
 
       valueRefinementControls.onUpdate();
 
