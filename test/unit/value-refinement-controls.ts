@@ -52,12 +52,8 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
   });
 
   describe('onUpdate()', () => {
-    let superOnUpdate;
-    beforeEach(() => superOnUpdate = RefinementControls.prototype.onUpdate);
-    afterEach(() => RefinementControls.prototype.onUpdate = superOnUpdate);
-
     it('should call super onUpdate()', () => {
-      const onUpdate = RefinementControls.prototype.onUpdate = spy();
+      const onUpdate = stub(RefinementControls.prototype, 'onUpdate');
       valueRefinementControls.updateAlias = () => null;
 
       valueRefinementControls.onUpdate();
@@ -66,18 +62,12 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
     });
 
     it('should call updateAlias()', () => {
-      const field = 'price';
-      const selectNavigation = valueRefinementControls.selectNavigation = spy(() => ({ c: 'd' }));
+      const onUpdate = stub(RefinementControls.prototype, 'onUpdate');
       const updateAlias = valueRefinementControls.updateAlias = spy();
-      valueRefinementControls.field = 'colour';
-      valueRefinementControls.updateField = () => null;
-      valueRefinementControls.state = <any>{ a: 'b' };
-      valueRefinementControls.props = { field };
 
       valueRefinementControls.onUpdate();
 
-      expect(updateAlias).to.be.calledWith('valueControls', { a: 'b', c: 'd' });
-      expect(valueRefinementControls.state).to.eql({ a: 'b', c: 'd' });
+      expect(updateAlias).to.be.calledWith('valueControls', valueRefinementControls.state);
     });
   });
 

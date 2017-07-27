@@ -22,13 +22,8 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
     });
 
     describe('init()', () => {
-      let superInit;
-
-      beforeEach(() => superInit = RefinementControls.prototype.init);
-      afterEach(() => RefinementControls.prototype.init = superInit);
-
       it('should call super init()', () => {
-        const init = RefinementControls.prototype.init = spy();
+        const init = stub(RefinementControls.prototype, 'init');
         rangeRefinementControls.expose = () => null;
 
         rangeRefinementControls.init();
@@ -38,7 +33,7 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
 
       it('should call expose()', () => {
         const expose = rangeRefinementControls.expose = spy();
-        RefinementControls.prototype.init = () => null;
+        stub(RefinementControls.prototype, 'init');
 
         rangeRefinementControls.init();
 

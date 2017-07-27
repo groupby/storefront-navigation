@@ -7,9 +7,7 @@ class MockRefinementControls extends RefinementControls { }
 suite('RefinementControls', ({ expect, spy, stub }) => {
   let refinementControls;
 
-  beforeEach(() => {
-    refinementControls = new MockRefinementControls();
-  });
+  beforeEach(() => refinementControls = new MockRefinementControls());
 
   describe('init()', () => {
     it('should call updateField()', () => {
