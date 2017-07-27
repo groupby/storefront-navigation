@@ -57,9 +57,7 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
     afterEach(() => RefinementControls.prototype.onUpdate = superOnUpdate);
 
     it('should call super onUpdate()', () => {
-      const onUpdate = spy();
-      const superInstance = { onUpdate };
-      RefinementControls.prototype.onUpdate = onUpdate;
+      const onUpdate = RefinementControls.prototype.onUpdate = spy();
       valueRefinementControls.updateAlias = () => null;
 
       valueRefinementControls.onUpdate();

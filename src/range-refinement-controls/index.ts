@@ -18,8 +18,8 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
   };
 
   init() {
+    super.init();
     this.expose('rangeControls', this.props);
-    this.label = Selectors.navigation(this.flux.store.getState(), this.props.field).label;
   }
 
   search = () => {

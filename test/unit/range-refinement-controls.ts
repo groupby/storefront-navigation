@@ -1,5 +1,6 @@
 import { Selectors } from '@storefront/core';
 import RangeRefinementControls from '../../src/range-refinement-controls';
+import RefinementControls from '../../src/refinement-controls';
 import suite from './_suite';
 
 suite('RangeRefinementControls', ({ expect, spy, stub }) => {
@@ -21,28 +22,27 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
     });
 
     describe('init()', () => {
-      it('should expose rangeControls', () => {
+      let superInit;
+
+      beforeEach(() => superInit = RefinementControls.prototype.init);
+      afterEach(() => RefinementControls.prototype.init = superInit);
+
+      it('should call super init()', () => {
+        const init = RefinementControls.prototype.init = spy();
+        rangeRefinementControls.expose = () => null;
+
+        rangeRefinementControls.init();
+
+        expect(init).to.be.calledOnce;
+      });
+
+      it('should call expose()', () => {
         const expose = rangeRefinementControls.expose = spy();
-        stub(Selectors, 'navigation').returns({ label: '' });
-        rangeRefinementControls.flux = <any>{ store: { getState: () => null } };
-        rangeRefinementControls.props = <any>{ field: '' };
+        RefinementControls.prototype.init = () => null;
 
         rangeRefinementControls.init();
 
         expect(expose).to.be.calledWith('rangeControls', rangeRefinementControls.props);
-      });
-
-      it('should set label', () => {
-        const navigation = stub(Selectors, 'navigation').returns({ label: 'nav' });
-        const result = 'some result';
-        rangeRefinementControls.expose = () => null;
-        rangeRefinementControls.flux = <any>{ store: { getState: () => result } };
-        rangeRefinementControls.props = <any>{ field: '' };
-
-        rangeRefinementControls.init();
-
-        expect(navigation).to.be.calledWith(result);
-        expect(rangeRefinementControls.label).to.be.eq('nav');
       });
     });
   });
