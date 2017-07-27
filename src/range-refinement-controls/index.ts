@@ -1,10 +1,9 @@
-import { alias, tag, Selectors, Tag } from '@storefront/core';
+import { tag, Tag } from '@storefront/core';
 import RefinementControls from '../refinement-controls';
 
 @tag('gb-range-refinement-controls', require('./index.html'))
 class RangeRefinementControls extends RefinementControls<RangeRefinementControls.Props> {
 
-  label: string;
   refs: {
     low: HTMLInputElement,
     high: HTMLInputElement
