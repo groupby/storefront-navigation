@@ -10,6 +10,20 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
   itShouldBeConfigurable(Navigation);
   itShouldHaveAlias(Navigation, 'navigation');
 
+  describe('constructor()', () => {
+    describe('props', () => {
+      it('should set initial display', () => {
+        expect(navigation.props.display).to.eql({});
+      });
+    });
+
+    describe('state', () => {
+      it('should set initial fields', () => {
+        expect(navigation.state.fields).to.eql([]);
+      });
+    });
+  });
+
   describe('init()', () => {
     it('should set initial fields', () => {
       navigation.flux = <any>{ on: () => null };

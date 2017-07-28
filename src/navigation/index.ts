@@ -8,6 +8,9 @@ import { alias, configurable, origin, tag, Events, Store, Tag } from '@storefron
 @tag('gb-navigation', require('./index.html'))
 class Navigation {
 
+  props: Navigation.Props = {
+    display: {}
+  };
   state: Navigation.State = {
     fields: []
   };
