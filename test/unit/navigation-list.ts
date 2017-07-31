@@ -12,15 +12,15 @@ suite('NavigationList', ({ expect, spy }) => {
         expect(navigationList.props).eql(<any>{ display: {}, fields: [] });
       });
     });
+  });
 
-    describe('init()', () => {
-      it('should expose navigationList.props', () => {
-        const expose = navigationList.expose = spy();
+  describe('init()', () => {
+    it('should expose navigationList.props', () => {
+      const expose = navigationList.expose = spy();
 
-        navigationList.init();
+      navigationList.init();
 
-        expect(expose).to.be.calledWith('navigationList', navigationList.props);
-      });
+      expect(expose).to.be.calledWith('navigationList', navigationList.props);
     });
   });
 });
