@@ -1,4 +1,5 @@
 import * as pkg from '../../src';
+import FilteredRefinementList from '../../src/filtered-refinement-list';
 import Navigation from '../../src/navigation';
 import NavigationList from '../../src/navigation-list';
 import RangeRefinementControls from '../../src/range-refinement-controls';
@@ -8,6 +9,10 @@ import ValueRefinementControls from '../../src/value-refinement-controls';
 import suite from './_suite';
 
 suite('package', ({ expect }) => {
+  it('should expose FilteredRefinementList', () => {
+    expect(pkg.FilteredRefinementList).to.eq(FilteredRefinementList);
+  });
+
   it('should expose Navigation', () => {
     expect(pkg.Navigation).to.eq(Navigation);
   });
