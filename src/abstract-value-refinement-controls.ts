@@ -1,11 +1,9 @@
 import { alias, tag, Events, Selectors, Store, Tag } from '@storefront/core';
-import RefinementControls from '../refinement-controls';
+import RefinementControls from './refinement-controls';
 
-@alias('valueControls')
-@tag('gb-value-refinement-controls', require('./index.html'))
-class ValueRefinementControls extends RefinementControls<RefinementControls.Props, ValueRefinementControls.State> {
+abstract class AbstractValueRefinementControls extends RefinementControls<RefinementControls.Props, AbstractValueRefinementControls.State> {
 
-  state: ValueRefinementControls.State = {
+  state: AbstractValueRefinementControls.State = {
     onClick: (index) => {
       if (this.isSelected(index)) {
         this.actions.deselectRefinement(this.field, index);
@@ -16,9 +14,11 @@ class ValueRefinementControls extends RefinementControls<RefinementControls.Prop
     moreRefinements: () => this.actions.fetchMoreRefinements(this.field)
   };
 
+  abstract get alias(): string;
+
   onUpdate() {
     super.onUpdate();
-    this.updateAlias('valueControls', this.state);
+    this.updateAlias(this.alias, this.state);
   }
 
   isSelected(index: number) {
@@ -26,8 +26,8 @@ class ValueRefinementControls extends RefinementControls<RefinementControls.Prop
   }
 }
 
-interface ValueRefinementControls extends Tag<RefinementControls.Props, ValueRefinementControls.State> { }
-namespace ValueRefinementControls {
+interface AbstractValueRefinementControls extends Tag<RefinementControls.Props, AbstractValueRefinementControls.State> { }
+namespace AbstractValueRefinementControls {
   export interface State extends RefinementControls.State {
     more?: boolean;
     onClick(index: number): void;
@@ -35,4 +35,4 @@ namespace ValueRefinementControls {
   }
 }
 
-export default ValueRefinementControls;
+export default AbstractValueRefinementControls;

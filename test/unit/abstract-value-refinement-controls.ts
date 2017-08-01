@@ -3,12 +3,18 @@ import RefinementControls from '../../src/refinement-controls';
 import AbstractValueRefinementControls from '../../src/abstract-value-refinement-controls';
 import suite from './_suite';
 
-class MockAbstractValueRefinementControls extends AbstractValueRefinementControls { }
+const MOCK_ALIAS = 'MockAlias';
 
-suite('AbstractValueRefinementControls', ({ expect, spy, stub, itShouldHaveAlias }) => {
+class MockAbstractValueRefinementControls extends AbstractValueRefinementControls {
+  get alias() {
+    return MOCK_ALIAS;
+  }
+}
+
+suite('AbstractValueRefinementControls', ({ expect, spy, stub }) => {
   let mockAbstractValueRefinementControls: AbstractValueRefinementControls;
 
-  beforeEach(() => mockAbstractValueRefinementControls = new AbstractValueRefinementControls());
+  beforeEach(() => mockAbstractValueRefinementControls = new MockAbstractValueRefinementControls());
 
   describe('constructor()', () => {
     it('should extend RefinementControls', () => {
@@ -73,7 +79,7 @@ suite('AbstractValueRefinementControls', ({ expect, spy, stub, itShouldHaveAlias
 
       mockAbstractValueRefinementControls.onUpdate();
 
-      expect(updateAlias).to.be.calledWith('valueControls', mockAbstractValueRefinementControls.state);
+      expect(updateAlias).to.be.calledWith(MOCK_ALIAS, mockAbstractValueRefinementControls.state);
     });
   });
 
