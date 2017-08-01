@@ -1,4 +1,3 @@
-import { Selectors } from '@storefront/core';
 import RangeRefinementControls from '../../src/range-refinement-controls';
 import RefinementControls from '../../src/refinement-controls';
 import suite from './_suite';
@@ -8,9 +7,13 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
 
   beforeEach(() => rangeRefinementControls = new RangeRefinementControls());
 
-  describe('constructor', () => {
+  describe('constructor()', () => {
+    it('should extend RefinementControls', () => {
+      expect(rangeRefinementControls).to.be.an.instanceof(RefinementControls);
+    });
+
     describe('props', () => {
-      it('should set initial value', () => {
+      it('should set initial values', () => {
         expect(rangeRefinementControls.props).to.eql({
           labels: {
             low: 'Min',

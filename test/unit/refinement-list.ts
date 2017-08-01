@@ -17,20 +17,24 @@ suite('RefinementList', ({ expect, spy }) => {
   describe('init()', () => {
     it('should expose refinements', () => {
       const expose = refinementList.expose = spy();
+      const refinements: any = ['a', 'b'];
+      refinementList.props = { refinements };
 
       refinementList.init();
 
-      expect(expose).to.be.calledWith('refinements', refinementList.props.refinements);
+      expect(expose).to.be.calledWith('refinements', refinements);
     });
   });
 
   describe('onUpdate()', () => {
     it('should call updateAlias()', () => {
       const updateAlias = refinementList.updateAlias = spy();
+      const refinements: any = ['a', 'b'];
+      refinementList.props = { refinements };
 
       refinementList.onUpdate();
 
-      expect(updateAlias).to.be.calledWith('refinements', refinementList.props.refinements);
+      expect(updateAlias).to.be.calledWith('refinements', refinements);
     });
   });
 });
