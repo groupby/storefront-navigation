@@ -1,4 +1,4 @@
-import { alias, tag, Events, Selectors, Store, Tag } from '@storefront/core';
+import { alias, tag } from '@storefront/core';
 import AbstractValueRefinementControls from '../abstract-value-refinement-controls';
 
 @alias('valueControls')
