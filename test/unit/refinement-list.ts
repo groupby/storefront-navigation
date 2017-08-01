@@ -17,7 +17,7 @@ suite('RefinementList', ({ expect, spy }) => {
   describe('init()', () => {
     it('should expose refinements', () => {
       const expose = refinementList.expose = spy();
-      const refinements = [];
+      const refinements: any = ['a', 'b'];
       refinementList.props = { refinements };
 
       refinementList.init();
@@ -29,7 +29,7 @@ suite('RefinementList', ({ expect, spy }) => {
   describe('onUpdate()', () => {
     it('should call updateAlias()', () => {
       const updateAlias = refinementList.updateAlias = spy();
-      const refinements = [];
+      const refinements: any = ['a', 'b'];
       refinementList.props = { refinements };
 
       refinementList.onUpdate();
