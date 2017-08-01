@@ -3,7 +3,7 @@ import RefinementControls from '../../src/refinement-controls';
 import suite from './_suite';
 
 suite('RangeRefinementControls', ({ expect, spy, stub }) => {
-  let rangeRefinementControls;
+  let rangeRefinementControls: RangeRefinementControls;
 
   beforeEach(() => rangeRefinementControls = new RangeRefinementControls());
 
@@ -47,8 +47,8 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
 
   describe('search()', () => {
     it('should update search', () => {
-      const low = { value: '10' };
-      const high = { value: '20' };
+      const low: any = { value: '10' };
+      const high: any = { value: '20' };
       const addRefinement = spy();
       rangeRefinementControls.refs = { low, high };
       rangeRefinementControls.props.field = 'Age Range';

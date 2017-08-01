@@ -1,6 +1,6 @@
 <gb-list items="{ $navigationList.fields }">
   <yield>
-    <gb-navigation-display label="{ $navigationList.labels[item] }"></gb-navigation-display>
-    <div data-is="gb-{ $navigationList.display[item] || 'value' }-refinement-controls" field="{ item }"></div>
+    <gb-navigation-display ref="display" label="{ $navigationList.labels[item] }"></gb-navigation-display>
+    <div data-is="gb-{ $navigationList.display[item] || 'value' }-refinement-controls" if="{ refs.display.state.isActive }" field="{ item }"></div>
   </yield>
 </gb-list>

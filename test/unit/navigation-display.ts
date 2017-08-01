@@ -2,7 +2,7 @@ import NavigationDisplay from '../../src/navigation-display';
 import suite from './_suite';
 
 suite('NavigationDisplay', ({ expect, spy, itShouldHaveAlias }) => {
-  let navigationDisplay;
+  let navigationDisplay: NavigationDisplay;
 
   beforeEach(() => navigationDisplay = new NavigationDisplay());
 
@@ -15,10 +15,24 @@ suite('NavigationDisplay', ({ expect, spy, itShouldHaveAlias }) => {
       });
 
       describe('toggleDisplay()', () => {
-        it('should toggleDisplay', () => {
+        it('should set isActive to true', () => {
+          const set = navigationDisplay.set = spy();
+          navigationDisplay.state.isActive = false;
 
+          navigationDisplay.state.toggleDisplay();
+
+          expect(set).to.be.calledWith({ isActive: true });
         });
-      })
+
+        it('should set isActive to false', () => {
+          const set = navigationDisplay.set = spy();
+          navigationDisplay.state.isActive = true;
+
+          navigationDisplay.state.toggleDisplay();
+
+          expect(set).to.be.calledWith({ isActive: false });
+        });
+      });
     });
   });
 });

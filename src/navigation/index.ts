@@ -1,15 +1,14 @@
 import { alias, configurable, origin, tag, Events, Store, Tag } from '@storefront/core';
 
 @configurable
-// TODO can we rename this? hard to have alias for navigation component
-// vs alias for a navigation object
 @alias('navigation')
 @origin('navigation')
 @tag('gb-navigation', require('./index.html'))
 class Navigation {
 
   props: Navigation.Props = {
-    display: {}
+    display: {},
+    labels: {}
   };
   state: Navigation.State = {
     fields: []
@@ -27,6 +26,7 @@ interface Navigation extends Tag<Navigation.Props, Navigation.State> { }
 namespace Navigation {
   export interface Props extends Tag.Props {
     display?: { [key: string]: string };
+    labels?: { [key: string]: string };
   }
 
   export interface State {

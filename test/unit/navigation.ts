@@ -13,13 +13,13 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
   describe('constructor()', () => {
     describe('props', () => {
       it('should set initial display', () => {
-        expect(navigation.props.display).to.eql({});
+        expect(navigation.props).to.eql({ display: {}, labels: {} });
       });
     });
 
     describe('state', () => {
-      it('should set initial fields', () => {
-        expect(navigation.state.fields).to.eql([]);
+      it('should set initial value', () => {
+        expect(navigation.state).to.eql({ fields: [] });
       });
     });
   });

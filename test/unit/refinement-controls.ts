@@ -5,7 +5,7 @@ import suite from './_suite';
 class MockRefinementControls extends RefinementControls { }
 
 suite('RefinementControls', ({ expect, spy, stub }) => {
-  let refinementControls;
+  let refinementControls: RefinementControls;
 
   beforeEach(() => refinementControls = new MockRefinementControls());
 

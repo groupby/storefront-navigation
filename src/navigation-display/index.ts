@@ -6,9 +6,8 @@ class NavigationDisplay {
 
   state: NavigationDisplay.State = {
     isActive: true,
-    toggleDisplay: () => console.log('click'),
+    toggleDisplay: () => this.set({ isActive: !this.state.isActive }),
   };
-
 }
 
 interface NavigationDisplay extends Tag<NavigationDisplay.Props, NavigationDisplay.State> { }
