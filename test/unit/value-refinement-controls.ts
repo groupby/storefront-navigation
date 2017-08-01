@@ -1,14 +1,20 @@
-import { Events, Selectors } from '@storefront/core';
+import { Selectors } from '@storefront/core';
 import RefinementControls from '../../src/refinement-controls';
 import ValueRefinementControls from '../../src/value-refinement-controls';
 import suite from './_suite';
 
-suite('ValueRefinementControls', ({ expect, spy, stub }) => {
+suite('ValueRefinementControls', ({ expect, spy, stub, itShouldHaveAlias }) => {
   let valueRefinementControls: ValueRefinementControls;
+
+  itShouldHaveAlias(ValueRefinementControls, 'valueControls');
 
   beforeEach(() => valueRefinementControls = new ValueRefinementControls());
 
   describe('constructor()', () => {
+    it('should extend RefinementControls', () => {
+      expect(valueRefinementControls).to.be.an.instanceof(RefinementControls);
+    });
+
     describe('state', () => {
       describe('onClick()', () => {
         it('should call actions.deselectRefinement() if selected', () => {
