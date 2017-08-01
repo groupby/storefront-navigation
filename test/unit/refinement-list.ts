@@ -3,7 +3,7 @@ import RefinementList from '../../src/refinement-list';
 import suite from './_suite';
 
 suite('RefinementList', ({ expect }) => {
-  let refinementList: RefinementList;
+ let refinementList: RefinementList;
 
   beforeEach(() => refinementList = new RefinementList());
 
