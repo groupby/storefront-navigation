@@ -8,7 +8,7 @@ suite('NavigationList', ({ expect, spy }) => {
 
   describe('constructor()', () => {
     describe('props', () => {
-      it('should set props', () => {
+      it('should set initial values', () => {
         expect(navigationList.props).eql(<any>{ display: {}, fields: [] });
       });
     });
