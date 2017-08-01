@@ -1,3 +1,4 @@
+import FilterRefinementControls from './filter-refinement-controls';
 import FilteredRefinementList from './filtered-refinement-list';
 import Navigation from './navigation';
 import NavigationList from './navigation-list';
@@ -7,6 +8,7 @@ import RefinementList from './refinement-list';
 import ValueRefinementControls from './value-refinement-controls';
 
 export {
+  FilterRefinementControls,
   FilteredRefinementList,
   Navigation,
   NavigationList,

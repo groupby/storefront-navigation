@@ -2,6 +2,7 @@ import { bootstrap } from '@storefront/testing';
 import * as chai from 'chai';
 
 bootstrap(chai, __dirname, [
+  '../src/filter-refinement-controls/index.html',
   '../src/filtered-refinement-list/index.html',
   '../src/navigation/index.html',
   '../src/navigation-list/index.html',
