@@ -5,13 +5,17 @@ abstract class RefinementControls<P extends RefinementControls.Props, S extends 
   abstract get alias(): string;
 
   init() {
-    this.state = { ...<any>this.state, ...this.props.navigation };
+    this.updateState();
     this.expose(this.alias, this.state);
   }
 
   onUpdate() {
-    this.state = { ...<any>this.state, ...this.props.navigation };
+    this.updateState();
     this.updateAlias(this.alias, this.state);
+  }
+
+  updateState() {
+    this.state = { ...<any>this.state, ...this.props.navigation };
   }
 }
 
