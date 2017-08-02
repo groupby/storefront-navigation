@@ -32,6 +32,9 @@ class NavigationDisplay {
       ...navigation,
       refinements: navigation.refinements.map((value, index) => ({
         ...value,
+        index,
+        or: navigation.or,
+        range: navigation.range,
         selected: navigation.selected.includes(index)
       }))
     };

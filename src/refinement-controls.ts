@@ -15,7 +15,12 @@ abstract class RefinementControls<P extends RefinementControls.Props, S extends 
   }
 
   updateState() {
-    this.state = { ...<any>this.state, ...this.props.navigation };
+    this.state = { ...<any>this.state, ...this.transformNavigation(this.props.navigation) };
+  }
+
+  // tslint:disable-next-line max-line-length
+  transformNavigation<T extends RefinementControls.SelectedNavigation>(navigation: RefinementControls.SelectedNavigation): T {
+    return <any>navigation;
   }
 }
 
@@ -32,7 +37,12 @@ namespace RefinementControls {
     refinements?: SelectedRefinement[];
   }
 
-  export type SelectedRefinement = Store.Refinement & { selected: boolean };
+  export type SelectedRefinement = Store.Refinement & {
+    selected: boolean;
+    or: boolean;
+    range: boolean;
+    index: number;
+  };
 }
 
 export default RefinementControls;

@@ -6,15 +6,23 @@ import RefinementControls from '../refinement-controls';
 class ValueRefinementControls extends RefinementControls<RefinementControls.Props, ValueRefinementControls.State> {
 
   state: ValueRefinementControls.State = {
-    onClick: (index) => {
-      // tslint:disable-next-line max-line-length
-      this.actions[this.isSelected(index) ? 'deselectRefinement' : 'selectRefinement'](this.props.navigation.field, index);
-    },
     moreRefinements: () => this.actions.fetchMoreRefinements(this.props.navigation.field)
   };
 
   get alias() {
     return 'valueControls';
+  }
+
+  // tslint:disable-next-line max-line-length
+  transformNavigation<T extends RefinementControls.SelectedNavigation>(navigation: RefinementControls.SelectedNavigation): T {
+    return <any>{
+      ...navigation,
+      refinements: navigation.refinements.map((refinement) => ({
+        ...refinement,
+        // tslint:disable-next-line max-line-length
+        onClick: () => this.actions[refinement.selected ? 'deselectRefinement' : 'selectRefinement'](this.props.navigation.field, refinement.index)
+      }))
+    };
   }
 
   isSelected(index: number) {
@@ -25,9 +33,16 @@ class ValueRefinementControls extends RefinementControls<RefinementControls.Prop
 namespace ValueRefinementControls {
   export interface State {
     more?: boolean;
-    onClick(index: number): void;
     moreRefinements(): void;
   }
+
+  export interface ActionableNavigation extends RefinementControls.SelectedNavigation {
+    refinements: ActionableRefinement[];
+  }
+
+  export type ActionableRefinement = RefinementControls.SelectedRefinement & {
+    onClick: () => void;
+  };
 }
 
 export default ValueRefinementControls;
