@@ -1,4 +1,5 @@
 import { alias, configurable, origin, tag, Events, Store, Tag } from '@storefront/core';
+import NavigationList from '../navigation-list';
 
 @configurable
 @alias('navigation')
@@ -25,8 +26,8 @@ class Navigation {
 interface Navigation extends Tag<Navigation.Props, Navigation.State> { }
 namespace Navigation {
   export interface Props extends Tag.Props {
-    display?: { [key: string]: string };
-    labels?: { [key: string]: string };
+    display: NavigationList.DisplayMap;
+    labels: { [key: string]: string };
   }
 
   export interface State {

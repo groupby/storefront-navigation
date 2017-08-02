@@ -1,4 +1,5 @@
 import { alias, tag, Selectors, Tag } from '@storefront/core';
+import NavigationDisplay from '../navigation-display';
 
 @alias('navigationList')
 @tag('gb-navigation-list', require('./index.html'))
@@ -10,9 +11,7 @@ class NavigationList {
     labels: {}
   };
   state: NavigationList.State = {
-    display: {},
     fields: [],
-    labels: {}
   };
 
   init() {
@@ -24,24 +23,31 @@ class NavigationList {
   }
 
   updateState() {
-    const defaultLabels = Selectors.navigations(this.flux.store.getState())
-      .reduce((labelMap, { label, field }) => Object.assign(labelMap, { [field]: label }), {});
     this.state = <any>{
       ...this.state,
-      ...this.props,
-      labels: { ...defaultLabels, ...this.props.labels }
+      fields: this.props.fields.map((value) => ({
+        value,
+        label: this.props.labels[value],
+        display: this.props.display[value],
+      }))
     };
   }
 }
 
 interface NavigationList extends Tag<NavigationList.Props> { }
 namespace NavigationList {
-  export interface Props extends Tag.Props, State { }
+  export interface Props extends Tag.Props {
+    display: DisplayMap;
+    fields: string[];
+    labels: { [key: string]: string };
+  }
 
   export interface State {
-    display?: { [key: string]: string };
-    fields: string[];
-    labels?: { [key: string]: string };
+    fields: NavigationDisplay.Field[];
+  }
+
+  export interface DisplayMap {
+    [key: string]: NavigationDisplay.Display;
   }
 }
 

@@ -1,5 +1,5 @@
 <yield>
-  <input ref="low" type="text" placeholder="{ $rangeControls.labels.low }"> to
-  <input ref="high" type="text" placeholder="{ $rangeControls.labels.high }">
-  <gb-button on-click="{ search }">{ $rangeControls.labels.submit }</gb-button>
+  <input ref="low" type="text" placeholder="{ props.labels.low }"> to
+  <input ref="high" type="text" placeholder="{ props.labels.high }">
+  <gb-button on-click="{ onClick }">{ props.labels.submit }</gb-button>
 </yield>

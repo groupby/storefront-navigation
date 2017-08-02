@@ -8,7 +8,7 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
     low: HTMLInputElement,
     high: HTMLInputElement
   };
-  props: RangeRefinementControls.Props = {
+  props: RangeRefinementControls.Props = <any>{
     labels: {
       low: 'Min',
       high: 'Max',
@@ -16,15 +16,14 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
     }
   };
 
-  init() {
-    super.init();
-    this.expose('rangeControls', this.props);
+  get alias() {
+    return 'rangeControls';
   }
 
-  search = () => {
+  onClick() {
     const low = parseFloat(this.refs.low.value);
     const high = parseFloat(this.refs.high.value);
-    this.actions.addRefinement(this.props.field, low, high);
+    this.actions.addRefinement(this.props.navigation.field, low, high);
   }
 }
 

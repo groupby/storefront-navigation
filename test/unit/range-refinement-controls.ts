@@ -54,7 +54,7 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
       rangeRefinementControls.props.field = 'Age Range';
       rangeRefinementControls.actions = <any>{ addRefinement };
 
-      rangeRefinementControls.search();
+      rangeRefinementControls.onClick();
 
       expect(addRefinement).to.be.calledWith('Age Range', 10, 20);
     });

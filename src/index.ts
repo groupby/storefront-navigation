@@ -1,5 +1,6 @@
 import Navigation from './navigation';
 import NavigationDisplay from './navigation-display';
+import './navigation-header';
 import NavigationList from './navigation-list';
 import RangeRefinementControls from './range-refinement-controls';
 import Refinement from './refinement';

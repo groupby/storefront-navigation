@@ -1,4 +1,4 @@
 <yield>
-  <h4>{ props.label }</h4>
-  <gb-button on-click="{ $navigationDisplay.toggleDisplay }"></gb-button>
+  <gb-navigation-header label="{ $navigationDisplay.label }" on-toggle="{ onToggle }"></gb-navigation-header>
+  <div data-is="gb-{ $navigationDisplay.display || 'value' }-refinement-controls" class="gb-refinement-controls { gb-active: $navigationDisplay.isActive }" navigation="{ $navigationDisplay.navigation }"></div>
 </yield>

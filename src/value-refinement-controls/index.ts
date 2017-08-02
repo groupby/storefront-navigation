@@ -7,28 +7,23 @@ class ValueRefinementControls extends RefinementControls<RefinementControls.Prop
 
   state: ValueRefinementControls.State = {
     onClick: (index) => {
-      if (this.isSelected(index)) {
-        this.actions.deselectRefinement(this.field, index);
-      } else {
-        this.actions.selectRefinement(this.field, index);
-      }
+      // tslint:disable-next-line max-line-length
+      this.actions[this.isSelected(index) ? 'deselectRefinement' : 'selectRefinement'](this.props.navigation.field, index);
     },
-    moreRefinements: () => this.actions.fetchMoreRefinements(this.field)
+    moreRefinements: () => this.actions.fetchMoreRefinements(this.props.navigation.field)
   };
 
-  onUpdate() {
-    super.onUpdate();
-    this.updateAlias('valueControls', this.state);
+  get alias() {
+    return 'valueControls';
   }
 
   isSelected(index: number) {
-    return Selectors.isRefinementSelected(this.flux.store.getState(), this.field, index);
+    return Selectors.isRefinementSelected(this.flux.store.getState(), this.props.navigation.field, index);
   }
 }
 
-interface ValueRefinementControls extends Tag<RefinementControls.Props, ValueRefinementControls.State> { }
 namespace ValueRefinementControls {
-  export interface State extends RefinementControls.State {
+  export interface State {
     more?: boolean;
     onClick(index: number): void;
     moreRefinements(): void;
