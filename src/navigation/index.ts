@@ -1,4 +1,5 @@
 import { alias, configurable, origin, tag, Events, Store, Tag } from '@storefront/core';
+import NavigationDisplay from '../navigation-display';
 import NavigationList from '../navigation-list';
 
 @configurable
@@ -20,7 +21,13 @@ class Navigation {
   }
 
   updateFields = (navigations: Store.Indexed<Store.Navigation>) =>
-    this.set({ fields: navigations.allIds })
+    this.set({
+      fields: navigations.allIds.map((value) => ({
+        value,
+        display: this.props.display[value],
+        label: this.props.labels[value],
+      }))
+    })
 }
 
 interface Navigation extends Tag<Navigation.Props, Navigation.State> { }
@@ -31,7 +38,7 @@ namespace Navigation {
   }
 
   export interface State {
-    fields: string[];
+    fields: NavigationDisplay.Field[];
   }
 }
 
