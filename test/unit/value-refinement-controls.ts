@@ -16,37 +16,11 @@ suite('ValueRefinementControls', ({ expect, spy, stub, itShouldHaveAlias }) => {
     });
 
     describe('state', () => {
-      describe('onClick()', () => {
-        it('should call actions.deselectRefinement() if selected', () => {
-          const index = 8;
-          const deselectRefinement = spy();
-          const isSelected = valueRefinementControls.isSelected = spy(() => true);
-          const field = valueRefinementControls.field = 'myfield';
-          valueRefinementControls.actions = <any>{ deselectRefinement };
-
-          valueRefinementControls.state.onClick(index);
-
-          expect(isSelected).to.be.calledWith(index);
-          expect(deselectRefinement).to.be.calledWith(field, index);
-        });
-
-        it('should call actions.selectRefinement() if not selected', () => {
-          const index = 8;
-          const selectRefinement = spy();
-          const field = valueRefinementControls.field = 'myfield';
-          valueRefinementControls.isSelected = spy(() => false);
-          valueRefinementControls.actions = <any>{ selectRefinement };
-
-          valueRefinementControls.state.onClick(index);
-
-          expect(selectRefinement).to.be.calledWith(field, index);
-        });
-      });
-
       describe('moreRefinements()', () => {
         it('should call actions.fetchMoreRefinements()', () => {
           const fetchMoreRefinements = spy();
-          const field = valueRefinementControls.field = 'myfield';
+          const field = 'myfield';
+          valueRefinementControls.props = { navigation: { field } };
           valueRefinementControls.actions = <any>{ fetchMoreRefinements };
 
           valueRefinementControls.state.moreRefinements();
@@ -57,38 +31,50 @@ suite('ValueRefinementControls', ({ expect, spy, stub, itShouldHaveAlias }) => {
     });
   });
 
-  describe('onUpdate()', () => {
-    it('should call super onUpdate()', () => {
-      const onUpdate = stub(RefinementControls.prototype, 'onUpdate');
-      valueRefinementControls.updateAlias = () => null;
-
-      valueRefinementControls.onUpdate();
-
-      expect(onUpdate).to.be.calledOnce;
-    });
-
-    it('should call updateAlias()', () => {
-      const updateAlias = valueRefinementControls.updateAlias = spy();
-      stub(RefinementControls.prototype, 'onUpdate');
-
-      valueRefinementControls.onUpdate();
-
-      expect(updateAlias).to.be.calledWith('valueControls', valueRefinementControls.state);
+  describe('alias', () => {
+    it('should return alias', () => {
+      expect(valueRefinementControls.alias).to.eq('valueControls');
     });
   });
 
-  describe('isSelected()', () => {
-    it('should check if refinement is selected', () => {
-      const index = 99;
-      const state = { a: 'b' };
-      const field = valueRefinementControls.field = 'colour';
-      const isRefinementSelected = stub(Selectors, 'isRefinementSelected').returns(true);
-      valueRefinementControls.flux = <any>{ store: { getState: () => state } };
+  describe('transformNavigation()', () => {
+    it('should add onClick() handlers', () => {
+      const navigation: any = { a: 'b', refinements: [{ c: 'd' }, { e: 'f' }] };
 
-      const selected = valueRefinementControls.isSelected(index);
+      const transformed = valueRefinementControls.transformNavigation<any>(navigation);
 
-      expect(selected).to.be.true;
-      expect(isRefinementSelected).to.be.calledWith(state, field, index);
+      expect(transformed.refinements).to.have.length(2);
+      transformed.refinements.forEach((refinement) => {
+        expect(refinement.onClick).to.be.a('function');
+      });
+    });
+
+    it('should call actions.selectRefinement() when onClick() called', () => {
+      const index = 8;
+      const field = 'price';
+      const navigation: any = { refinements: [{ index }] };
+      const selectRefinement = spy();
+      valueRefinementControls.actions = <any>{ selectRefinement };
+      valueRefinementControls.props = { navigation: { field } };
+
+      const transformed = valueRefinementControls.transformNavigation<any>(navigation);
+      transformed.refinements[0].onClick();
+
+      expect(selectRefinement).to.be.calledWithExactly(field, index);
+    });
+
+    it('should call actions.deselectRefinement() when onClick() called', () => {
+      const index = 8;
+      const field = 'price';
+      const navigation: any = { refinements: [{ index, selected: true }] };
+      const deselectRefinement = spy();
+      valueRefinementControls.actions = <any>{ deselectRefinement };
+      valueRefinementControls.props = { navigation: { field } };
+
+      const transformed = valueRefinementControls.transformNavigation<any>(navigation);
+      transformed.refinements[0].onClick();
+
+      expect(deselectRefinement).to.be.calledWithExactly(field, index);
     });
   });
 });

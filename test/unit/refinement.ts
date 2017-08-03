@@ -9,7 +9,7 @@ suite('Refinement', ({ expect, spy, stub }) => {
   describe('onClick()', () => {
     it('should set preventUpdate', () => {
       const event: any = {};
-      refinement.$valueControls = <any>{};
+      refinement.$refinement = <any>{};
 
       refinement.onClick(event);
 
@@ -17,14 +17,12 @@ suite('Refinement', ({ expect, spy, stub }) => {
     });
 
     it('should call $valueControls.onClick()', () => {
-      const i = 8;
       const onClick = spy();
-      const event: any = { item: { i } };
-      refinement.$valueControls = <any>{ onClick };
+      refinement.$refinement = <any>{ onClick };
 
-      refinement.onClick(event);
+      refinement.onClick(<any>{});
 
-      expect(onClick).to.be.calledWith(i);
+      expect(onClick).to.be.called;
     });
   });
 });

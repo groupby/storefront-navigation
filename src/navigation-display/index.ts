@@ -21,7 +21,8 @@ class NavigationDisplay {
     const navigation = this.selectNavigation(field.value);
     this.flux.off(`${Events.SELECTED_REFINEMENTS_UPDATED}:${this.state.value}`, this.updateNavigation);
     this.root.classList.remove(`gb-navigation-${this.state.value}`);
-    this.state = { ...this.state, ...field, label: field.label || navigation.label, navigation };
+    const label = field.label || navigation.label || field.value;
+    this.state = { ...this.state, ...field, label, navigation };
     this.root.classList.add(`gb-navigation-${field.value}`);
     this.flux.on(`${Events.SELECTED_REFINEMENTS_UPDATED}:${field.value}`, this.updateNavigation);
   }

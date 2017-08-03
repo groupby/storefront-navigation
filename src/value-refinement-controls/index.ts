@@ -24,10 +24,6 @@ class ValueRefinementControls extends RefinementControls<RefinementControls.Prop
       }))
     };
   }
-
-  isSelected(index: number) {
-    return Selectors.isRefinementSelected(this.flux.store.getState(), this.props.navigation.field, index);
-  }
 }
 
 namespace ValueRefinementControls {
