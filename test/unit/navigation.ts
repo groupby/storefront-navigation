@@ -45,12 +45,21 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
 
   describe('updateFields()', () => {
     it('should set fields', () => {
-      const fields = ['a', 'b'];
+      const fields = ['a', 'b', 'c'];
+      const display = { a: 'value', b: 'range' };
+      const labels = { b: 'B', c: 'C' };
       const set = navigation.set = spy();
+      navigation.props = <any>{ display, labels };
 
       navigation.updateFields(<any>{ allIds: fields });
 
-      expect(set).to.be.calledWith({ fields });
+      expect(set).to.be.calledWith({
+        fields: [
+          { value: 'a', display: 'value', label: undefined },
+          { value: 'b', display: 'range', label: 'B' },
+          { value: 'c', display: undefined, label: 'C' },
+        ]
+      });
     });
   });
 });
