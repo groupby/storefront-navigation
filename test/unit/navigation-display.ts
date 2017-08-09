@@ -10,6 +10,17 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
   itShouldHaveAlias(NavigationDisplay, 'navigationDisplay');
 
   describe('constructor()', () => {
+    describe('props', () => {
+      it('should set initial value', () => {
+        expect(navigationDisplay.props).to.eql({
+          icons: {
+            toggleClosed: '/img/maximize.svg',
+            toggleOpen: '/img/minimize.svg',
+          }
+        });
+      });
+    });
+
     describe('state', () => {
       it('should set initial value', () => {
         expect(navigationDisplay.state.isActive).to.be.true;

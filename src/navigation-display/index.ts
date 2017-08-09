@@ -5,6 +5,13 @@ import RefinementControls from '../refinement-controls';
 @tag('gb-navigation-display', require('./index.html'))
 class NavigationDisplay {
 
+  props: NavigationDisplay.Props = <any>{
+    icons: {
+      toggleOpen: '/img/minimize.svg',
+      toggleClosed: '/img/maximize.svg',
+    }
+  };
+
   state: NavigationDisplay.State = <any>{
     isActive: true
   };
@@ -50,11 +57,17 @@ interface NavigationDisplay extends Tag<NavigationDisplay.Props, NavigationDispl
 namespace NavigationDisplay {
   export interface Props extends Tag.Props {
     field: Field;
+    icons: Icons;
   }
 
   export interface State extends Field {
     isActive: boolean;
     navigation: RefinementControls.SelectedNavigation;
+  }
+
+  export interface Icons {
+    toggleOpen: string;
+    toggleClosed: string;
   }
 
   export type Display = 'value' | 'range' | 'filter';
