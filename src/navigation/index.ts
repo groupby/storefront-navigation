@@ -10,7 +10,8 @@ class Navigation {
 
   props: Navigation.Props = {
     display: {},
-    labels: {}
+    labels: {},
+    collapse: true
   };
   state: Navigation.State = {
     fields: []
@@ -35,6 +36,7 @@ namespace Navigation {
   export interface Props extends Tag.Props {
     display: NavigationList.DisplayMap;
     labels: { [key: string]: string };
+    collapse: boolean;
   }
 
   export interface State {

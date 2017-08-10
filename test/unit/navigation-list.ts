@@ -10,8 +10,19 @@ suite('NavigationList', ({ expect, spy, stub, itShouldHaveAlias }) => {
   describe('constructor()', () => {
     describe('props', () => {
       it('should set initial values', () => {
-        expect(navigationList.props).eql(<any>{ fields: []});
+        expect(navigationList.props).eql(<any>{ fields: [] });
       });
+    });
+  });
+
+  describe('init()', () => {
+    it('should call expose()', () => {
+      const props = navigationList.props = <any>{ a: 'b' };
+      const expose = navigationList.expose = spy();
+
+      navigationList.init();
+
+      expect(expose).to.be.calledWithExactly('navigationList', props);
     });
   });
 });

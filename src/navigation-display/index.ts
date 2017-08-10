@@ -7,8 +7,8 @@ class NavigationDisplay {
 
   props: NavigationDisplay.Props = <any>{
     icons: {
-      toggleOpen: '/img/minimize.svg',
-      toggleClosed: '/img/maximize.svg',
+      toggleOpen: 'gb-icon__minus',
+      toggleClosed: 'gb-icon__plus',
     }
   };
 
@@ -56,6 +56,7 @@ class NavigationDisplay {
 interface NavigationDisplay extends Tag<NavigationDisplay.Props, NavigationDisplay.State> { }
 namespace NavigationDisplay {
   export interface Props extends Tag.Props {
+    collapse: boolean;
     field: Field;
     icons: Icons;
   }

@@ -1,7 +1,7 @@
 import { tag, Tag } from '@storefront/core';
 import NavigationDisplay from '../navigation-display';
 
-@tag('gb-navigation-header', require('./index.html'))
+@tag('gb-navigation-header', require('./index.html'), require('./index.css'))
 class NavigationHeader {
 
   props: NavigationHeader.Props = <any>{
@@ -19,6 +19,7 @@ namespace NavigationHeader {
     icons: NavigationDisplay.Icons;
     label: string;
     isActive: boolean;
+    collapse: boolean;
     onToggle: (active: boolean) => void;
   }
 }

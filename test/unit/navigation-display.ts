@@ -14,8 +14,8 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       it('should set initial value', () => {
         expect(navigationDisplay.props).to.eql({
           icons: {
-            toggleClosed: '/img/maximize.svg',
-            toggleOpen: '/img/minimize.svg',
+            toggleClosed: 'gb-icon__plus',
+            toggleOpen: 'gb-icon__minus',
           }
         });
       });

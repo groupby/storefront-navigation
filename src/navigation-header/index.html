@@ -1,6 +1,6 @@
 <yield>
   <h4 class="gb-navigation__label">{ $navigationHeader.label }</h4>
-  <gb-button class="gb-navigation__collapse-toggle" on-click="{ $navigationHeader.onToggle }">
+  <gb-button if="{ $navigationHeader.collapse }" class="gb-navigation__collapse-toggle" on-click="{ $navigationHeader.onToggle }">
     <gb-icon image="{ $navigationHeader.isActive ? $navigationHeader.icons.toggleOpen : $navigationHeader.icons.toggleClosed }"></gb-icon>
   </gb-button>
 </yield>
