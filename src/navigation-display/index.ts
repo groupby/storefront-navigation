@@ -26,13 +26,15 @@ class NavigationDisplay {
         isActive: uiState.isActive
       };
     }
-    this.flux.on(`${Events.UI_UPDATED}:${tagName}:${this.props.field.value}`, ({isActive}) => {
-      this.set({ isActive });
-    });
+    this.flux.on(`${Events.UI_UPDATED}:${tagName}:${this.props.field.value}`, this.updateIsActive);
   }
 
   onUpdate() {
     this.updateField(this.props.field);
+  }
+
+  updateIsActive({ isActive }: { isActive: boolean }) {
+    this.set({ isActive });
   }
 
   updateField(field: NavigationDisplay.Field) {

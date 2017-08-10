@@ -29,6 +29,22 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
   });
 
   describe('init()', () => {
+    it('should call updateField()', () => {
+      const field = 'brand';
+      const updateField = navigationDisplay.updateField = spy();
+      stub(Selectors, <any>'tagId').returns({});
+      stub(Tag, 'getMeta').returns({});
+      navigationDisplay.flux = <any>{
+        on: () => null,
+        store: { getState: () => null }
+      };
+      navigationDisplay.props = <any>{ field };
+
+      navigationDisplay.init();
+
+      expect(updateField).to.be.calledWith(field);
+    });
+
     it('should set isActive', () => {
       const globalState = { a: 'a' };
       const name = 'efgh';
@@ -67,20 +83,22 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       expect(navigationDisplay.state.isActive).to.be.true;
     });
 
-    it('should call updateField()', () => {
-      const field = 'brand';
-      const updateField = navigationDisplay.updateField = spy();
-      stub(Selectors, <any>'tagId').returns({});
-      stub(Tag, 'getMeta').returns({});
+    it('should listen for UI_UPDATED', () => {
+      const on = spy();
+      const name = 'efgh';
+      const value = 'abcd';
+      stub(Selectors, 'tagId');
+      stub(Tag, 'getMeta').returns({ name });
+      navigationDisplay.updateField = () => null;
       navigationDisplay.flux = <any>{
-        on: () => null,
+        on,
         store: { getState: () => null }
       };
-      navigationDisplay.props = <any>{ field };
+      navigationDisplay.props = <any>{ field: { value } };
 
       navigationDisplay.init();
 
-      expect(updateField).to.be.calledWith(field);
+      expect(on).to.be.calledWith(`${Events.UI_UPDATED}:${name}:${value}`, navigationDisplay.updateIsActive);
     });
   });
 
@@ -93,6 +111,17 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       navigationDisplay.onUpdate();
 
       expect(updateField).to.be.calledWith(field);
+    });
+  });
+
+  describe('updateIsActive()', () => {
+    it('should set isActive', () => {
+      const isActive = false;
+      const set = navigationDisplay.set = spy();
+
+      navigationDisplay.updateIsActive({ isActive });
+
+      expect(set).to.be.calledWith({ isActive });
     });
   });
 
