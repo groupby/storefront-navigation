@@ -29,6 +29,16 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
   });
 
   describe('init()', () => {
+    it('should set isActive', () => {
+      stub(Selectors, 'tagId').returns(false);
+      navigationDisplay.updateField = () => null;
+      navigationDisplay.flux = <any>{ on: () => null };
+      navigationDisplay.props = <any>{ field: '' };
+
+      navigationDisplay.init();
+
+      expect(navigationDisplay.state.isActive).to.be.false;
+    });
     it('should call updateField()', () => {
       const field = 'brand';
       const updateField = navigationDisplay.updateField = spy();

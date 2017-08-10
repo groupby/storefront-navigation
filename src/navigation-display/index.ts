@@ -18,6 +18,10 @@ class NavigationDisplay {
 
   init() {
     this.updateField(this.props.field);
+    this.state = {
+      ...this.state,
+      // isActive: Selectors.
+    };
     this.flux.on(`${Events.UI_ISACTIVE_UPDATED}:${this.props.field.value}`, ({isActive}) => {
       this.set({ isActive });
     });
