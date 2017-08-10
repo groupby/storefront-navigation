@@ -11,7 +11,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
 
   describe('constructor()', () => {
     describe('props', () => {
-      it('should set initial value', () => {
+      it('should set initial values', () => {
         expect(navigationDisplay.props).to.eql({
           icons: {
             toggleClosed: 'gb-icon__plus',
@@ -51,6 +51,12 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
     it('should call updateField()', () => {
       const field = 'brand';
       const updateField = navigationDisplay.updateField = spy();
+      stub(Selectors, 'tagId').returns({});
+      stub(Tag, 'getMeta').returns({});
+      navigationDisplay.flux = <any>{
+        on: () => null,
+        store: { getState: () => null }
+      };
       navigationDisplay.props = <any>{ field };
 
       navigationDisplay.init();
@@ -211,13 +217,18 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
   });
 
   describe('onToggle()', () => {
-    it('should set isActive true', () => {
-      const set = navigationDisplay.set = spy();
+    it('should call createComponentState()', () => {
+      const name = 'name';
+      const value = 'brand';
+      const createComponentState = spy();
+      stub(Tag, 'getMeta').returns({ name });
+      navigationDisplay.actions = <any>{ createComponentState };
       navigationDisplay.state = <any>{ isActive: false };
+      navigationDisplay.props = <any>{ field: { value } };
 
       navigationDisplay.onToggle();
 
-      expect(set).to.be.calledWith({ isActive: true });
+      expect(createComponentState).to.be.calledWith(name, value, { isActive: true });
     });
 
     it('should set isActive false', () => {
