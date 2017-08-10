@@ -18,6 +18,9 @@ class NavigationDisplay {
 
   init() {
     this.updateField(this.props.field);
+    this.flux.on(`${Events.UI_ISACTIVE_UPDATED}:${this.props.field.value}`, ({isActive}) => {
+      this.set({ isActive });
+    });
   }
 
   onUpdate() {
@@ -50,7 +53,10 @@ class NavigationDisplay {
 
   updateNavigation = () => this.set({ navigation: this.selectNavigation(this.state.value) });
 
-  onToggle = () => this.set({ isActive: !this.state.isActive });
+  onToggle = () => {
+    // tslint:disable-next-line max-line-length
+    this.actions.createComponentState(Tag.getMeta(this).name, this.props.field.value, { isActive: !this.state.isActive });
+  }
 }
 
 interface NavigationDisplay extends Tag<NavigationDisplay.Props, NavigationDisplay.State> { }
