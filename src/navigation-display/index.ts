@@ -20,7 +20,7 @@ class NavigationDisplay {
     this.updateField(this.props.field);
     this.state = {
       ...this.state,
-      // isActive: Selectors.
+      isActive: Selectors.tagId(this.flux.store.getState(), Tag.getMeta(this).name, this.props.field.value).isActive
     };
     this.flux.on(`${Events.UI_ISACTIVE_UPDATED}:${this.props.field.value}`, ({isActive}) => {
       this.set({ isActive });

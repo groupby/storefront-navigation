@@ -1,4 +1,4 @@
-import { Events, Selectors } from '@storefront/core';
+import { Events, Selectors, Tag } from '@storefront/core';
 import NavigationDisplay from '../../src/navigation-display';
 import suite from './_suite';
 
@@ -30,15 +30,24 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
 
   describe('init()', () => {
     it('should set isActive', () => {
-      stub(Selectors, 'tagId').returns(false);
+      const globalState = { a: 'a' };
+      const name = 'efgh';
+      const value = 'abcd';
+      const tagId = stub(Selectors, 'tagId').returns({ isActive: false });
+      stub(Tag, 'getMeta').withArgs(navigationDisplay).returns({ name });
       navigationDisplay.updateField = () => null;
-      navigationDisplay.flux = <any>{ on: () => null };
-      navigationDisplay.props = <any>{ field: '' };
+      navigationDisplay.flux = <any>{
+        on: () => null,
+        store: { getState: () => globalState }
+      };
+      navigationDisplay.props = <any>{ field: { value } };
 
       navigationDisplay.init();
 
       expect(navigationDisplay.state.isActive).to.be.false;
+      expect(tagId).to.be.calledWith(globalState, name, value);
     });
+
     it('should call updateField()', () => {
       const field = 'brand';
       const updateField = navigationDisplay.updateField = spy();
