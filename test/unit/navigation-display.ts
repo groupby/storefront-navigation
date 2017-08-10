@@ -230,14 +230,5 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
 
       expect(createComponentState).to.be.calledWith(name, value, { isActive: true });
     });
-
-    it('should set isActive false', () => {
-      const set = navigationDisplay.set = spy();
-      navigationDisplay.state = <any>{ isActive: true };
-
-      navigationDisplay.onToggle();
-
-      expect(set).to.be.calledWith({ isActive: false });
-    });
   });
 });
