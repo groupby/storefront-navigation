@@ -17,7 +17,8 @@ class NavigationDisplay {
   };
 
   init() {
-    const uiState = Selectors.tagId(this.flux.store.getState(), Tag.getMeta(this).name, this.props.field.value);
+    const tagName = Tag.getMeta(this).name;
+    const uiState = Selectors.tagId(this.flux.store.getState(), tagName, this.props.field.value);
     this.updateField(this.props.field);
     if (uiState) {
       this.state = {
@@ -25,7 +26,7 @@ class NavigationDisplay {
         isActive: uiState.isActive
       };
     }
-    this.flux.on(`${Events.UI_ISACTIVE_UPDATED}:${this.props.field.value}`, ({isActive}) => {
+    this.flux.on(`${Events.UI_UPDATED}:${tagName}:${this.props.field.value}`, ({isActive}) => {
       this.set({ isActive });
     });
   }
