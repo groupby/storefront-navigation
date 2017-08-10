@@ -33,7 +33,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       const globalState = { a: 'a' };
       const name = 'efgh';
       const value = 'abcd';
-      const tagId = stub(Selectors, 'tagId').returns({ isActive: false });
+      const tagId = stub(Selectors, <any>'tagId').returns({ isActive: false });
       stub(Tag, 'getMeta').withArgs(navigationDisplay).returns({ name });
       navigationDisplay.updateField = () => null;
       navigationDisplay.flux = <any>{
@@ -44,14 +44,33 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
 
       navigationDisplay.init();
 
-      expect(navigationDisplay.state.isActive).to.be.false;
       expect(tagId).to.be.calledWith(globalState, name, value);
+      expect(navigationDisplay.state.isActive).to.be.false;
+    });
+
+    it('should not set isActive if UI state does not exist', () => {
+      const globalState = { a: 'a' };
+      const name = 'efgh';
+      const value = 'abcd';
+      const tagId = stub(Selectors, <any>'tagId');
+      stub(Tag, 'getMeta').withArgs(navigationDisplay).returns({ name });
+      navigationDisplay.updateField = () => null;
+      navigationDisplay.flux = <any>{
+        on: () => null,
+        store: { getState: () => globalState }
+      };
+      navigationDisplay.props = <any>{ field: { value } };
+
+      navigationDisplay.init();
+
+      expect(tagId).to.be.calledWith(globalState, name, value);
+      expect(navigationDisplay.state.isActive).to.be.true;
     });
 
     it('should call updateField()', () => {
       const field = 'brand';
       const updateField = navigationDisplay.updateField = spy();
-      stub(Selectors, 'tagId').returns({});
+      stub(Selectors, <any>'tagId').returns({});
       stub(Tag, 'getMeta').returns({});
       navigationDisplay.flux = <any>{
         on: () => null,
