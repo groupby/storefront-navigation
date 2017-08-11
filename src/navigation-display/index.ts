@@ -18,7 +18,7 @@ class NavigationDisplay {
 
   init() {
     const tagName = Tag.getMeta(this).name;
-    const uiState = Selectors.tagId(this.flux.store.getState(), tagName, this.props.field.value);
+    const uiState = Selectors.uiTagState(this.flux.store.getState(), tagName, this.props.field.value);
     this.updateField(this.props.field);
     if (uiState) {
       this.state = {
