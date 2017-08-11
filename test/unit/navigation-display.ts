@@ -119,7 +119,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       const isActive = false;
       const set = navigationDisplay.set = spy();
 
-      navigationDisplay.updateIsActive(isActive);
+      navigationDisplay.updateIsActive(<any>{ isActive });
 
       expect(set).to.be.calledWith({ isActive });
     });
