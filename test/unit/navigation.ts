@@ -12,7 +12,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
 
   describe('constructor()', () => {
     describe('props', () => {
-      it('should set initial display', () => {
+      it('should set initial values', () => {
         expect(navigation.props).to.eql({ display: {}, labels: {}, collapse: true });
       });
     });

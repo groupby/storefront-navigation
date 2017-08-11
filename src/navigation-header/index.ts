@@ -20,7 +20,7 @@ namespace NavigationHeader {
     label: string;
     isActive: boolean;
     collapse: boolean;
-    onToggle: (active: boolean) => void;
+    onToggle: () => void;
   }
 }
 
