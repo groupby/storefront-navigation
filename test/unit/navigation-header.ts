@@ -1,4 +1,3 @@
-import { Events, Selectors } from '@storefront/core';
 import NavigationHeader from '../../src/navigation-header';
 import suite from './_suite';
 

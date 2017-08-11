@@ -1,4 +1,3 @@
-import { Selectors } from '@storefront/core';
 import NavigationList from '../../src/navigation-list';
 import suite from './_suite';
 
