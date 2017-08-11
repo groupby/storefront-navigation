@@ -98,7 +98,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
 
       navigationDisplay.init();
 
-      expect(on).to.be.calledWith(`${Events.UI_UPDATED}:${name}:${value}`, navigationDisplay.updateIsActive);
+      expect(on).to.be.calledWith(`${Events.UI_UPDATED}:${name}:${value}`);
     });
   });
 
@@ -119,7 +119,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       const isActive = false;
       const set = navigationDisplay.set = spy();
 
-      navigationDisplay.updateIsActive({ isActive });
+      navigationDisplay.updateIsActive(isActive);
 
       expect(set).to.be.calledWith({ isActive });
     });
