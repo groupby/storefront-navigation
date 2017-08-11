@@ -6,33 +6,39 @@ import RefinementControls from '../refinement-controls';
 class ValueRefinementControls extends RefinementControls<RefinementControls.Props, ValueRefinementControls.State> {
 
   state: ValueRefinementControls.State = {
-    onClick: (index) => {
-      if (this.isSelected(index)) {
-        this.actions.deselectRefinement(this.field, index);
-      } else {
-        this.actions.selectRefinement(this.field, index);
-      }
-    },
-    moreRefinements: () => this.actions.fetchMoreRefinements(this.field)
+    moreRefinements: () => this.actions.fetchMoreRefinements(this.props.navigation.field)
   };
 
-  onUpdate() {
-    super.onUpdate();
-    this.updateAlias('valueControls', this.state);
+  get alias() {
+    return 'valueControls';
   }
 
-  isSelected(index: number) {
-    return Selectors.isRefinementSelected(this.flux.store.getState(), this.field, index);
+  // tslint:disable-next-line max-line-length
+  transformNavigation<T extends RefinementControls.SelectedNavigation>(navigation: RefinementControls.SelectedNavigation): T {
+    return <any>{
+      ...navigation,
+      refinements: navigation.refinements.map((refinement) => ({
+        ...refinement,
+        // tslint:disable-next-line max-line-length
+        onClick: () => this.actions[refinement.selected ? 'deselectRefinement' : 'selectRefinement'](this.props.navigation.field, refinement.index)
+      }))
+    };
   }
 }
 
-interface ValueRefinementControls extends Tag<RefinementControls.Props, ValueRefinementControls.State> { }
 namespace ValueRefinementControls {
-  export interface State extends RefinementControls.State {
+  export interface State {
     more?: boolean;
-    onClick(index: number): void;
     moreRefinements(): void;
   }
+
+  export interface ActionableNavigation extends RefinementControls.SelectedNavigation {
+    refinements: ActionableRefinement[];
+  }
+
+  export type ActionableRefinement = RefinementControls.SelectedRefinement & {
+    onClick: () => void;
+  };
 }
 
 export default ValueRefinementControls;

@@ -1,5 +1,5 @@
-<gb-list items="{ props.fields }">
+<gb-list items="{ $navigationList.fields }">
   <yield>
-    <div data-is="gb-{ $navigationList.display[item] || 'value' }-refinement-controls" field="{ item }"></div>
+    <gb-navigation-display field="{ item }" collapse="{ $navigationList.collapse }"></gb-navigation-display>
   </yield>
 </gb-list>

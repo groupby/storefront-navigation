@@ -5,12 +5,12 @@ import ValueRefinementControls from '../value-refinement-controls';
 @tag('gb-refinement', require('./index.html'))
 class Refinement {
 
-  $valueControls: ValueRefinementControls.State;
+  $refinement: ValueRefinementControls.ActionableRefinement;
 
   onClick(event: Refinement.IndexedClickEvent) {
     event.preventUpdate = true;
-    if (this.$valueControls.onClick) {
-      this.$valueControls.onClick(event.item.i);
+    if (this.$refinement.onClick) {
+      this.$refinement.onClick();
     }
   }
 }

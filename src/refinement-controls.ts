@@ -2,53 +2,47 @@ import { Events, Selectors, Store, Tag } from '@storefront/core';
 
 abstract class RefinementControls<P extends RefinementControls.Props, S extends RefinementControls.State> {
 
-  field: string;
+  abstract get alias(): string;
 
   init() {
-    this.updateField(this.props.field);
-    this.updateNavigation();
+    this.updateState();
+    this.expose(this.alias, this.state);
   }
 
   onUpdate() {
-    this.updateField(this.props.field);
-    this.state = { ...<any>this.state, ...<any>this.selectNavigation() };
+    this.updateState();
+    this.updateAlias(this.alias, this.state);
   }
 
-  updateField(field: string) {
-    this.flux.off(`${Events.SELECTED_REFINEMENTS_UPDATED}:${this.field}`, this.updateNavigation);
-    this.root.classList.remove(`gb-navigation-${this.field}`);
-    this.field = field;
-    this.root.classList.add(`gb-navigation-${field}`);
-    this.flux.on(`${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`, this.updateNavigation);
+  updateState() {
+    this.state = { ...<any>this.state, ...this.transformNavigation(this.props.navigation) };
   }
 
-  updateNavigation = () => this.set(this.selectNavigation());
-
-  selectNavigation(): S {
-    const navigation = Selectors.navigation(this.flux.store.getState(), this.field);
-    return <any>{
-      ...navigation,
-      refinements: navigation.refinements.map((value, index) => ({
-        ...value,
-        selected: navigation.selected.includes(index)
-      }))
-    };
+  // tslint:disable-next-line max-line-length
+  transformNavigation<T extends RefinementControls.SelectedNavigation>(navigation: RefinementControls.SelectedNavigation): T {
+    return <any>navigation;
   }
-
 }
 
 // tslint:disable-next-line max-line-length
 interface RefinementControls<P extends RefinementControls.Props = RefinementControls.Props, S extends RefinementControls.State = RefinementControls.State> extends Tag<P, S> { }
 namespace RefinementControls {
   export interface Props extends Tag.Props {
-    field?: string;
+    navigation: SelectedNavigation;
   }
 
-  export interface State extends Partial<Store.Navigation> {
+  export interface State extends SelectedNavigation { }
+
+  export interface SelectedNavigation extends Partial<Store.Navigation> {
     refinements?: SelectedRefinement[];
   }
 
-  export type SelectedRefinement = Store.Refinement & { selected: boolean };
+  export type SelectedRefinement = Store.Refinement & {
+    selected: boolean;
+    or: boolean;
+    range: boolean;
+    index: number;
+  };
 }
 
 export default RefinementControls;

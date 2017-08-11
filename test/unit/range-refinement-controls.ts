@@ -3,7 +3,7 @@ import RefinementControls from '../../src/refinement-controls';
 import suite from './_suite';
 
 suite('RangeRefinementControls', ({ expect, spy, stub }) => {
-  let rangeRefinementControls;
+  let rangeRefinementControls: RangeRefinementControls;
 
   beforeEach(() => rangeRefinementControls = new RangeRefinementControls());
 
@@ -25,38 +25,25 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
     });
   });
 
-  describe('init()', () => {
-    it('should call super init()', () => {
-      const init = stub(RefinementControls.prototype, 'init');
-      rangeRefinementControls.expose = () => null;
-
-      rangeRefinementControls.init();
-
-      expect(init).to.be.calledOnce;
-    });
-
-    it('should call expose()', () => {
-      const expose = rangeRefinementControls.expose = spy();
-      stub(RefinementControls.prototype, 'init');
-
-      rangeRefinementControls.init();
-
-      expect(expose).to.be.calledWith('rangeControls', rangeRefinementControls.props);
+  describe('alias', () => {
+    it('should return alias', () => {
+      expect(rangeRefinementControls.alias).to.eq('rangeControls');
     });
   });
 
-  describe('search()', () => {
+  describe('onClick()', () => {
     it('should update search', () => {
-      const low = { value: '10' };
-      const high = { value: '20' };
+      const field = 'Age Range';
+      const low: any = { value: '10' };
+      const high: any = { value: '20' };
       const addRefinement = spy();
       rangeRefinementControls.refs = { low, high };
-      rangeRefinementControls.props.field = 'Age Range';
+      rangeRefinementControls.props = <any>{ navigation: { field } };
       rangeRefinementControls.actions = <any>{ addRefinement };
 
-      rangeRefinementControls.search();
+      rangeRefinementControls.onClick();
 
-      expect(addRefinement).to.be.calledWith('Age Range', 10, 20);
+      expect(addRefinement).to.be.calledWith(field, 10, 20);
     });
   });
 });

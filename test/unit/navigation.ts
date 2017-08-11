@@ -12,14 +12,14 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
 
   describe('constructor()', () => {
     describe('props', () => {
-      it('should set initial display', () => {
-        expect(navigation.props.display).to.eql({});
+      it('should set initial values', () => {
+        expect(navigation.props).to.eql({ display: {}, labels: {}, collapse: true });
       });
     });
 
     describe('state', () => {
-      it('should set initial fields', () => {
-        expect(navigation.state.fields).to.eql([]);
+      it('should set initial value', () => {
+        expect(navigation.state).to.eql({ fields: [] });
       });
     });
   });
@@ -45,12 +45,21 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
 
   describe('updateFields()', () => {
     it('should set fields', () => {
-      const fields = ['a', 'b'];
+      const fields = ['a', 'b', 'c'];
+      const display = { a: 'value', b: 'range' };
+      const labels = { b: 'B', c: 'C' };
       const set = navigation.set = spy();
+      navigation.props = <any>{ display, labels };
 
       navigation.updateFields(<any>{ allIds: fields });
 
-      expect(set).to.be.calledWith({ fields });
+      expect(set).to.be.calledWith({
+        fields: [
+          { value: 'a', display: 'value', label: undefined },
+          { value: 'b', display: 'range', label: 'B' },
+          { value: 'c', display: undefined, label: 'C' },
+        ]
+      });
     });
   });
 });

@@ -1,11 +1,11 @@
-import { tag, Tag } from '@storefront/core';
+import { tag, Selectors, Tag } from '@storefront/core';
+import NavigationDisplay from '../navigation-display';
 
 @tag('gb-navigation-list', require('./index.html'))
 class NavigationList {
 
-  props: NavigationList.Props = {
-    display: {},
-    fields: []
+  props: NavigationList.Props = <any>{
+    fields: [],
   };
 
   init() {
@@ -16,8 +16,12 @@ class NavigationList {
 interface NavigationList extends Tag<NavigationList.Props> { }
 namespace NavigationList {
   export interface Props extends Tag.Props {
-    display?: { [key: string]: string };
-    fields: string[];
+    collapse: boolean;
+    fields: NavigationDisplay.Field[];
+  }
+
+  export interface DisplayMap {
+    [key: string]: NavigationDisplay.Display;
   }
 }
 
