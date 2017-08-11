@@ -33,9 +33,7 @@ class NavigationDisplay {
     this.updateField(this.props.field);
   }
 
-  updateIsActive = (isActive: boolean) => {
-    this.set({ isActive });
-  }
+  updateIsActive = (isActive: boolean) => this.set({ isActive });
 
   updateField(field: NavigationDisplay.Field) {
     const navigation = this.selectNavigation(field.value);
