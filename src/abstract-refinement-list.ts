@@ -9,11 +9,11 @@ abstract class AbstractRefinementList {
   abstract get alias(): string;
 
   init() {
-    this.expose('refinements', this.props.refinements);
+    this.expose(this.alias, this.props.refinements);
   }
 
   onUpdate() {
-    this.updateAlias('refinements', this.props.refinements);
+    this.updateAlias(this.alias, this.props.refinements);
   }
 }
 
