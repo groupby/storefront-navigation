@@ -10,5 +10,7 @@ bootstrap(chai, __dirname, [
   '../src/range-refinement-controls/index.html',
   '../src/refinement/index.html',
   '../src/refinement-list/index.html',
+  '../src/filter-refinement-controls',
+  '../src/filtered-refinement-list',
   '../src/value-refinement-controls/index.html'
 ]);
