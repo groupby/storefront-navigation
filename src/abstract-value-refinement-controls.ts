@@ -2,15 +2,13 @@ import { alias, tag, Events, Selectors, Store, Tag } from '@storefront/core';
 import RefinementControls from './refinement-controls';
 
 // tslint:disable-next-line max-line-length
-class AbstractValueRefinementControls extends RefinementControls<RefinementControls.Props, AbstractValueRefinementControls.State> {
+abstract class AbstractValueRefinementControls extends RefinementControls<RefinementControls.Props, AbstractValueRefinementControls.State> {
 
   state: AbstractValueRefinementControls.State = {
     moreRefinements: () => this.actions.fetchMoreRefinements(this.props.navigation.field)
   };
 
-  get alias() {
-    return 'valueControls';
-  }
+  abstract get alias(): string;
 
   // tslint:disable-next-line max-line-length
   transformNavigation<T extends RefinementControls.SelectedNavigation>(navigation: RefinementControls.SelectedNavigation): T {
