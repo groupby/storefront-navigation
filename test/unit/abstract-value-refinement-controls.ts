@@ -35,6 +35,12 @@ suite('AbstractValueRefinementControls', ({ expect, spy, stub }) => {
         });
       });
     });
+
+    describe('get alias()', () => {
+      it('should return alias name', () => {
+        expect(mockAbstractValueRefinementControls.alias).to.eq(MOCK_ALIAS);
+      });
+    });
   });
 
   describe('transformNavigation()', () => {

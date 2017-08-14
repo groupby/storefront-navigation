@@ -22,6 +22,12 @@ suite('AbstractRefinementList', ({ expect, spy }) => {
     });
   });
 
+  describe('get alias()', () => {
+    it('should return alias name', () => {
+      expect(refinementList.alias).to.eq(MOCK_ALIAS);
+    });
+  });
+
   describe('init()', () => {
     it('should expose refinements', () => {
       const expose = refinementList.expose = spy();
@@ -43,12 +49,6 @@ suite('AbstractRefinementList', ({ expect, spy }) => {
       refinementList.onUpdate();
 
       expect(updateAlias).to.be.calledWith(MOCK_ALIAS, refinements);
-    });
-  });
-
-  describe('get alias()', () => {
-    it('should return alias name', () => {
-      expect(refinementList.alias).to.eq(MOCK_ALIAS);
     });
   });
 });
