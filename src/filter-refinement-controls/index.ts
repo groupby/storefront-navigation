@@ -1,8 +1,8 @@
 import { alias, tag } from '@storefront/core';
-import AbstractValueRefinementControls from '../abstract-value-refinement-controls';
+import ValueRefinementControls from '../value-refinement-controls';
 
 @tag('gb-filter-refinement-controls', require('./index.html'))
-class FilterRefinementControls extends AbstractValueRefinementControls {
+class FilterRefinementControls extends ValueRefinementControls {
 
   get alias() {
     return 'filterControls';
