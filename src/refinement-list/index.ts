@@ -1,28 +1,12 @@
-import { tag, Store, Tag } from '@storefront/core';
+import { tag } from '@storefront/core';
+import AbstractRefinementList from '../abstract-refinement-list';
 
 @tag('gb-refinement-list', require('./index.html'))
-class RefinementList {
+class RefinementList extends AbstractRefinementList {
 
-  props: RefinementList.Props = {
-    refinements: []
-  };
-
-  init() {
-    this.expose('refinements', this.props.refinements);
+  get alias() {
+    return 'refinements';
   }
-
-  onUpdate() {
-    this.updateAlias('refinements', this.props.refinements);
-  }
-}
-
-interface RefinementList extends Tag<RefinementList.Props> { }
-namespace RefinementList {
-  export interface Props extends Tag.Props {
-    refinements: Refinement[];
-  }
-
-  export type Refinement = Store.Refinement & { selected: boolean };
 }
 
 export default RefinementList;
