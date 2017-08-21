@@ -11,7 +11,8 @@ class Navigation {
   props: Navigation.Props = {
     display: {},
     labels: {},
-    collapse: true
+    collapse: true,
+    defaultOpen: 3
   };
   state: Navigation.State = {
     fields: []
@@ -23,10 +24,11 @@ class Navigation {
 
   updateFields = (navigations: Store.Indexed<Store.Navigation>) =>
     this.set({
-      fields: navigations.allIds.map((value) => ({
+      fields: navigations.allIds.map((value, index) => ({
         value,
         display: this.props.display[value],
         label: this.props.labels[value],
+        defaultIsActive: index < this.props.defaultOpen
       }))
     })
 }
@@ -37,6 +39,7 @@ namespace Navigation {
     display: NavigationList.DisplayMap;
     labels: { [key: string]: string };
     collapse: boolean;
+    defaultOpen?: number;
   }
 
   export interface State {

@@ -13,7 +13,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
   describe('constructor()', () => {
     describe('props', () => {
       it('should set initial values', () => {
-        expect(navigation.props).to.eql({ display: {}, labels: {}, collapse: true });
+        expect(navigation.props).to.eql({ display: {}, labels: {}, collapse: true, defaultOpen: 3 });
       });
     });
 
@@ -49,15 +49,15 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
       const display = { a: 'value', b: 'range' };
       const labels = { b: 'B', c: 'C' };
       const set = navigation.set = spy();
-      navigation.props = <any>{ display, labels };
+      navigation.props = <any>{ display, labels, defaultOpen: 2 };
 
       navigation.updateFields(<any>{ allIds: fields });
 
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'a', display: 'value', label: undefined },
-          { value: 'b', display: 'range', label: 'B' },
-          { value: 'c', display: undefined, label: 'C' },
+          { value: 'a', display: 'value', label: undefined, defaultIsActive: true },
+          { value: 'b', display: 'range', label: 'B', defaultIsActive: true },
+          { value: 'c', display: undefined, label: 'C', defaultIsActive: false }
         ]
       });
     });

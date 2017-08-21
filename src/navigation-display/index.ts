@@ -20,12 +20,10 @@ class NavigationDisplay {
     const tagName = Tag.getMeta(this).name;
     const uiState = Selectors.uiTagState(this.flux.store.getState(), tagName, this.props.field.value);
     this.updateField(this.props.field);
-    if (uiState) {
-      this.state = {
-        ...this.state,
-        isActive: uiState.isActive
-      };
-    }
+    this.state = {
+      ...this.state,
+      isActive: uiState ? uiState.isActive : this.props.field.defaultIsActive
+    };
     this.flux.on(`${Events.UI_UPDATED}:${tagName}:${this.props.field.value}`, this.updateIsActive);
   }
 
@@ -89,6 +87,7 @@ namespace NavigationDisplay {
     value: string;
     display: Display;
     label: string;
+    defaultIsActive: boolean;
   }
 }
 
