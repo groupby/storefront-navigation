@@ -64,7 +64,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       expect(navigationDisplay.state.isActive).to.be.false;
     });
 
-    it('should set isActive based on defaultIsActive if UI state does not exist', () => {
+    it('should set isActive based on active if UI state does not exist', () => {
       const globalState = { a: 'a' };
       const name = 'efgh';
       const value = 'abcd';
@@ -75,7 +75,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
         on: () => null,
         store: { getState: () => globalState }
       };
-      navigationDisplay.props = <any>{ field: { value, defaultIsActive: false } };
+      navigationDisplay.props = <any>{ field: { value, active: false } };
 
       navigationDisplay.init();
 

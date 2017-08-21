@@ -28,7 +28,7 @@ class Navigation {
         value,
         display: this.props.display[value],
         label: this.props.labels[value],
-        defaultIsActive: index < this.props.defaultOpen
+        active: index < this.props.defaultOpen
       }))
     })
 }

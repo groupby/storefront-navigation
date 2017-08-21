@@ -22,7 +22,7 @@ class NavigationDisplay {
     this.updateField(this.props.field);
     this.state = {
       ...this.state,
-      isActive: uiState ? uiState.isActive : this.props.field.defaultIsActive
+      isActive: uiState ? uiState.isActive : this.props.field.active
     };
     this.flux.on(`${Events.UI_UPDATED}:${tagName}:${this.props.field.value}`, this.updateIsActive);
   }
@@ -87,7 +87,7 @@ namespace NavigationDisplay {
     value: string;
     display: Display;
     label: string;
-    defaultIsActive: boolean;
+    active: boolean;
   }
 }
 

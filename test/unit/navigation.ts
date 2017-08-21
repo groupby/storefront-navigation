@@ -55,9 +55,9 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
 
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'a', display: 'value', label: undefined, defaultIsActive: true },
-          { value: 'b', display: 'range', label: 'B', defaultIsActive: true },
-          { value: 'c', display: undefined, label: 'C', defaultIsActive: false }
+          { value: 'a', display: 'value', label: undefined, active: true },
+          { value: 'b', display: 'range', label: 'B', active: true },
+          { value: 'c', display: undefined, label: 'C', active: false }
         ]
       });
     });
