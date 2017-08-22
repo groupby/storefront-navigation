@@ -45,7 +45,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       expect(updateField).to.be.calledWith(field);
     });
 
-    it('should set isActive', () => {
+    it('should set isActive based on ui', () => {
       const globalState = { a: 'a' };
       const name = 'efgh';
       const value = 'abcd';
@@ -64,7 +64,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       expect(navigationDisplay.state.isActive).to.be.false;
     });
 
-    it('should not set isActive if UI state does not exist', () => {
+    it('should set isActive based on active if UI state does not exist', () => {
       const globalState = { a: 'a' };
       const name = 'efgh';
       const value = 'abcd';
@@ -75,12 +75,12 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
         on: () => null,
         store: { getState: () => globalState }
       };
-      navigationDisplay.props = <any>{ field: { value } };
+      navigationDisplay.props = <any>{ field: { value, active: false } };
 
       navigationDisplay.init();
 
       expect(uiTagState).to.be.calledWith(globalState, name, value);
-      expect(navigationDisplay.state.isActive).to.be.true;
+      expect(navigationDisplay.state.isActive).to.be.false;
     });
 
     it('should listen for UI_UPDATED', () => {
