@@ -13,7 +13,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
   describe('constructor()', () => {
     describe('props', () => {
       it('should set initial values', () => {
-        expect(navigation.props).to.eql({ display: {}, labels: {}, collapse: true, defaultOpen: 3 });
+        expect(navigation.props).to.eql({ display: {}, labels: {}, collapse: true, isActive: true });
       });
     });
 
@@ -44,12 +44,15 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
   });
 
   describe('updateFields()', () => {
-    it('should set fields', () => {
-      const fields = ['a', 'b', 'c'];
-      const display = { a: 'value', b: 'range' };
-      const labels = { b: 'B', c: 'C' };
-      const set = navigation.set = spy();
-      navigation.props = <any>{ display, labels, defaultOpen: 2 };
+    const fields = ['a', 'b', 'c'];
+    const display = { a: 'value', b: 'range' };
+    const labels = { b: 'B', c: 'C' };
+    let set;
+
+    beforeEach(() => set = navigation.set = spy());
+
+    it('should set fields, with active set for the first x number of fields based on isActive', () => {
+      navigation.props = <any>{ display, labels, isActive: 2 };
 
       navigation.updateFields(<any>{ allIds: fields });
 
@@ -57,6 +60,34 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
         fields: [
           { value: 'a', display: 'value', label: undefined, active: true },
           { value: 'b', display: 'range', label: 'B', active: true },
+          { value: 'c', display: undefined, label: 'C', active: false }
+        ]
+      });
+    });
+
+    it('should set fields with active true when isActive true', () => {
+      navigation.props = <any>{ display, labels, isActive: true };
+
+      navigation.updateFields(<any>{ allIds: fields });
+
+      expect(set).to.be.calledWith({
+        fields: [
+          { value: 'a', display: 'value', label: undefined, active: true },
+          { value: 'b', display: 'range', label: 'B', active: true },
+          { value: 'c', display: undefined, label: 'C', active: true }
+        ]
+      });
+    });
+
+    it('should set fields with active false when isActive false', () => {
+      navigation.props = <any>{ display, labels, isActive: false };
+
+      navigation.updateFields(<any>{ allIds: fields });
+
+      expect(set).to.be.calledWith({
+        fields: [
+          { value: 'a', display: 'value', label: undefined, active: false },
+          { value: 'b', display: 'range', label: 'B', active: false },
           { value: 'c', display: undefined, label: 'C', active: false }
         ]
       });

@@ -12,7 +12,7 @@ class Navigation {
     display: {},
     labels: {},
     collapse: true,
-    defaultOpen: 3
+    isActive: true
   };
   state: Navigation.State = {
     fields: []
@@ -22,15 +22,17 @@ class Navigation {
     this.flux.on(Events.NAVIGATIONS_UPDATED, this.updateFields);
   }
 
-  updateFields = (navigations: Store.Indexed<Store.Navigation>) =>
+  updateFields = (navigations: Store.Indexed<Store.Navigation>) => {
+    const isActive = this.props.isActive;
     this.set({
       fields: navigations.allIds.map((value, index) => ({
         value,
         display: this.props.display[value],
         label: this.props.labels[value],
-        active: index < this.props.defaultOpen
+        active: typeof isActive === 'boolean' ? isActive : index < isActive
       }))
-    })
+    });
+  }
 }
 
 interface Navigation extends Tag<Navigation.Props, Navigation.State> { }
@@ -39,7 +41,7 @@ namespace Navigation {
     display: NavigationList.DisplayMap;
     labels: { [key: string]: string };
     collapse: boolean;
-    defaultOpen?: number;
+    isActive?: boolean | number;
   }
 
   export interface State {
