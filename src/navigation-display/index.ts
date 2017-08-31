@@ -1,5 +1,5 @@
 import { alias, tag, Events, Selectors, Tag } from '@storefront/core';
-import RefinementControls from '../refinement-controls';
+import RefinementControls from '../refinement-controls/controls';
 
 @alias('navigationDisplay')
 @tag('gb-navigation-display', require('./index.html'))

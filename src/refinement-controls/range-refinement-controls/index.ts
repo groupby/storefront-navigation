@@ -1,5 +1,5 @@
 import { tag, Tag } from '@storefront/core';
-import RefinementControls from '../refinement-controls';
+import RefinementControls from '../controls';
 
 @tag('gb-range-refinement-controls', require('./index.html'))
 class RangeRefinementControls extends RefinementControls<RangeRefinementControls.Props> {

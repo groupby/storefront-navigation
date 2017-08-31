@@ -1,5 +1,5 @@
 import { alias, tag, Events, Selectors, Store, Tag } from '@storefront/core';
-import RefinementControls from '../refinement-controls';
+import RefinementControls from '../controls';
 
 @tag('gb-value-refinement-controls', require('./index.html'))
 class ValueRefinementControls extends RefinementControls<RefinementControls.Props, ValueRefinementControls.State> {

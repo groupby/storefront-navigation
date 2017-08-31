@@ -1,7 +1,7 @@
 import { Selectors } from '@storefront/core';
-import RefinementControls from '../../src/refinement-controls';
-import ValueRefinementControls from '../../src/value-refinement-controls';
-import suite from './_suite';
+import RefinementControls from '../../../src/refinement-controls/controls';
+import ValueRefinementControls from '../../../src/refinement-controls/value-refinement-controls';
+import suite from '../_suite';
 
 suite('ValueRefinementControls', ({ expect, spy, stub, itShouldHaveAlias }) => {
   let valueRefinementControls: ValueRefinementControls;

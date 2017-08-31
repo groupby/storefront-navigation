@@ -2,10 +2,10 @@ import * as pkg from '../../src';
 import Navigation from '../../src/navigation';
 import NavigationDisplay from '../../src/navigation-display';
 import NavigationList from '../../src/navigation-list';
-import RangeRefinementControls from '../../src/range-refinement-controls';
 import Refinement from '../../src/refinement';
+import RangeRefinementControls from '../../src/refinement-controls/range-refinement-controls';
+import ValueRefinementControls from '../../src/refinement-controls/value-refinement-controls';
 import RefinementList from '../../src/refinement-list';
-import ValueRefinementControls from '../../src/value-refinement-controls';
 import suite from './_suite';
 
 suite('package', ({ expect }) => {

@@ -1,5 +1,5 @@
-import RefinementList from '../../src/refinement-list';
 import FilteredRefinementList from '../../src/filtered-refinement-list';
+import RefinementList from '../../src/refinement-list';
 import suite from './_suite';
 
 suite('FilteredRefinementList', ({ expect }) => {

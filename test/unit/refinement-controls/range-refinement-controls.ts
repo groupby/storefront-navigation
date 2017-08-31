@@ -1,6 +1,6 @@
-import RangeRefinementControls from '../../src/range-refinement-controls';
-import RefinementControls from '../../src/refinement-controls';
-import suite from './_suite';
+import RefinementControls from '../../../src/refinement-controls/controls';
+import RangeRefinementControls from '../../../src/refinement-controls/range-refinement-controls';
+import suite from '../_suite';
 
 suite('RangeRefinementControls', ({ expect, spy, stub }) => {
   let rangeRefinementControls: RangeRefinementControls;
