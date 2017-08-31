@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>State | @storefront/navigation</title>
+	<title>Props | @storefront/navigation</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,16 +56,16 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../classes/abstractvaluerefinementcontrols.html">AbstractValueRefinementControls</a>
+					<a href="../classes/valuerefinementcontrols.html">ValueRefinementControls</a>
 				</li>
 				<li>
-					<a href="../modules/abstractvaluerefinementcontrols.refinementcontrols.html">RefinementControls</a>
+					<a href="../modules/valuerefinementcontrols.refinementcontrols.html">RefinementControls</a>
 				</li>
 				<li>
-					<a href="abstractvaluerefinementcontrols.refinementcontrols.state.html">State</a>
+					<a href="valuerefinementcontrols.refinementcontrols.props.html">Props</a>
 				</li>
 			</ul>
-			<h1>Interface State</h1>
+			<h1>Interface Props</h1>
 		</div>
 	</div>
 </header>
@@ -76,7 +76,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">State</span>
+						<span class="target">Props</span>
 					</li>
 				</ul>
 			</section>
@@ -84,25 +84,48 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-inherited">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="abstractvaluerefinementcontrols.refinementcontrols.state.html#refinements" class="tsd-kind-icon">refinements</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="valuerefinementcontrols.refinementcontrols.props.html#navigation" class="tsd-kind-icon">navigation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="valuerefinementcontrols.refinementcontrols.props.html#stylish" class="tsd-kind-icon">stylish</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="valuerefinementcontrols.refinementcontrols.props.html#ui" class="tsd-kind-icon">ui</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="refinements" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> refinements</h3>
-					<div class="tsd-signature tsd-kind-icon">refinements<span class="tsd-signature-symbol">:</span> <a href="../modules/abstractvaluerefinementcontrols.refinementcontrols.html#selectedrefinement" class="tsd-signature-type">SelectedRefinement</a><span class="tsd-signature-symbol">[]</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="navigation" class="tsd-anchor"></a>
+					<h3>navigation</h3>
+					<div class="tsd-signature tsd-kind-icon">navigation<span class="tsd-signature-symbol">:</span> <a href="refinementcontrols.selectednavigation.html" class="tsd-signature-type">SelectedNavigation</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="refinementcontrols.selectednavigation.html">SelectedNavigation</a>.<a href="refinementcontrols.selectednavigation.html#refinements">refinements</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/7512103/src/refinement-controls.ts#L37">src/refinement-controls.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/864adbf/src/refinement-controls.ts#L31">src/refinement-controls.ts:31</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="stylish" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> stylish</h3>
+					<div class="tsd-signature tsd-kind-icon">stylish<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Props.stylish</p>
+						<ul>
+							<li>Defined in node_modules/@storefront/core/dist/core/tag/index.d.ts:60</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="ui" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ui</h3>
+					<div class="tsd-signature tsd-kind-icon">ui<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Props.ui</p>
+						<ul>
+							<li>Defined in node_modules/@storefront/core/dist/core/tag/index.d.ts:59</li>
 						</ul>
 					</aside>
 				</section>
@@ -118,26 +141,32 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="abstractvaluerefinementcontrols.refinementcontrols.props.html" class="tsd-kind-icon">Props</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="abstractvaluerefinementcontrols.refinementcontrols.selectednavigation.html" class="tsd-kind-icon">Selected<wbr>Navigation</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="abstractvaluerefinementcontrols.refinementcontrols.state.html" class="tsd-kind-icon">State</a>
+						<a href="valuerefinementcontrols.refinementcontrols.props.html" class="tsd-kind-icon">Props</a>
 						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="valuerefinementcontrols.refinementcontrols.props.html#navigation" class="tsd-kind-icon">navigation</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="abstractvaluerefinementcontrols.refinementcontrols.state.html#refinements" class="tsd-kind-icon">refinements</a>
+								<a href="valuerefinementcontrols.refinementcontrols.props.html#stylish" class="tsd-kind-icon">stylish</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="valuerefinementcontrols.refinementcontrols.props.html#ui" class="tsd-kind-icon">ui</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="valuerefinementcontrols.refinementcontrols.selectednavigation.html" class="tsd-kind-icon">Selected<wbr>Navigation</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="valuerefinementcontrols.refinementcontrols.state.html" class="tsd-kind-icon">State</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/abstractvaluerefinementcontrols.refinementcontrols.html#selectedrefinement" class="tsd-kind-icon">Selected<wbr>Refinement</a>
+						<a href="../modules/valuerefinementcontrols.refinementcontrols.html#selectedrefinement" class="tsd-kind-icon">Selected<wbr>Refinement</a>
 					</li>
 				</ul>
 			</nav>
