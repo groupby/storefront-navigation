@@ -1,11 +1,11 @@
 import { tag, Tag } from '@storefront/core';
-import AbstractValueRefinementControls from '../abstract-value-refinement-controls';
 import RefinementList from '../refinement-list';
+import ValueRefinementControls from '../value-refinement-controls';
 
 @tag('gb-refinement', require('./index.html'))
 class Refinement {
 
-  $refinement: AbstractValueRefinementControls.ActionableRefinement;
+  $refinement: ValueRefinementControls.ActionableRefinement;
 
   onClick(event: Refinement.IndexedClickEvent) {
     event.preventUpdate = true;

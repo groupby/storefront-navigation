@@ -1,5 +1,5 @@
-import AbstractValueRefinementControls from '../../src/abstract-value-refinement-controls';
 import FilterRefinementControls from '../../src/filter-refinement-controls';
+import ValueRefinementControls from '../../src/value-refinement-controls';
 import suite from './_suite';
 
 suite('FilterRefinementControls', ({ expect, itShouldHaveAlias }) => {
@@ -8,8 +8,8 @@ suite('FilterRefinementControls', ({ expect, itShouldHaveAlias }) => {
   beforeEach(() => filterRefinementControls = new FilterRefinementControls());
 
   describe('constructor()', () => {
-    it('should extend AbstractValueRefinementControls', () => {
-      expect(filterRefinementControls).to.be.an.instanceof(AbstractValueRefinementControls);
+    it('should extend ValueRefinementControls', () => {
+      expect(filterRefinementControls).to.be.an.instanceof(ValueRefinementControls);
     });
   });
 
