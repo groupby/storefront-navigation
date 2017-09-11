@@ -20,7 +20,15 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
     return 'rangeControls';
   }
 
-  onClick() {
+  init() {
+    const refinements = this.props.navigation.refinements;
+    const low = refinements[0]['low'];
+    const high = refinements[refinements.length - 1]['high'];
+    console.log(low, high);
+    this.state = { ...this.state, low, high };
+  }
+
+  onClick = () => {
     const low = parseFloat(this.refs.low.value);
     const high = parseFloat(this.refs.high.value);
     this.actions.addRefinement(this.props.navigation.field, low, high);
@@ -35,6 +43,11 @@ namespace RangeRefinementControls {
       high: string;
       submit: string;
     };
+  }
+
+  export interface State {
+    low: number;
+    high: number;
   }
 }
 
