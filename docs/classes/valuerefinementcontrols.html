@@ -134,6 +134,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="valuerefinementcontrols.html#expose" class="tsd-kind-icon">expose</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="valuerefinementcontrols.html#init" class="tsd-kind-icon">init</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="valuerefinementcontrols.html#onupdate" class="tsd-kind-icon">on<wbr>Update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="valuerefinementcontrols.html#select" class="tsd-kind-icon">select</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="valuerefinementcontrols.html#set" class="tsd-kind-icon">set</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite"><a href="valuerefinementcontrols.html#transformnavigation" class="tsd-kind-icon">transform<wbr>Navigation</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="valuerefinementcontrols.html#unexpose" class="tsd-kind-icon">unexpose</a></li>
@@ -158,7 +159,7 @@
 					<div class="tsd-signature tsd-kind-icon">Actionable<wbr>Refinement<span class="tsd-signature-symbol">:</span> <a href="../modules/valuerefinementcontrols.refinementcontrols.html#selectedrefinement" class="tsd-signature-type">SelectedRefinement</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/44098a9/src/value-refinement-controls/index.ts#L38">src/value-refinement-controls/index.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/2c8c594/src/value-refinement-controls/index.ts#L38">src/value-refinement-controls/index.ts:38</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -233,7 +234,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="refinementcontrols.html">RefinementControls</a>.<a href="refinementcontrols.html#alias">alias</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/44098a9/src/value-refinement-controls/index.ts#L11">src/value-refinement-controls/index.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/2c8c594/src/value-refinement-controls/index.ts#L11">src/value-refinement-controls/index.ts:11</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -254,7 +255,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Tag.dispatch</p>
 								<ul>
-									<li>Defined in node_modules/@storefront/core/dist/core/tag/index.d.ts:18</li>
+									<li>Defined in node_modules/@storefront/core/dist/core/tag/index.d.ts:19</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -278,7 +279,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Tag.expose</p>
 								<ul>
-									<li>Defined in node_modules/@storefront/core/dist/core/tag/index.d.ts:19</li>
+									<li>Defined in node_modules/@storefront/core/dist/core/tag/index.d.ts:20</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -305,7 +306,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="refinementcontrols.html">RefinementControls</a>.<a href="refinementcontrols.html#init">init</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/44098a9/src/refinement-controls.ts#L7">src/refinement-controls.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/2c8c594/src/refinement-controls.ts#L7">src/refinement-controls.ts:7</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -323,10 +324,58 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="refinementcontrols.html">RefinementControls</a>.<a href="refinementcontrols.html#onupdate">onUpdate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/44098a9/src/refinement-controls.ts#L12">src/refinement-controls.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/2c8c594/src/refinement-controls.ts#L12">src/refinement-controls.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="select" class="tsd-anchor"></a>
+					<h3>select</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">select<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Tag.select</p>
+								<ul>
+									<li>Defined in node_modules/@storefront/core/dist/core/tag/index.d.ts:18</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>selector: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">State</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>state: <span class="tsd-signature-type">State</span></h5>
+														</li>
+														<li>
+															<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -365,7 +414,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="refinementcontrols.html">RefinementControls</a>.<a href="refinementcontrols.html#transformnavigation">transformNavigation</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/44098a9/src/value-refinement-controls/index.ts#L16">src/value-refinement-controls/index.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/2c8c594/src/value-refinement-controls/index.ts#L16">src/value-refinement-controls/index.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -395,7 +444,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Tag.unexpose</p>
 								<ul>
-									<li>Defined in node_modules/@storefront/core/dist/core/tag/index.d.ts:20</li>
+									<li>Defined in node_modules/@storefront/core/dist/core/tag/index.d.ts:21</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -419,7 +468,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Tag.updateAlias</p>
 								<ul>
-									<li>Defined in node_modules/@storefront/core/dist/core/tag/index.d.ts:21</li>
+									<li>Defined in node_modules/@storefront/core/dist/core/tag/index.d.ts:22</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -446,7 +495,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="refinementcontrols.html">RefinementControls</a>.<a href="refinementcontrols.html#updatestate">updateState</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/44098a9/src/refinement-controls.ts#L17">src/refinement-controls.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/2c8c594/src/refinement-controls.ts#L17">src/refinement-controls.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -463,7 +512,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides Tag.state</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/44098a9/src/value-refinement-controls/index.ts#L7">src/value-refinement-controls/index.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/2c8c594/src/value-refinement-controls/index.ts#L7">src/value-refinement-controls/index.ts:7</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal">
@@ -476,7 +525,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/44098a9/src/value-refinement-controls/index.ts#L8">src/value-refinement-controls/index.ts:8</a></li>
+										<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/2c8c594/src/value-refinement-controls/index.ts#L8">src/value-refinement-controls/index.ts:8</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -569,6 +618,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="valuerefinementcontrols.html#onupdate" class="tsd-kind-icon">on<wbr>Update</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="valuerefinementcontrols.html#select" class="tsd-kind-icon">select</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="valuerefinementcontrols.html#set" class="tsd-kind-icon">set</a>
