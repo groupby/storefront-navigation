@@ -1,6 +1,7 @@
 <yield>
-  <gb-slider></gb-slider>
-  <input ref="low" type="text" placeholder="{ props.labels.low }"> to
-  <input ref="high" type="text" placeholder="{ props.labels.high }">
+  <gb-slider min="{ state.min }" max="{ state.max }" low="{ state.low }" high="{ state.high }"></gb-slider>
+  <input ref="low" type="number" placeholder="{ props.labels.low }" riot-value="{ state.low }" min="{ state.min }" max="{ state.max }" onkeyup="{ onChange }">
+  <span>to</span>
+  <input ref="high" type="number" placeholder="{ props.labels.high }" riot-value="{ state.high }" min="{ state.min }" max="{ state.max }" onkeyup="{ onChange }">
   <gb-button on-click="{ onClick }" submit="{ props.labels.submit }">{ props.submit }</gb-button>
 </yield>

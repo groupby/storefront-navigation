@@ -1,0 +1,5 @@
+[data-is="gb-range-refinement-controls"].gb-ui input[type="number"]::-webkit-outer-spin-button,
+[data-is="gb-range-refinement-controls"].gb-ui input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
