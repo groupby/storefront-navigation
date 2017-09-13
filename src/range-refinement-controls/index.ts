@@ -44,9 +44,9 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
   }
 
   onChange = (event: KeyboardEvent) => {
+    console.log('stuff', this.refs.low.value, this.refs.high.value);
     this.updateProps(parseFloat(this.refs.low.value), parseFloat(this.refs.high.value));
     const slider = this.tags['gb-slider'];
-    console.log(slider);
     if (event.target === this.refs.low) {
       slider.moveHandle(slider.state.handleLower, slider.props.low);
     } else {
@@ -55,10 +55,17 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
   }
 
   onClick = () => {
-    this.actions.switchRefinement(this.props.navigation.field, this.state.low, this.state.high);
+    // TODO: don't send any refinement (clear refinement) if range = full range?
+    if (!isNaN(this.state.high) && !isNaN(this.state.low)) {
+      if (this.state.low > this.state.high) {
+        this.actions.switchRefinement(this.props.navigation.field, this.state.high, this.state.low);
+      } else {
+        this.actions.switchRefinement(this.props.navigation.field, this.state.low, this.state.high);
+      }
+    }
   }
 
-  updateProps(low: number, high: number) {
+  updateProps = (low: number, high: number) => {
     this.set({ low, high });
   }
 }
