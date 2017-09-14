@@ -41,9 +41,9 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
     this.updateProps(parseFloat(this.refs.low.value), parseFloat(this.refs.high.value));
     const slider = this.tags['gb-slider'];
     if (event.target === this.refs.low) {
-      slider.moveHandle(slider.state.handleLower, slider.props.low);
+      slider.moveHandle(slider.refs.lower, slider.props.low);
     } else {
-      slider.moveHandle(slider.state.handleUpper, slider.props.high);
+      slider.moveHandle(slider.refs.upper, slider.props.high);
     }
   }
 
