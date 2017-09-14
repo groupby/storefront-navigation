@@ -28,13 +28,7 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
     const refinements = this.props.navigation.refinements;
     const selected = refinements[this.props.navigation.selected[0]] || {};
     const min = parseFloat(refinements[0]['low']);
-    let max = -Infinity;
-    for (const index of Object.keys(refinements)) {
-      let curr = parseFloat(refinements[index]['high']);
-      if (curr > max) {
-        max = curr;
-      }
-    }
+    const max = refinements.reduce((curMax, cur) => Math.max(curMax, cur['high']), -Infinity);
     this.state = { ...this.state,
       min,
       max,
@@ -44,7 +38,6 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
   }
 
   onChange = (event: KeyboardEvent) => {
-    console.log('stuff', this.refs.low.value, this.refs.high.value);
     this.updateProps(parseFloat(this.refs.low.value), parseFloat(this.refs.high.value));
     const slider = this.tags['gb-slider'];
     if (event.target === this.refs.low) {

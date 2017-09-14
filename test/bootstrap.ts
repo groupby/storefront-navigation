@@ -7,6 +7,7 @@ bootstrap(chai, __dirname, [
   '../src/navigation-header/index.css',
   '../src/navigation-header/index.html',
   '../src/navigation-list/index.html',
+  '../src/range-refinement-controls/index.css',
   '../src/range-refinement-controls/index.html',
   '../src/refinement/index.html',
   '../src/refinement-list/index.html',
