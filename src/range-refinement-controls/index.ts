@@ -1,4 +1,4 @@
-import { tag, Tag } from '@storefront/core';
+import { tag, Store, Tag } from '@storefront/core';
 import RefinementControls from '../refinement-controls';
 
 @tag('gb-range-refinement-controls', require('./index.html'), require('./index.css'))
@@ -25,10 +25,11 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
   }
 
   init() {
-    const refinements = this.props.navigation.refinements;
+    const refinements: Store.RangeRefinement[] = <any>this.props.navigation.refinements;
     const selected = refinements[this.props.navigation.selected[0]] || {};
     const min = parseFloat(refinements[0]['low']);
-    const max = refinements.reduce((curMax, cur) => Math.max(curMax, cur['high']), -Infinity);
+    const max = Math.max(...refinements.map((refinement) => refinement['high']));
+
     this.state = { ...this.state,
       min,
       max,
@@ -38,7 +39,7 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
   }
 
   onChange = (event: KeyboardEvent) => {
-    this.updateProps(parseFloat(this.refs.low.value), parseFloat(this.refs.high.value));
+    this.updateSelected(parseFloat(this.refs.low.value), parseFloat(this.refs.high.value));
     const slider = this.tags['gb-slider'];
     if (event.target === this.refs.low) {
       slider.moveHandle(slider.refs.lower, slider.props.low);
@@ -48,7 +49,6 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
   }
 
   onClick = () => {
-    // TODO: don't send any refinement (clear refinement) if range = full range?
     if (!isNaN(this.state.high) && !isNaN(this.state.low)) {
       if (this.state.low > this.state.high) {
         this.actions.switchRefinement(this.props.navigation.field, this.state.high, this.state.low);
@@ -58,9 +58,8 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
     }
   }
 
-  updateProps = (low: number, high: number) => {
-    this.set({ low, high });
-  }
+  updateSelected = (low: number, high: number) => this.set({ low, high });
+
 }
 
 // tslint:disable-next-line max-line-length

@@ -80,15 +80,15 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
   describe('onChange()', () => {
     const low = { value: 10 };
     const high = { value: 50 };
-    let updateProps;
+    let updateSelected;
     let moveHandle;
 
     beforeEach(() => {
-      updateProps = rangeRefinementControls.updateProps = spy();
+      updateSelected = rangeRefinementControls.updateSelected = spy();
       moveHandle = spy();
     });
 
-    it('should call updateProps() and moveHandle() with lower', () => {
+    it('should call updateSelected() and moveHandle() with lower', () => {
       const event = <any>{ target: low };
       const lower = { a: 'b' };
       rangeRefinementControls.refs = <any>{ low, high };
@@ -106,11 +106,11 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
 
       rangeRefinementControls.onChange(event);
 
-      expect(updateProps).to.be.calledWithExactly(low.value, high.value);
+      expect(updateSelected).to.be.calledWithExactly(low.value, high.value);
       expect(moveHandle).to.be.calledWithExactly(lower, low.value);
     });
 
-    it('should call updateProps() and moveHandle() with upper', () => {
+    it('should call updateSelected() and moveHandle() with upper', () => {
       const event = <any>{ };
       const upper = { a: 'b' };
       rangeRefinementControls.refs = <any>{ low, high };
@@ -128,7 +128,7 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
 
       rangeRefinementControls.onChange(event);
 
-      expect(updateProps).to.be.calledWithExactly(low.value, high.value);
+      expect(updateSelected).to.be.calledWithExactly(low.value, high.value);
       expect(moveHandle).to.be.calledWithExactly(upper, high.value);
     });
   });
@@ -164,13 +164,13 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
     });
   });
 
-  describe('updateProps()', () => {
+  describe('updateSelected()', () => {
     it('should set low and high', () => {
       const low = 50;
       const high = 80;
       const set = rangeRefinementControls.set = spy();
 
-      rangeRefinementControls.updateProps(low, high);
+      rangeRefinementControls.updateSelected(low, high);
 
       expect(set).to.be.calledWithExactly({ low, high });
     });
