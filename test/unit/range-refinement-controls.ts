@@ -78,20 +78,24 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
   });
 
   describe('onChange()', () => {
-    it('should call updateProps() and moveHandle() with handleLower', () => {
-      const low = { value: 10 };
-      const high = { value: 50 };
+    const low = { value: 10 };
+    const high = { value: 50 };
+    let updateProps;
+    let moveHandle;
+
+    beforeEach(() => {
+      updateProps = rangeRefinementControls.updateProps = spy();
+      moveHandle = spy();
+    });
+
+    it('should call updateProps() and moveHandle() with lower', () => {
       const event = <any>{ target: low };
-      const handleLower = { a: 'b' };
-      const updateProps = rangeRefinementControls.updateProps = spy();
-      const moveHandle = spy();
-      rangeRefinementControls.refs = <any>{
-        low, high
-      };
+      const lower = { a: 'b' };
+      rangeRefinementControls.refs = <any>{ low, high };
       rangeRefinementControls.tags = <any>{
         'gb-slider': {
-          state: {
-            handleLower
+          refs: {
+            lower
           },
           props: {
             low: low.value
@@ -103,23 +107,17 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
       rangeRefinementControls.onChange(event);
 
       expect(updateProps).to.be.calledWithExactly(low.value, high.value);
-      expect(moveHandle).to.be.calledWithExactly(handleLower, low.value);
+      expect(moveHandle).to.be.calledWithExactly(lower, low.value);
     });
 
-    it('should call updateProps() and moveHandle() with handleUpper', () => {
-      const low = { value: 10 };
-      const high = { value: 50 };
+    it('should call updateProps() and moveHandle() with upper', () => {
       const event = <any>{ };
-      const handleUpper = { a: 'b' };
-      const updateProps = rangeRefinementControls.updateProps = spy();
-      const moveHandle = spy();
-      rangeRefinementControls.refs = <any>{
-        low, high
-      };
+      const upper = { a: 'b' };
+      rangeRefinementControls.refs = <any>{ low, high };
       rangeRefinementControls.tags = <any>{
         'gb-slider': {
-          state: {
-            handleUpper
+          refs: {
+            upper
           },
           props: {
             high: high.value
@@ -131,37 +129,38 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
       rangeRefinementControls.onChange(event);
 
       expect(updateProps).to.be.calledWithExactly(low.value, high.value);
-      expect(moveHandle).to.be.calledWithExactly(handleUpper, high.value);
+      expect(moveHandle).to.be.calledWithExactly(upper, high.value);
     });
   });
 
   describe('onClick()', () => {
+    const field = 'Age Range';
+    let switchRefinement;
+
+    beforeEach(() => switchRefinement = spy());
+
     it('should update search', () => {
-      const field = 'Age Range';
       const low = 10;
       const high = 20;
-      const switchRefinement = spy();
       rangeRefinementControls.state = <any>{ low, high };
       rangeRefinementControls.props = <any>{ navigation: { field } };
       rangeRefinementControls.actions = <any>{ switchRefinement };
 
       rangeRefinementControls.onClick();
 
-      expect(switchRefinement).to.be.calledWith(field, low, high);
+      expect(switchRefinement).to.be.calledWithExactly(field, low, high);
     });
 
     it('should update search and reverse low and high', () => {
-      const field = 'Age Range';
       const high = 10;
       const low = 20;
-      const switchRefinement = spy();
       rangeRefinementControls.state = <any>{ low, high };
       rangeRefinementControls.props = <any>{ navigation: { field } };
       rangeRefinementControls.actions = <any>{ switchRefinement };
 
       rangeRefinementControls.onClick();
 
-      expect(switchRefinement).to.be.calledWith(field, high, low);
+      expect(switchRefinement).to.be.calledWithExactly(field, high, low);
     });
   });
 
