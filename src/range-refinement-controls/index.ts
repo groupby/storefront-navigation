@@ -1,4 +1,5 @@
 import { tag, Store, Tag } from '@storefront/core';
+import { Slider } from '@storefront/structure';
 import RefinementControls from '../refinement-controls';
 
 @tag('gb-range-refinement-controls', require('./index.html'), require('./index.css'))
@@ -9,8 +10,7 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
     high: HTMLInputElement
   };
   tags: {
-    // TODO: give a type!
-    slider: any
+    slider: Slider
   };
   props: RangeRefinementControls.Props = <any>{
     labels: {
@@ -27,14 +27,14 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
   init() {
     const refinements: Store.RangeRefinement[] = <any>this.props.navigation.refinements;
     const selected = refinements[this.props.navigation.selected[0]] || {};
-    const min = parseFloat(refinements[0]['low']);
+    const min = refinements[0]['low'];
     const max = Math.max(...refinements.map((refinement) => refinement['high']));
 
     this.state = { ...this.state,
       min,
       max,
-      low: parseFloat(selected['low']) || min,
-      high: parseFloat(selected['high']) || max
+      low: selected['low'] || min,
+      high: selected['high'] || max
     };
   }
 
