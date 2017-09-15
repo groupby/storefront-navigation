@@ -36,9 +36,9 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
       rangeRefinementControls.props = <any>{
         navigation: {
           refinements: [
-            { low: '0', high: '5' },
-            { low: '5', high: '10' },
-            { low: '10', high: '20' }
+            { low: 0, high: 5 },
+            { low: 5, high: 10 },
+            { low: 10, high: 20 }
           ],
           selected: [2]
         }
@@ -58,9 +58,9 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
       rangeRefinementControls.props = <any>{
         navigation: {
           refinements: [
-            { low: '0', high: '5' },
-            { low: '5', high: '10' },
-            { low: '10', high: '20' }
+            { low: 0, high: 5 },
+            { low: 5, high: 10 },
+            { low: 10, high: 20 }
           ],
           selected: []
         }
