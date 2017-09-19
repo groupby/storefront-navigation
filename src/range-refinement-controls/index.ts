@@ -1,12 +1,12 @@
-import { tag, Tag } from '@storefront/core';
+import { tag, Store, Tag } from '@storefront/core';
 import RefinementControls from '../refinement-controls';
 
 @tag('gb-range-refinement-controls', require('./index.html'))
-class RangeRefinementControls extends RefinementControls<RangeRefinementControls.Props> {
+// tslint:disable-next-line max-line-length
+class RangeRefinementControls extends RefinementControls<RangeRefinementControls.Props, RangeRefinementControls.State> {
 
-  refs: {
-    low: HTMLInputElement,
-    high: HTMLInputElement
+  tags: {
+    rangeSelector: Tag
   };
   props: RangeRefinementControls.Props = <any>{
     labels: {
@@ -20,14 +20,31 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
     return 'rangeControls';
   }
 
-  onClick() {
-    const low = parseFloat(this.refs.low.value);
-    const high = parseFloat(this.refs.high.value);
-    this.actions.addRefinement(this.props.navigation.field, low, high);
+  init() {
+    const refinements: Store.RangeRefinement[] = <any>this.props.navigation.refinements;
+    const selected = refinements[this.props.navigation.selected[0]] || {};
+    const min = refinements[0]['low'];
+    const max = Math.max(...refinements.map((refinement) => refinement['high']));
+
+    this.state = { ...this.state,
+      min,
+      max,
+      low: selected['low'] || min,
+      high: selected['high'] || max
+    };
   }
+
+  onChange = (event: KeyboardEvent) => {
+    const rangeSelector = this.tags['gb-range-selector'];
+    this.updateSelected(parseFloat(rangeSelector.refs.low.value), parseFloat(rangeSelector.refs.high.value));
+  }
+
+  updateSelected = (low: number, high: number) => this.set({ low, high });
+
 }
 
-interface RangeRefinementControls extends RefinementControls<RangeRefinementControls.Props> { }
+// tslint:disable-next-line max-line-length
+interface RangeRefinementControls extends RefinementControls<RangeRefinementControls.Props, RangeRefinementControls.State> { }
 namespace RangeRefinementControls {
   export interface Props extends RefinementControls.Props {
     labels: {
@@ -35,6 +52,13 @@ namespace RangeRefinementControls {
       high: string;
       submit: string;
     };
+  }
+
+  export interface State extends RefinementControls.State {
+    min: number;
+    max: number;
+    low: number;
+    high: number;
   }
 }
 

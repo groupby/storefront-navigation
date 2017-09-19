@@ -2,9 +2,9 @@ import * as pkg from '../../src';
 import Navigation from '../../src/navigation';
 import NavigationDisplay from '../../src/navigation-display';
 import NavigationList from '../../src/navigation-list';
-import RangeRefinementControls from '../../src/range-refinement-controls';
 import Refinement from '../../src/refinement';
 import RefinementList from '../../src/refinement-list';
+import SliderRefinementControls from '../../src/slider-refinement-controls';
 import ValueRefinementControls from '../../src/value-refinement-controls';
 import suite from './_suite';
 
@@ -22,7 +22,7 @@ suite('package', ({ expect }) => {
   });
 
   it('should expose RangeRefinementControls', () => {
-    expect(pkg.RangeRefinementControls).to.eq(RangeRefinementControls);
+    expect(pkg.SliderRefinementControls).to.eq(SliderRefinementControls);
   });
 
   it('should expose Refinement', () => {
