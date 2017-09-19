@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>State | @storefront/navigation</title>
+	<title>Props | @storefront/navigation</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../classes/valuerefinementcontrols.html">ValueRefinementControls</a>
+					<a href="../classes/rangeselector.html">RangeSelector</a>
 				</li>
 				<li>
-					<a href="valuerefinementcontrols.state.html">State</a>
+					<a href="rangeselector.props.html">Props</a>
 				</li>
 			</ul>
-			<h1>Interface State</h1>
+			<h1>Interface Props</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">State</span>
+						<span class="tsd-signature-type">Props</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">Props</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -84,13 +89,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="valuerefinementcontrols.state.html#more" class="tsd-kind-icon">more</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Methods</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="valuerefinementcontrols.state.html#morerefinements" class="tsd-kind-icon">more<wbr>Refinements</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="rangeselector.props.html#field" class="tsd-kind-icon">field</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="rangeselector.props.html#labels" class="tsd-kind-icon">labels</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="rangeselector.props.html#onchange" class="tsd-kind-icon">on<wbr>Change</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="rangeselector.props.html#stylish" class="tsd-kind-icon">stylish</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="rangeselector.props.html#ui" class="tsd-kind-icon">ui</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="rangeselector.props.html#values" class="tsd-kind-icon">values</a></li>
 							</ul>
 						</section>
 					</div>
@@ -99,34 +103,112 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="more" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> more</h3>
-					<div class="tsd-signature tsd-kind-icon">more<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="field" class="tsd-anchor"></a>
+					<h3>field</h3>
+					<div class="tsd-signature tsd-kind-icon">field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/99a336d/src/value-refinement-controls/index.ts#L30">src/value-refinement-controls/index.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/99a336d/src/range-selector/index.ts#L33">src/range-selector/index.ts:33</a></li>
 						</ul>
 					</aside>
 				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="morerefinements" class="tsd-anchor"></a>
-					<h3>more<wbr>Refinements</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">more<wbr>Refinements<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/99a336d/src/value-refinement-controls/index.ts#L31">src/value-refinement-controls/index.ts:31</a></li>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="labels" class="tsd-anchor"></a>
+					<h3>labels</h3>
+					<div class="tsd-signature tsd-kind-icon">labels<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/99a336d/src/range-selector/index.ts#L22">src/range-selector/index.ts:22</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>high<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>low<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>submit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="onchange" class="tsd-anchor"></a>
+					<h3>on<wbr>Change</h3>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/99a336d/src/range-selector/index.ts#L34">src/range-selector/index.ts:34</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="stylish" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> stylish</h3>
+					<div class="tsd-signature tsd-kind-icon">stylish<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Props.stylish</p>
+						<ul>
+							<li>Defined in node_modules/@storefront/core/dist/core/tag/index.d.ts:62</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="ui" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ui</h3>
+					<div class="tsd-signature tsd-kind-icon">ui<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Props.ui</p>
+						<ul>
+							<li>Defined in node_modules/@storefront/core/dist/core/tag/index.d.ts:61</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="values" class="tsd-anchor"></a>
+					<h3>values</h3>
+					<div class="tsd-signature tsd-kind-icon">values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/groupby/storefront-navigation/blob/99a336d/src/range-selector/index.ts#L27">src/range-selector/index.ts:27</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>high<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>low<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -164,9 +246,38 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/rangerefinementcontrols.html" class="tsd-kind-icon">Range<wbr>Refinement<wbr>Controls</a>
 					</li>
-					<li class=" tsd-kind-class tsd-has-type-parameter">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-has-type-parameter">
 						<a href="../classes/rangeselector.html" class="tsd-kind-icon">Range<wbr>Selector</a>
+						<ul>
+							<li class="current tsd-kind-interface tsd-parent-kind-class">
+								<a href="rangeselector.props.html" class="tsd-kind-icon">Props</a>
+								<ul>
+									<li class=" tsd-kind-property tsd-parent-kind-interface">
+										<a href="rangeselector.props.html#field" class="tsd-kind-icon">field</a>
+									</li>
+									<li class=" tsd-kind-property tsd-parent-kind-interface">
+										<a href="rangeselector.props.html#labels" class="tsd-kind-icon">labels</a>
+									</li>
+									<li class=" tsd-kind-property tsd-parent-kind-interface">
+										<a href="rangeselector.props.html#onchange" class="tsd-kind-icon">on<wbr>Change</a>
+									</li>
+									<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+										<a href="rangeselector.props.html#stylish" class="tsd-kind-icon">stylish</a>
+									</li>
+									<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+										<a href="rangeselector.props.html#ui" class="tsd-kind-icon">ui</a>
+									</li>
+									<li class=" tsd-kind-property tsd-parent-kind-interface">
+										<a href="rangeselector.props.html#values" class="tsd-kind-icon">values</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="../classes/refinement.html" class="tsd-kind-icon">Refinement</a>
 					</li>
@@ -179,80 +290,9 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/sliderrefinementcontrols.html" class="tsd-kind-icon">Slider<wbr>Refinement<wbr>Controls</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class">
+					<li class=" tsd-kind-class">
 						<a href="../classes/valuerefinementcontrols.html" class="tsd-kind-icon">Value<wbr>Refinement<wbr>Controls</a>
-						<ul>
-							<li class=" tsd-kind-interface tsd-parent-kind-class">
-								<a href="valuerefinementcontrols.actionablenavigation.html" class="tsd-kind-icon">Actionable<wbr>Navigation</a>
-							</li>
-							<li class="current tsd-kind-interface tsd-parent-kind-class">
-								<a href="valuerefinementcontrols.state.html" class="tsd-kind-icon">State</a>
-								<ul>
-									<li class=" tsd-kind-property tsd-parent-kind-interface">
-										<a href="valuerefinementcontrols.state.html#more" class="tsd-kind-icon">more</a>
-									</li>
-									<li class=" tsd-kind-method tsd-parent-kind-interface">
-										<a href="valuerefinementcontrols.state.html#morerefinements" class="tsd-kind-icon">more<wbr>Refinements</a>
-									</li>
-								</ul>
-							</li>
-							<li class=" tsd-kind-type-alias tsd-parent-kind-class tsd-is-static">
-								<a href="../classes/valuerefinementcontrols.html#actionablerefinement" class="tsd-kind-icon">Actionable<wbr>Refinement</a>
-							</li>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-								<a href="../classes/valuerefinementcontrols.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="../classes/valuerefinementcontrols.html#aliasing" class="tsd-kind-icon">aliasing</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="../classes/valuerefinementcontrols.html#opts" class="tsd-kind-icon">opts</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="../classes/valuerefinementcontrols.html#props" class="tsd-kind-icon">props</a>
-							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
-								<a href="../classes/valuerefinementcontrols.html#alias" class="tsd-kind-icon">alias</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="../classes/valuerefinementcontrols.html#dispatch" class="tsd-kind-icon">dispatch</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="../classes/valuerefinementcontrols.html#expose" class="tsd-kind-icon">expose</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="../classes/valuerefinementcontrols.html#init" class="tsd-kind-icon">init</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="../classes/valuerefinementcontrols.html#onupdate" class="tsd-kind-icon">on<wbr>Update</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="../classes/valuerefinementcontrols.html#select" class="tsd-kind-icon">select</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="../classes/valuerefinementcontrols.html#set" class="tsd-kind-icon">set</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
-								<a href="../classes/valuerefinementcontrols.html#transformnavigation" class="tsd-kind-icon">transform<wbr>Navigation</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="../classes/valuerefinementcontrols.html#unexpose" class="tsd-kind-icon">unexpose</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="../classes/valuerefinementcontrols.html#updatealias" class="tsd-kind-icon">update<wbr>Alias</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="../classes/valuerefinementcontrols.html#updatestate" class="tsd-kind-icon">update<wbr>State</a>
-							</li>
-							<li class=" tsd-kind-object-literal tsd-parent-kind-class tsd-is-overwrite">
-								<a href="../classes/valuerefinementcontrols.html#state-1" class="tsd-kind-icon">state</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="../globals.html#alias" class="tsd-kind-icon">ALIAS</a>
 					</li>
