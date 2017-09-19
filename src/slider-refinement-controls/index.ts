@@ -1,10 +1,7 @@
-import { tag, Store, Tag } from '@storefront/core';
-import { Slider } from '@storefront/structure';
+import { tag } from '@storefront/core';
 import RangeRefinementControls from '../range-refinement-controls';
-import RefinementControls from '../refinement-controls';
 
 @tag('gb-slider-refinement-controls', require('./index.html'))
-// tslint:disable-next-line max-line-length
 class SliderRefinementControls extends RangeRefinementControls {
 
   onChange = (event: KeyboardEvent) => {
