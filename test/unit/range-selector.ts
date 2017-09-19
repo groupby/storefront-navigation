@@ -9,6 +9,8 @@ suite('RangeSelector', ({ expect, spy, stub }) => {
 
   describe('onClick()', () => {
     const field = 'NavigationField';
+    const max = 1000;
+    const min = 10;
     let switchRefinement;
 
     beforeEach(() => switchRefinement = spy());
@@ -19,7 +21,9 @@ suite('RangeSelector', ({ expect, spy, stub }) => {
       rangeSelector.props = {
         values: {
           high,
-          low
+          low,
+          max,
+          min
         },
         field
       };
@@ -38,7 +42,9 @@ suite('RangeSelector', ({ expect, spy, stub }) => {
       rangeSelector.props = {
         values: {
           high,
-          low
+          low,
+          max,
+          min
         },
         field
       };
@@ -49,6 +55,27 @@ suite('RangeSelector', ({ expect, spy, stub }) => {
       rangeSelector.onClick();
 
       expect(switchRefinement).to.be.calledWithExactly(field, high, low);
+    });
+
+    it('should call switchRefinement with field, min, and max', () => {
+      const high = 1010;
+      const low = 5;
+      rangeSelector.props = {
+        values: {
+          high,
+          low,
+          max,
+          min
+        },
+        field
+      };
+      rangeSelector.actions = <any>{
+        switchRefinement
+      };
+
+      rangeSelector.onClick();
+
+      expect(switchRefinement).to.be.calledWithExactly(field, min, max);
     });
   });
 });

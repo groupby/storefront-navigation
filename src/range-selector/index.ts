@@ -6,9 +6,11 @@ class RangeSelector {
   onClick = () => {
     if (!isNaN(this.props.values.high) && !isNaN(this.props.values.low)) {
       if (this.props.values.low > this.props.values.high) {
-        this.actions.switchRefinement(this.props.field, this.props.values.high, this.props.values.low);
+        // tslint:disable-next-line max-line-length
+        this.actions.switchRefinement(this.props.field, Math.min(this.props.values.high, this.props.values.max), Math.max(this.props.values.low, this.props.values.min));
       } else {
-        this.actions.switchRefinement(this.props.field, this.props.values.low, this.props.values.high);
+        // tslint:disable-next-line max-line-length
+        this.actions.switchRefinement(this.props.field, Math.max(this.props.values.low, this.props.values.min), Math.min(this.props.values.high, this.props.values.max));
       }
     }
   }
