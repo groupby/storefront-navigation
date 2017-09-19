@@ -2,12 +2,13 @@ import { tag, Tag } from '@storefront/core';
 
 @tag('gb-range-selector', require('./index.html'), require('./index.css'))
 class RangeSelector {
+
   onClick = () => {
     if (!isNaN(this.props.values.high) && !isNaN(this.props.values.low)) {
       if (this.props.values.low > this.props.values.high) {
-        this.actions.switchRefinement(this.props.navigation.field, this.props.values.high, this.props.values.low);
+        this.actions.switchRefinement(this.props.field, this.props.values.high, this.props.values.low);
       } else {
-        this.actions.switchRefinement(this.props.navigation.field, this.props.values.low, this.props.values.high);
+        this.actions.switchRefinement(this.props.field, this.props.values.low, this.props.values.high);
       }
     }
   }
