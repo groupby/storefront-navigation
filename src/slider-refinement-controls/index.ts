@@ -1,14 +1,16 @@
 import { tag, Store, Tag } from '@storefront/core';
+import { Slider } from '@storefront/structure';
 import RefinementControls from '../refinement-controls';
 
-@tag('gb-range-refinement-controls', require('./index.html'))
+@tag('gb-slider-refinement-controls', require('./index.html'))
 // tslint:disable-next-line max-line-length
-class RangeRefinementControls extends RefinementControls<RangeRefinementControls.Props, RangeRefinementControls.State> {
+class SliderRefinementControls extends RefinementControls<SliderRefinementControls.Props, SliderRefinementControls.State> {
 
   tags: {
+    slider: Slider,
     rangeSelector: Tag
   };
-  props: RangeRefinementControls.Props = <any>{
+  props: SliderRefinementControls.Props = <any>{
     labels: {
       low: 'Min',
       high: 'Max',
@@ -37,6 +39,12 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
   onChange = (event: KeyboardEvent) => {
     const rangeSelector = this.tags['gb-range-selector'];
     this.updateSelected(parseFloat(rangeSelector.refs.low.value), parseFloat(rangeSelector.refs.high.value));
+    const slider = this.tags['gb-slider'];
+    if (event.target === rangeSelector.refs.low) {
+      slider.moveHandle(slider.refs.lower, slider.props.low);
+    } else {
+      slider.moveHandle(slider.refs.upper, slider.props.high);
+    }
   }
 
   updateSelected = (low: number, high: number) => this.set({ low, high });
@@ -44,8 +52,8 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
 }
 
 // tslint:disable-next-line max-line-length
-interface RangeRefinementControls extends RefinementControls<RangeRefinementControls.Props, RangeRefinementControls.State> { }
-namespace RangeRefinementControls {
+interface SliderRefinementControls extends RefinementControls<SliderRefinementControls.Props, SliderRefinementControls.State> { }
+namespace SliderRefinementControls {
   export interface Props extends RefinementControls.Props {
     labels: {
       low: string;
@@ -62,4 +70,4 @@ namespace RangeRefinementControls {
   }
 }
 
-export default RangeRefinementControls;
+export default SliderRefinementControls;

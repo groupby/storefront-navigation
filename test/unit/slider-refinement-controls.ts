@@ -1,20 +1,20 @@
-import RangeRefinementControls from '../../src/range-refinement-controls';
 import RefinementControls from '../../src/refinement-controls';
+import SliderRefinementControls from '../../src/slider-refinement-controls';
 import suite from './_suite';
 
-suite('RangeRefinementControls', ({ expect, spy, stub }) => {
-  let rangeRefinementControls: RangeRefinementControls;
+suite('SliderRefinementControls', ({ expect, spy, stub }) => {
+  let sliderRefinementControls: SliderRefinementControls;
 
-  beforeEach(() => rangeRefinementControls = new RangeRefinementControls());
+  beforeEach(() => sliderRefinementControls = new SliderRefinementControls());
 
   describe('constructor()', () => {
     it('should extend RefinementControls', () => {
-      expect(rangeRefinementControls).to.be.an.instanceof(RefinementControls);
+      expect(sliderRefinementControls).to.be.an.instanceof(RefinementControls);
     });
 
     describe('props', () => {
       it('should set initial values', () => {
-        expect(rangeRefinementControls.props).to.eql({
+        expect(sliderRefinementControls.props).to.eql({
           labels: {
             low: 'Min',
             high: 'Max',
@@ -27,13 +27,13 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
 
   describe('alias', () => {
     it('should return alias', () => {
-      expect(rangeRefinementControls.alias).to.eq('rangeControls');
+      expect(sliderRefinementControls.alias).to.eq('rangeControls');
     });
   });
 
   describe('init()', () => {
     it('should update state with low and high from selected', () => {
-      rangeRefinementControls.props = <any>{
+      sliderRefinementControls.props = <any>{
         navigation: {
           refinements: [
             { low: 0, high: 5 },
@@ -44,9 +44,9 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
         }
       };
 
-      rangeRefinementControls.init();
+      sliderRefinementControls.init();
 
-      expect(rangeRefinementControls.state).to.eql({
+      expect(sliderRefinementControls.state).to.eql({
         min: 0,
         max: 20,
         low: 10,
@@ -55,7 +55,7 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
     });
 
     it('should update state with low and high from min and max', () => {
-      rangeRefinementControls.props = <any>{
+      sliderRefinementControls.props = <any>{
         navigation: {
           refinements: [
             { low: 0, high: 5 },
@@ -66,9 +66,9 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
         }
       };
 
-      rangeRefinementControls.init();
+      sliderRefinementControls.init();
 
-      expect(rangeRefinementControls.state).to.eql({
+      expect(sliderRefinementControls.state).to.eql({
         min: 0,
         max: 20,
         low: 0,
@@ -84,15 +84,14 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
     let moveHandle;
 
     beforeEach(() => {
-      updateSelected = rangeRefinementControls.updateSelected = spy();
+      updateSelected = sliderRefinementControls.updateSelected = spy();
       moveHandle = spy();
     });
 
     it('should call updateSelected() and moveHandle() with lower', () => {
       const event = <any>{ target: low };
       const lower = { a: 'b' };
-      rangeRefinementControls.refs = <any>{ low, high };
-      rangeRefinementControls.tags = <any>{
+      sliderRefinementControls.tags = <any>{
         'gb-slider': {
           refs: {
             lower
@@ -101,10 +100,16 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
             low: low.value
           },
           moveHandle
+        },
+        'gb-range-selector': {
+          refs: {
+            low,
+            high
+          }
         }
       };
 
-      rangeRefinementControls.onChange(event);
+      sliderRefinementControls.onChange(event);
 
       expect(updateSelected).to.be.calledWithExactly(low.value, high.value);
       expect(moveHandle).to.be.calledWithExactly(lower, low.value);
@@ -113,8 +118,7 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
     it('should call updateSelected() and moveHandle() with upper', () => {
       const event = <any>{ };
       const upper = { a: 'b' };
-      rangeRefinementControls.refs = <any>{ low, high };
-      rangeRefinementControls.tags = <any>{
+      sliderRefinementControls.tags = <any>{
         'gb-slider': {
           refs: {
             upper
@@ -123,54 +127,60 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
             high: high.value
           },
           moveHandle
+        },
+        'gb-range-selector': {
+          refs: {
+            low,
+            high
+          }
         }
       };
 
-      rangeRefinementControls.onChange(event);
+      sliderRefinementControls.onChange(event);
 
       expect(updateSelected).to.be.calledWithExactly(low.value, high.value);
       expect(moveHandle).to.be.calledWithExactly(upper, high.value);
     });
   });
 
-  describe('onClick()', () => {
-    const field = 'Age Range';
-    let switchRefinement;
-
-    beforeEach(() => switchRefinement = spy());
-
-    it('should update search', () => {
-      const low = 10;
-      const high = 20;
-      rangeRefinementControls.state = <any>{ low, high };
-      rangeRefinementControls.props = <any>{ navigation: { field } };
-      rangeRefinementControls.actions = <any>{ switchRefinement };
-
-      rangeRefinementControls.onClick();
-
-      expect(switchRefinement).to.be.calledWithExactly(field, low, high);
-    });
-
-    it('should update search and reverse low and high', () => {
-      const high = 10;
-      const low = 20;
-      rangeRefinementControls.state = <any>{ low, high };
-      rangeRefinementControls.props = <any>{ navigation: { field } };
-      rangeRefinementControls.actions = <any>{ switchRefinement };
-
-      rangeRefinementControls.onClick();
-
-      expect(switchRefinement).to.be.calledWithExactly(field, high, low);
-    });
-  });
+  // describe('onClick()', () => {
+  //   const field = 'Age Range';
+  //   let switchRefinement;
+  //
+  //   beforeEach(() => switchRefinement = spy());
+  //
+  //   it('should update search', () => {
+  //     const low = 10;
+  //     const high = 20;
+  //     sliderRefinementControls.state = <any>{ low, high };
+  //     sliderRefinementControls.props = <any>{ navigation: { field } };
+  //     sliderRefinementControls.actions = <any>{ switchRefinement };
+  //
+  //     sliderRefinementControls.onClick();
+  //
+  //     expect(switchRefinement).to.be.calledWithExactly(field, low, high);
+  //   });
+  //
+  //   it('should update search and reverse low and high', () => {
+  //     const high = 10;
+  //     const low = 20;
+  //     sliderRefinementControls.state = <any>{ low, high };
+  //     sliderRefinementControls.props = <any>{ navigation: { field } };
+  //     sliderRefinementControls.actions = <any>{ switchRefinement };
+  //
+  //     sliderRefinementControls.onClick();
+  //
+  //     expect(switchRefinement).to.be.calledWithExactly(field, high, low);
+  //   });
+  // });
 
   describe('updateSelected()', () => {
     it('should set low and high', () => {
       const low = 50;
       const high = 80;
-      const set = rangeRefinementControls.set = spy();
+      const set = sliderRefinementControls.set = spy();
 
-      rangeRefinementControls.updateSelected(low, high);
+      sliderRefinementControls.updateSelected(low, high);
 
       expect(set).to.be.calledWithExactly({ low, high });
     });
