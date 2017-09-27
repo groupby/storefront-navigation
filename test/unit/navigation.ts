@@ -13,7 +13,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
   describe('constructor()', () => {
     describe('props', () => {
       it('should set initial values', () => {
-        expect(navigation.props).to.eql({ display: {}, labels: {}, collapse: true, isActive: true });
+        expect(navigation.props).to.eql({ display: {}, labels: {}, collapse: true });
       });
     });
 
@@ -52,7 +52,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
     beforeEach(() => set = navigation.set = spy());
 
     it('should set fields, with active set for the first x number of fields based on isActive', () => {
-      navigation.props = <any>{ display, labels, isActive: 2 };
+      navigation.props = <any>{ display, labels, collapse: { isActive: 2 } };
 
       navigation.updateFields(<any>{ allIds: fields });
 
@@ -66,7 +66,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
     });
 
     it('should set fields with active true when isActive true', () => {
-      navigation.props = <any>{ display, labels, isActive: true };
+      navigation.props = <any>{ display, labels, collapse: { isActive: true } };
 
       navigation.updateFields(<any>{ allIds: fields });
 
@@ -80,7 +80,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
     });
 
     it('should set fields with active false when isActive false', () => {
-      navigation.props = <any>{ display, labels, isActive: false };
+      navigation.props = <any>{ display, labels, collapse: { isActive: false } };
 
       navigation.updateFields(<any>{ allIds: fields });
 
