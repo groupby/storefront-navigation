@@ -11,8 +11,7 @@ class Navigation {
   props: Navigation.Props = {
     display: {},
     labels: {},
-    collapse: true,
-    isActive: true
+    collapse: true
   };
   state: Navigation.State = {
     fields: []
@@ -23,7 +22,11 @@ class Navigation {
   }
 
   updateFields = (navigations: Store.Indexed<Store.Navigation>) => {
-    const isActive = this.props.isActive;
+    const collapse = this.props.collapse;
+    let isActive: boolean | number = true;
+    if (typeof collapse !== 'boolean') {
+      isActive = collapse.isActive;
+    }
     this.set({
       fields: navigations.allIds.map((value, index) => ({
         value,
@@ -40,8 +43,9 @@ namespace Navigation {
   export interface Props extends Tag.Props {
     display: NavigationList.DisplayMap;
     labels: { [key: string]: string };
-    collapse: boolean;
-    isActive?: boolean | number;
+    collapse: boolean | {
+      isActive: boolean | number;
+    };
   }
 
   export interface State {
