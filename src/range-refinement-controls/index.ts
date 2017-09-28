@@ -23,8 +23,8 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
   init() {
     const refinements: Store.RangeRefinement[] = <any>this.props.navigation.refinements;
     const selected = refinements[this.props.navigation.selected[0]] || {};
-    const min = refinements[0]['low'];
-    const max = Math.max(...refinements.map((refinement) => refinement['high']));
+    const min = this.props.navigation.min;
+    const max = this.props.navigation.max;
 
     this.state = { ...this.state,
       min,
