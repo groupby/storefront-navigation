@@ -35,6 +35,8 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
     it('should update state with low and high from selected', () => {
       sliderRefinementControls.props = <any>{
         navigation: {
+          min: 0,
+          max: 20,
           refinements: [
             { low: 0, high: 5 },
             { low: 5, high: 10 },
@@ -57,6 +59,8 @@ suite('RangeRefinementControls', ({ expect, spy, stub }) => {
     it('should update state with low and high from min and max', () => {
       sliderRefinementControls.props = <any>{
         navigation: {
+          min: 0,
+          max: 20,
           refinements: [
             { low: 0, high: 5 },
             { low: 5, high: 10 },
