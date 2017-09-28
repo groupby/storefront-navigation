@@ -92,5 +92,33 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
         ]
       });
     });
+
+    it('should set fields with active true when collapse true', () => {
+      navigation.props = <any>{ display, labels, collapse: true };
+
+      navigation.updateFields(<any>{ allIds: fields });
+
+      expect(set).to.be.calledWith({
+        fields: [
+          { value: 'a', display: 'value', label: undefined, active: true },
+          { value: 'b', display: 'range', label: 'B', active: true },
+          { value: 'c', display: undefined, label: 'C', active: true }
+        ]
+      });
+    });
+
+    it('should set fields with active true when collapse false', () => {
+      navigation.props = <any>{ display, labels, collapse: false };
+
+      navigation.updateFields(<any>{ allIds: fields });
+
+      expect(set).to.be.calledWith({
+        fields: [
+          { value: 'a', display: 'value', label: undefined, active: true },
+          { value: 'b', display: 'range', label: 'B', active: true },
+          { value: 'c', display: undefined, label: 'C', active: true }
+        ]
+      });
+    });
   });
 });

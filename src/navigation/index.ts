@@ -22,7 +22,7 @@ class Navigation {
   }
 
   updateFields = (navigations: Store.Indexed<Store.Navigation>) => {
-    const collapse = this.props.collapse;
+    const { collapse } = this.props;
     let isActive: boolean | number = true;
     if (typeof collapse !== 'boolean') {
       isActive = collapse.isActive;
