@@ -39,9 +39,9 @@
     conventional-changelog "0.0.17"
     github-url-from-git "^1.4.0"
 
-"@storefront/core@~1.21.3":
-  version "1.21.3"
-  resolved "https://registry.yarnpkg.com/@storefront/core/-/core-1.21.3.tgz#29d46e25bf7139bee0e22c03c1628617b57a3851"
+"@storefront/core@~1.22.0":
+  version "1.22.0"
+  resolved "https://registry.yarnpkg.com/@storefront/core/-/core-1.22.0.tgz#6188a675a457485c114dc9d186f7df8b91933d8c"
   dependencies:
     "@storefront/flux-capacitor" "1.17.3"
     "@types/clone" "^0.1.30"
@@ -77,8 +77,8 @@
     sayt "^0.1.8"
 
 "@storefront/structure@^1.16.0":
-  version "1.18.0"
-  resolved "https://registry.yarnpkg.com/@storefront/structure/-/structure-1.18.0.tgz#960826cc5af98f60691c347a8d3c185aa18dd66e"
+  version "1.18.1"
+  resolved "https://registry.yarnpkg.com/@storefront/structure/-/structure-1.18.1.tgz#baa5860ef6da847d2c185a5352584d985bcfe7aa"
 
 "@storefront/testing@^1.0.2":
   version "1.0.2"
