@@ -32,7 +32,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
     it('should call updateField()', () => {
       const field = 'brand';
       const updateField = navigationDisplay.updateField = spy();
-      stub(Selectors, <any>'uiTagState').returns({});
+      navigationDisplay.select = spy(() => ({}));
       stub(Tag, 'getMeta').returns({});
       navigationDisplay.flux = <any>{
         on: () => null,
@@ -49,7 +49,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       const globalState = { a: 'a' };
       const name = 'efgh';
       const value = 'abcd';
-      const uiTagState = stub(Selectors, <any>'uiTagState').returns({ isActive: false });
+      const select = navigationDisplay.select = spy(() => ({ isActive: false }));
       stub(Tag, 'getMeta').withArgs(navigationDisplay).returns({ name });
       navigationDisplay.updateField = () => null;
       navigationDisplay.flux = <any>{
@@ -60,7 +60,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
 
       navigationDisplay.init();
 
-      expect(uiTagState).to.be.calledWith(globalState, name, value);
+      expect(select).to.be.calledWith(Selectors.uiTagState, name, value);
       expect(navigationDisplay.state.isActive).to.be.false;
     });
 
@@ -68,7 +68,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       const globalState = { a: 'a' };
       const name = 'efgh';
       const value = 'abcd';
-      const uiTagState = stub(Selectors, <any>'uiTagState');
+      const select = navigationDisplay.select = spy(() => undefined);
       stub(Tag, 'getMeta').withArgs(navigationDisplay).returns({ name });
       navigationDisplay.updateField = () => null;
       navigationDisplay.flux = <any>{
@@ -79,7 +79,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
 
       navigationDisplay.init();
 
-      expect(uiTagState).to.be.calledWith(globalState, name, value);
+      expect(select).to.be.calledWith(Selectors.uiTagState, name, value);
       expect(navigationDisplay.state.isActive).to.be.false;
     });
 
@@ -87,7 +87,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       const on = spy();
       const name = 'efgh';
       const value = 'abcd';
-      stub(Selectors, 'uiTagState');
+      navigationDisplay.select = () => undefined;
       stub(Tag, 'getMeta').returns({ name });
       navigationDisplay.updateField = () => null;
       navigationDisplay.flux = <any>{
@@ -229,7 +229,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       };
       const state = { i: 'j' };
       const field = 'brand';
-      const navigationSelector = stub(Selectors, 'navigation').returns(navigation);
+      const select = navigationDisplay.select = spy(() => navigation);
       navigationDisplay.flux = <any>{ store: { getState: () => state } };
 
       const refinements = navigationDisplay.selectNavigation(field);
@@ -245,7 +245,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
         range: true,
         g: 'h'
       });
-      expect(navigationSelector).to.be.calledWithExactly(state, field);
+      expect(select).to.be.calledWithExactly(Selectors.navigation, field);
     });
   });
 

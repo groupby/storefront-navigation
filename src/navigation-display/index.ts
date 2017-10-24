@@ -18,7 +18,7 @@ class NavigationDisplay {
 
   init() {
     const tagName = Tag.getMeta(this).name;
-    const uiState = Selectors.uiTagState(this.flux.store.getState(), tagName, this.props.field.value);
+    const uiState = this.select(Selectors.uiTagState, tagName, this.props.field.value);
     this.updateField(this.props.field);
     this.state = {
       ...this.state,
@@ -44,7 +44,7 @@ class NavigationDisplay {
   }
 
   selectNavigation(field: string): RefinementControls.SelectedNavigation {
-    const navigation = Selectors.navigation(this.flux.store.getState(), field);
+    const navigation = this.select(Selectors.navigation, field);
     return <any>{
       ...navigation,
       refinements: navigation.refinements.map((value, index) => ({
