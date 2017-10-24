@@ -77,5 +77,23 @@ suite('RangeSelector', ({ expect, spy, stub }) => {
 
       expect(switchRefinement).to.be.calledWithExactly(field, min, max);
     });
+
+    it('should not call switchRefinement with high NaN', () => {
+      const high = NaN;
+      const low = 5;
+      rangeSelector.props = {
+        values: {
+          high,
+          low,
+        },
+      };
+      rangeSelector.actions = <any>{
+        switchRefinement
+      };
+
+      rangeSelector.onClick();
+
+      expect(switchRefinement).to.not.be.called;
+    });
   });
 });
