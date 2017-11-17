@@ -77,8 +77,8 @@
     sayt "^0.1.8"
 
 "@storefront/structure@^1.16.0":
-  version "1.25.1"
-  resolved "https://registry.yarnpkg.com/@storefront/structure/-/structure-1.25.1.tgz#59f90daee9fb458633e2a83628c0226986b8cefd"
+  version "1.26.0"
+  resolved "https://registry.yarnpkg.com/@storefront/structure/-/structure-1.26.0.tgz#661c286699c1b3202ab1bcd7a7217cb89fe7d195"
 
 "@storefront/testing@^1.0.2":
   version "1.0.2"
