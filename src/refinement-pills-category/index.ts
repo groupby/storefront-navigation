@@ -34,6 +34,7 @@ class RefinementPillCategory {
   updateState() {
     const navigation = this.props.navigation;
     const isNavigationValid = navigation && navigation.refinements && navigation.selected;
+    /* istanbul ignore next */
     let action: Function = () => undefined;
     switch (this.props.storeSection) {
       case StoreSections.PAST_PURCHASES:

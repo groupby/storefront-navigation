@@ -40,10 +40,10 @@
     github-url-from-git "^1.4.0"
 
 "@storefront/core@~1.33.0":
-  version "1.33.0"
-  resolved "https://registry.yarnpkg.com/@storefront/core/-/core-1.33.0.tgz#7e0664e636d101d94e19474251e5f1b00127a702"
+  version "1.33.4"
+  resolved "https://registry.yarnpkg.com/@storefront/core/-/core-1.33.4.tgz#5f6366cd19ebf6ac0080416deed58e8bd7623ed8"
   dependencies:
-    "@storefront/flux-capacitor" "1.33.0"
+    "@storefront/flux-capacitor" "1.33.1"
     "@types/clone" "^0.1.30"
     "@types/deep-assign" "^0.1.0"
     "@types/js-cookie" "^2.0.28"
@@ -51,7 +51,7 @@
     "@types/loglevel" "^1.4.29"
     "@types/riot" "^3.6.0"
     clone "^2.1.1"
-    gb-tracker-client "3.5.4"
+    gb-tracker-client "3.5.5"
     js-cookie "^2.1.4"
     lodash.camelcase "^4.3.0"
     lodash.merge "^4.6.0"
@@ -59,16 +59,16 @@
     riot "^3.4.4"
     url-parse "^1.1.9"
 
-"@storefront/flux-capacitor@1.33.0":
-  version "1.33.0"
-  resolved "https://registry.yarnpkg.com/@storefront/flux-capacitor/-/flux-capacitor-1.33.0.tgz#73cbd0233b21727cbaad99f8988a0f646a039a0a"
+"@storefront/flux-capacitor@1.33.1":
+  version "1.33.1"
+  resolved "https://registry.yarnpkg.com/@storefront/flux-capacitor/-/flux-capacitor-1.33.1.tgz#3217eb78ecbb6a3c405898122592226e3bcc1934"
   dependencies:
     "@manaflair/redux-batch" "^0.1.0"
     "@types/redux-logger" "^3.0.0"
     cuid "^1.3.8"
     eventemitter3 "^2.0.3"
     fetch-ponyfill "^4.1.0"
-    groupby-api "2.3.0"
+    groupby-api "2.4.0"
     redux "^3.7.0"
     redux-logger "^3.0.6"
     redux-persist "^5.1.0"
@@ -78,8 +78,8 @@
     sayt "^0.1.8"
 
 "@storefront/structure@^1.16.0":
-  version "1.30.0"
-  resolved "https://registry.yarnpkg.com/@storefront/structure/-/structure-1.30.0.tgz#9ae2b167d39dc5dc8aa210fe73bb81a73b862789"
+  version "1.31.1"
+  resolved "https://registry.yarnpkg.com/@storefront/structure/-/structure-1.31.1.tgz#25a9688785bb296025e68b815e80637e58210d1f"
 
 "@storefront/testing@^1.0.2":
   version "1.0.2"
@@ -146,8 +146,8 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.71.tgz#0dc383f78981216ac76e2f2c3afd998e0450e4c1"
 
 "@types/lodash@^4.14.70":
-  version "4.14.87"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.87.tgz#55f92183b048c2c64402afe472f8333f4e319a6b"
+  version "4.14.88"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.88.tgz#97eaf2dc668f33ed8e511a5b627035f4ea20b0f5"
 
 "@types/loglevel@^1.4.29":
   version "1.5.3"
@@ -1691,9 +1691,9 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
-gb-tracker-client@3.5.4:
-  version "3.5.4"
-  resolved "https://registry.yarnpkg.com/gb-tracker-client/-/gb-tracker-client-3.5.4.tgz#559377366631bcf66403ee8cecf862c30ec8d75d"
+gb-tracker-client@3.5.5:
+  version "3.5.5"
+  resolved "https://registry.yarnpkg.com/gb-tracker-client/-/gb-tracker-client-3.5.5.tgz#2a66355f452310bebeffc6f8856f047682c0465b"
   dependencies:
     cookies-js "^1.2.3"
     cuid "^1.3.8"
@@ -1832,9 +1832,9 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.5, graceful-fs@^4.1.6:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
-groupby-api@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/groupby-api/-/groupby-api-2.3.0.tgz#30e3a0830d6fed4677631681634ef27fe012d752"
+groupby-api@2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/groupby-api/-/groupby-api-2.4.0.tgz#c7d0bf6e59edab8c86f80b3427edf47d34f455a0"
   dependencies:
     "@types/clone" "^0.1.30"
     "@types/deep-equal" "^0.0.30"
