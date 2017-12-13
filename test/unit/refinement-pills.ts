@@ -55,7 +55,8 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
   describe('updatePastPurchaseNavigations()', () => {
     it('should update navigations via set', () => {
       const queryNavigation = 4;
-      const buildPastPurchaseQueryNavigation = refinementPills.buildPastPurchaseQueryNavigation = spy(() => queryNavigation);
+      const buildPastPurchaseQueryNavigation =
+        refinementPills.buildPastPurchaseQueryNavigation = spy(() => queryNavigation);
       const navigations = [1, 2, 3];
       const newNavigations = [4, 1, 2, 3];
       const select = refinementPills.select = spy(() => navigations);
