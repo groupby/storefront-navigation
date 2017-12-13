@@ -3,40 +3,15 @@ import { alias, tag, Events, ProductTransformer, Selectors, Store, Structure, Ta
 @alias('refinementPill')
 @tag('gb-refinement-pill', require('./index.html'))
 class RefinementPill {
-  props: RefinementPill.Props = <any>{};
-
-  state: RefinementPill.State = <any>{ selected: false };
-
-  init() {
-    this.updateState();
-  }
-  onUpdate() {
-    this.updateState();
-  }
-
-  updateState() {
-    const refinement = this.props.refinement;
-
-    this.state = {
-      refinement,
-      onClick: refinement.onClick,
-      onClose: refinement.onClose,
-      selected: !!refinement.selected,
-    };
-  }
+  props: RefinementPill.Props = {
+    refinement: undefined,
+  };
 }
 
-interface RefinementPill extends Tag<RefinementPill.Props, RefinementPill.State> { }
+interface RefinementPill extends Tag<RefinementPill.Props> { }
 namespace RefinementPill {
   export interface Props extends Tag.Props {
     refinement: PillsRefinement;
-  }
-
-  export interface State {
-    refinement: PillsRefinement;
-    selected?: any;
-    onClick: Function;
-    onClose: Function;
   }
 
   export type PillsRefinement = Store.Refinement & {
