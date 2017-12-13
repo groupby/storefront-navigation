@@ -1,5 +1,5 @@
 <yield>
-  <gb-pill click-action="{ $refinementPill.onClick }" close-action="{ $refinementPill.onClose }" selected="{ $refinementPill.selected }">
+  <gb-pill on-click="{ $refinementPill.onClick }" on-close="{ $refinementPill.onClose }" selected="{ $refinementPill.selected }">
     { $refinementPill.refinement.display || $refinementPill.refinement.value } { $refinementPill.refinement.total }
   </gb-pill>
 </yield>
