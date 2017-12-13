@@ -16,7 +16,7 @@ suite('RefinementPillsCategory', ({ expect, spy, stub }) => {
       it('should set initial value', () => {
         const tag = new RefinementPillsCategory();
 
-        expect(tag.props).to.eql({ navigation: undefined });
+        expect(tag.props).to.eql({});
       });
     });
 
@@ -26,7 +26,6 @@ suite('RefinementPillsCategory', ({ expect, spy, stub }) => {
 
         expect(tag.state).to.eql({
           refinements: [],
-          navigation: undefined,
         });
       });
     });
@@ -43,16 +42,14 @@ suite('RefinementPillsCategory', ({ expect, spy, stub }) => {
   });
 
   describe('onUpdate()', () => {
-    it('should call updateState() and updateAlias()', () => {
+    it('should call updateState()', () => {
       const updateState = refinementPillsCategory.updateState = spy();
-      const updateAlias = refinementPillsCategory.updateAlias = spy();
       const state: any = { a: 1 };
       refinementPillsCategory.state = state;
 
       refinementPillsCategory.onUpdate();
 
       expect(updateState).to.be.calledOnce;
-      expect(updateAlias).to.be.calledOnce.and.calledWithExactly('refinementPillsCategory', state);
     });
   });
 

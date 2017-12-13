@@ -74,13 +74,16 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
     it('should update displayQuery and displayCount if new query is not empty', () => {
       const query = 'giraffe';
       const select = refinementPills.select = spy(() => query);
+      const set = refinementPills.set = spy();
 
       refinementPills.updatePastPurchaseDisplayQuery();
 
       expect(select).to.be.calledWithExactly(Selectors.pastPurchaseQuery);
-      expect(refinementPills.state.displayCount).to.be.eql(query);
       expect(select).to.be.calledWithExactly(Selectors.pastPurchaseCurrentRecordCount);
-      expect(refinementPills.state.displayQuery).to.be.eql(query);
+      expect(set).to.be.calledWithExactly({
+        displayCount: query,
+        displayQuery: query,
+      });
     });
 
     it('should not update displayQuery and displayCount if new query is empty', () => {

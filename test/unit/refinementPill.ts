@@ -14,7 +14,7 @@ suite('RefinementPill', ({ expect, spy, stub }) => {
       it('should set initial value', () => {
         const tag = new RefinementPill();
 
-        expect(tag.props).to.eql({ refinement: undefined });
+        expect(tag.props).to.eql({});
       });
     });
 
@@ -23,9 +23,6 @@ suite('RefinementPill', ({ expect, spy, stub }) => {
         const tag = new RefinementPill();
 
         expect(tag.state).to.eql({
-          refinement: undefined,
-          onClick: undefined,
-          onClose: undefined,
           selected: false,
         });
       });
@@ -43,16 +40,14 @@ suite('RefinementPill', ({ expect, spy, stub }) => {
   });
 
   describe('onUpdate()', () => {
-    it('should call updateState() and updateAlias()', () => {
+    it('should call updateState()', () => {
       const updateState = refinementPill.updateState = spy();
-      const updateAlias = refinementPill.updateAlias = spy();
       const state: any = { a: 1 };
       refinementPill.state = state;
 
       refinementPill.onUpdate();
 
       expect(updateState).to.be.calledOnce;
-      expect(updateAlias).to.be.calledOnce.and.calledWithExactly('refinementPill', state);
     });
   });
 
