@@ -54,9 +54,9 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
 
   describe('updatePastPurchaseNavigations()', () => {
     it('should update navigations via set', () => {
-      const buildPastPurchaseQueryNavigation = refinementPills.buildPastPurchaseQueryNavigation = spy();
+      const queryNavigation = 4;
+      const buildPastPurchaseQueryNavigation = refinementPills.buildPastPurchaseQueryNavigation = spy(() => queryNavigation);
       const navigations = [1, 2, 3];
-      refinementPills.state.queryNavigation = 4;
       const newNavigations = [4, 1, 2, 3];
       const select = refinementPills.select = spy(() => navigations);
       const set = refinementPills.set = spy();
@@ -66,7 +66,7 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
       expect(select).to.be.calledWithExactly(Selectors.pastPurchaseNavigations);
       expect(buildPastPurchaseQueryNavigation).to.be.calledOnce;
       expect(navigations).to.be.eql(newNavigations);
-      expect(set).to.be.calledWithExactly({ navigations });
+      expect(set).to.be.calledWithExactly({ navigations, queryNavigation });
     });
   });
 
@@ -132,16 +132,16 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
       const updatePastPurchaseQuery = refinementPills.actions.updatePastPurchaseQuery = spy();
       const updatePastPurchaseState = refinementPills.updatePastPurchaseState = spy();
 
-      refinementPills.buildPastPurchaseQueryNavigation();
+      const queryNavigation = refinementPills.buildPastPurchaseQueryNavigation();
 
-      expect(JSON.stringify(refinementPills.state.queryNavigation)).to.be.eql(
+      expect(JSON.stringify(queryNavigation)).to.eql(
         JSON.stringify(navigation)
       );
-      refinementPills.state.queryNavigation.refinements[1]['onClick']();
+      queryNavigation.refinements[1]['onClick']();
       expect(updatePastPurchaseQuery).to.be.calledWith('');
-      refinementPills.state.queryNavigation.refinements[0]['onClose']();
+      queryNavigation.refinements[0]['onClose']();
       expect(updatePastPurchaseState).to.be.calledOnce;
-      refinementPills.state.queryNavigation.refinements[0]['onClick']();
+      queryNavigation.refinements[0]['onClick']();
       expect(updatePastPurchaseQuery).to.be.calledWith(displayQuery);
     });
 
@@ -166,11 +166,9 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
         refinements
       };
 
-      refinementPills.buildPastPurchaseQueryNavigation();
+      const queryNavigation = refinementPills.buildPastPurchaseQueryNavigation();
 
-      expect(JSON.stringify(refinementPills.state.queryNavigation)).to.be.eql(
-        JSON.stringify(navigation)
-      );
+      expect(JSON.stringify(queryNavigation)).to.eql(JSON.stringify(navigation));
     });
 
     // tslint:disable-next-line max-line-length
@@ -203,12 +201,12 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
       refinementPills.actions = <any>{};
       const updatePastPurchaseQuery = refinementPills.actions.updatePastPurchaseQuery = spy();
 
-      refinementPills.buildPastPurchaseQueryNavigation();
+      const queryNavigation = refinementPills.buildPastPurchaseQueryNavigation();
 
-      expect(JSON.stringify(refinementPills.state.queryNavigation)).to.be.eql(
+      expect(JSON.stringify(queryNavigation)).to.be.eql(
         JSON.stringify(navigation)
       );
-      refinementPills.state.queryNavigation.refinements[0]['onClose']();
+      queryNavigation.refinements[0]['onClose']();
       expect(updatePastPurchaseQuery).to.be.calledWith('');
     });
   });
