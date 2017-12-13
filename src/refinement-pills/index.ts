@@ -37,11 +37,11 @@ class RefinementPills {
   updatePastPurchaseNavigations = () => {
     const navigations = this.select(Selectors.pastPurchaseNavigations);
 
-    this.buildPastPurchaseQueryNavigation();
+    const queryNavigation = this.buildPastPurchaseQueryNavigation();
 
-    navigations.unshift(this.state.queryNavigation);
+    navigations.unshift(queryNavigation);
 
-    this.set({ navigations });
+    this.set({ navigations, queryNavigation });
   }
 
   updatePastPurchaseDisplayQuery = () => {
@@ -84,7 +84,7 @@ class RefinementPills {
       });
     }
 
-    this.state.queryNavigation = {
+    return {
       field: 'query',
       label: 'Query',
       selected: hasRefinementSelected ? [] : [(displayQuery && !queriesAreEqual) ? 1 : 0],
