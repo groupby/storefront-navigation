@@ -13,14 +13,9 @@ import {
 @alias('refinementPillsCategory')
 @tag('gb-refinement-pills-category', require('./index.html'))
 class RefinementPillCategory {
-  props: RefinementPillCategory.Props = {
-    navigation: undefined
-  };
+  props: RefinementPillCategory.Props = <any>{};
 
-  state: RefinementPillCategory.State = {
-    navigation: undefined,
-    refinements: [],
-  };
+  state: RefinementPillCategory.State = <any>{ refinements: [], };
 
   init() {
     this.updateState();
@@ -28,14 +23,13 @@ class RefinementPillCategory {
 
   onUpdate() {
     this.updateState();
-    this.updateAlias('refinementPillsCategory', this.state);
   }
 
   updateState() {
     const navigation = this.props.navigation;
     const isNavigationValid = navigation && navigation.refinements && navigation.selected;
     /* istanbul ignore next */
-    let action: Function = () => undefined;
+    let action: Function = () => null;
     switch (this.props.storeSection) {
       case StoreSections.PAST_PURCHASES:
         action = this.actions.resetPastPurchaseQueryAndSelectRefinement;
@@ -43,9 +37,10 @@ class RefinementPillCategory {
     }
 
     if (isNavigationValid) {
-      navigation.refinements.forEach((value, index) => {
-        value['selected'] = navigation.selected.some((i) => i === index);
-      });
+      navigation.refinements = navigation.refinements.map((value, index) => ({
+        ...value,
+        selected: navigation.selected.some((i) => i === index),
+      }));
     }
 
     const refinements = isNavigationValid ? navigation.refinements.map((refinement, index) => {

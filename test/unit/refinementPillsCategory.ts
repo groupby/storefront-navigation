@@ -94,7 +94,6 @@ suite('RefinementPillsCategory', ({ expect, spy, stub }) => {
       refinementPillsCategory.updateState();
 
       expect(refinementPillsCategory.state.navigation).to.be.eql(newNavigation);
-      // there is no way to perform deep comparison with functions :(
       expect(JSON.stringify(refinementPillsCategory.state.refinements)).to.be
         .eql(JSON.stringify(newRefinements));
       refinementPillsCategory.state.refinements[0]['onClick']();

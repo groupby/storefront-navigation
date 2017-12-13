@@ -3,23 +3,15 @@ import { alias, tag, Events, ProductTransformer, Selectors, Store, Structure, Ta
 @alias('refinementPill')
 @tag('gb-refinement-pill', require('./index.html'))
 class RefinementPill {
-  props: RefinementPill.Props = {
-    refinement: undefined,
-  };
+  props: RefinementPill.Props = <any>{};
 
-  state: RefinementPill.State = {
-    refinement: undefined,
-    onClick: undefined,
-    onClose: undefined,
-    selected: false
-  };
+  state: RefinementPill.State = <any>{ selected: false };
 
   init() {
     this.updateState();
   }
   onUpdate() {
     this.updateState();
-    this.updateAlias('refinementPill', this.state);
   }
 
   updateState() {
@@ -51,6 +43,7 @@ namespace RefinementPill {
     onClick: Function,
     onClose?: Function,
     selected: boolean,
+    value: string,
     display?: string,
   };
 }

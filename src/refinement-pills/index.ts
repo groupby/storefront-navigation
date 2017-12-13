@@ -13,7 +13,6 @@ import {
 @alias('refinementPills')
 @tag('gb-refinement-pills', require('./index.html'))
 class RefinementPills {
-
   state: RefinementPills.State = {
     navigations: [],
     queryNavigation: {},
@@ -46,10 +45,12 @@ class RefinementPills {
   }
 
   updatePastPurchaseDisplayQuery = () => {
-    const newQuery = this.select(Selectors.pastPurchaseQuery);
-    if (newQuery) {
-      this.state.displayQuery = newQuery;
-      this.state.displayCount = this.select(Selectors.pastPurchaseCurrentRecordCount);
+    const displayQuery = this.select(Selectors.pastPurchaseQuery);
+    if (displayQuery) {
+      this.set({
+        displayQuery,
+        displayCount: this.select(Selectors.pastPurchaseCurrentRecordCount),
+      });
     }
   }
 
@@ -61,11 +62,10 @@ class RefinementPills {
 
     const resetQuery = () => this.actions.updatePastPurchaseQuery('');
 
-    const refinements = [{
+    const refinements: any[] = [{
       value: 'All your purchases',
       total: this.select(Selectors.pastPurchaseAllRecordCount),
       onClick: resetQuery,
-      onClose: undefined,
     }];
 
     if (displayQuery) {
@@ -96,7 +96,6 @@ class RefinementPills {
 interface RefinementPills extends Tag<Tag.Props, RefinementPills.State> { }
 namespace RefinementPills {
   export interface State {
-    // navigations: any;
     navigations: Store.Navigation[];
     queryNavigation: any;
     displayQuery: string;
