@@ -52,7 +52,6 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
       navigation.init();
 
       expect(updateFields).to.be.calledOnce;
-      expect(on).to.be.calledWith(Events.NAVIGATIONS_UPDATED, navigation.updateFields);
     });
   });
 
