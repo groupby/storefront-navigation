@@ -1,4 +1,4 @@
-import { alias, configurable, origin, tag, Events, Store, Tag } from '@storefront/core';
+import { alias, configurable, origin, tag, Events, Selectors, Store, Tag } from '@storefront/core';
 import NavigationDisplay from '../navigation-display';
 import NavigationList from '../navigation-list';
 
@@ -18,10 +18,12 @@ class Navigation {
   };
 
   init() {
+    this.updateFields();
     this.flux.on(Events.NAVIGATIONS_UPDATED, this.updateFields);
   }
 
-  updateFields = (navigations: Store.Indexed<Store.Navigation>) => {
+  updateFields = () => {
+    const navigations: Store.Indexed<Store.Navigation> = this.select(Selectors.navigationsObject);
     const { collapse } = this.props;
     let isActive: boolean | number = true;
     if (typeof collapse !== 'boolean') {
