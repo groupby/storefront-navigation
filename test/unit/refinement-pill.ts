@@ -5,12 +5,10 @@ import suite from './_suite';
 suite('RefinementPill', ({ expect }) => {
   describe('constructor()', () => {
     describe('props', () => {
-      it('should set initial value', () => {
+      it('should have no initial value', () => {
         const tag = new RefinementPill();
 
-        expect(tag.props).to.eql({
-          refinement: undefined,
-        });
+        expect(tag.props).to.be.undefined;
       });
     });
   });

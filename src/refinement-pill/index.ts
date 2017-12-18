@@ -2,9 +2,6 @@ import { alias, view, Events, ProductTransformer, Selectors, Store, Structure, T
 
 view('gb-refinement-pill', require('./index.html'));
 class RefinementPill {
-  props: RefinementPill.Props = {
-    refinement: undefined,
-  };
 }
 
 interface RefinementPill extends Tag<RefinementPill.Props> { }
