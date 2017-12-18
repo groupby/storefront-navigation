@@ -13,6 +13,9 @@ bootstrap(chai, __dirname, [
   '../src/range-selector/index.html',
   '../src/refinement/index.html',
   '../src/refinement-list/index.html',
+  '../src/refinement-pill/index.html',
+  '../src/refinement-pills/index.html',
+  '../src/refinement-pills-category/index.html',
   '../src/filter-refinement-controls/index.html',
   '../src/filtered-refinement-list/index.html',
   '../src/value-refinement-controls/index.html'
