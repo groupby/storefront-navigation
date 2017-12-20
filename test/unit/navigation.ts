@@ -1,4 +1,4 @@
-import { Events } from '@storefront/core';
+import { Events, Selectors } from '@storefront/core';
 import Navigation from '../../src/navigation';
 import suite from './_suite';
 
@@ -27,16 +27,19 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
   describe('init()', () => {
     it('should set initial fields', () => {
       navigation.flux = <any>{ on: () => null };
-      navigation.updateFields = spy();
+      const select = navigation.select = spy();
+      navigation.updateFields = () => null;
 
       navigation.init();
 
+      expect(select).to.be.calledWithExactly(Selectors.navigationsObject);
       expect(navigation.state.fields).to.eql([]);
     });
 
     it('should listen for NAVIGATIONS_UPDATED', () => {
       const on = spy();
-      navigation.updateFields = spy();
+      navigation.updateFields = () => null;
+      navigation.select = () => null;
       navigation.flux = <any>{ on };
 
       navigation.init();
@@ -45,9 +48,9 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
     });
 
     it('should call updateFields', () => {
-      const on = spy();
       const updateFields = navigation.updateFields = spy();
-      navigation.flux = <any>{ on };
+      navigation.select = () => null;
+      navigation.flux = <any>{ on: () => null };
 
       navigation.init();
 
@@ -59,18 +62,19 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
     const fields = ['a', 'b', 'c'];
     const display = { a: 'value', b: 'range' };
     const labels = { b: 'B', c: 'C' };
+    const navigationsObject: any = { allIds: fields };
     let set;
     let select;
 
     beforeEach(() => {
       set = navigation.set = spy();
-      select = navigation.select = spy(() => <any>{ allIds: fields });
+      select = navigation.select = spy(() => navigationsObject);
     });
 
     it('should set fields, with active set for the first x number of fields based on isActive', () => {
       navigation.props = <any>{ display, labels, collapse: { isActive: 2 } };
 
-      navigation.updateFields();
+      navigation.updateFields(navigationsObject);
 
       expect(set).to.be.calledWith({
         fields: [
@@ -84,7 +88,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
     it('should set fields with active true when isActive true', () => {
       navigation.props = <any>{ display, labels, collapse: { isActive: true } };
 
-      navigation.updateFields();
+      navigation.updateFields(navigationsObject);
 
       expect(set).to.be.calledWith({
         fields: [
@@ -98,7 +102,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
     it('should set fields with active false when isActive false', () => {
       navigation.props = <any>{ display, labels, collapse: { isActive: false } };
 
-      navigation.updateFields();
+      navigation.updateFields(navigationsObject);
 
       expect(set).to.be.calledWith({
         fields: [
@@ -112,7 +116,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
     it('should set fields with active true when collapse true', () => {
       navigation.props = <any>{ display, labels, collapse: true };
 
-      navigation.updateFields();
+      navigation.updateFields(navigationsObject);
 
       expect(set).to.be.calledWith({
         fields: [
@@ -126,7 +130,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
     it('should set fields with active true when collapse false', () => {
       navigation.props = <any>{ display, labels, collapse: false };
 
-      navigation.updateFields();
+      navigation.updateFields(navigationsObject);
 
       expect(set).to.be.calledWith({
         fields: [

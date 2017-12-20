@@ -18,12 +18,11 @@ class Navigation {
   };
 
   init() {
-    this.updateFields();
+    this.updateFields(this.select(Selectors.navigationsObject));
     this.flux.on(Events.NAVIGATIONS_UPDATED, this.updateFields);
   }
 
-  updateFields = () => {
-    const navigations: Store.Indexed<Store.Navigation> = this.select(Selectors.navigationsObject);
+  updateFields = (navigations: Store.Indexed<Store.Navigation>) => {
     const { collapse } = this.props;
     let isActive: boolean | number = true;
     if (typeof collapse !== 'boolean') {
