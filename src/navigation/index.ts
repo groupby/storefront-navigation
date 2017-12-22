@@ -1,4 +1,4 @@
-import { alias, configurable, origin, tag, Events, Store, Tag } from '@storefront/core';
+import { alias, configurable, origin, tag, Events, Selectors, Store, Tag } from '@storefront/core';
 import NavigationDisplay from '../navigation-display';
 import NavigationList from '../navigation-list';
 
@@ -18,6 +18,7 @@ class Navigation {
   };
 
   init() {
+    this.updateFields(this.select(Selectors.navigationsObject));
     this.flux.on(Events.NAVIGATIONS_UPDATED, this.updateFields);
   }
 
