@@ -1,6 +1,7 @@
-import { tag, Store, Tag } from '@storefront/core';
+import { configurable, tag, Store, Tag } from '@storefront/core';
 import RefinementControls from '../refinement-controls';
 
+@configurable
 @tag('gb-range-refinement-controls', require('./index.html'))
 // tslint:disable-next-line max-line-length
 class RangeRefinementControls extends RefinementControls<RangeRefinementControls.Props, RangeRefinementControls.State> {
