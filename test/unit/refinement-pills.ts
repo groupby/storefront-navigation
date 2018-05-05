@@ -27,15 +27,14 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
 
   describe('init()', () => {
     it('should listen for PAST_PURCHASE_NAVIGATIONS_UPDATED', () => {
-      const on = spy();
-      const once = spy();
-      refinementPills.flux = <any>{ on, once };
+      const subscribe = refinementPills.subscribe = spy();
+      const subscribeOnce = refinementPills.subscribeOnce = spy();
 
       refinementPills.init();
 
-      expect(once).to.be.calledWithExactly(Events.PAST_PURCHASE_NAVIGATIONS_UPDATED,
+      expect(subscribeOnce).to.be.calledWithExactly(Events.PAST_PURCHASE_NAVIGATIONS_UPDATED,
         refinementPills.updatePastPurchaseState);
-      expect(on).to.be.calledWithExactly(Events.PAST_PURCHASE_PRODUCTS_UPDATED,
+      expect(subscribe).to.be.calledWithExactly(Events.PAST_PURCHASE_PRODUCTS_UPDATED,
         refinementPills.updatePastPurchaseState);
     });
   });

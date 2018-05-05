@@ -19,7 +19,7 @@ class Navigation {
 
   init() {
     this.updateFields(this.select(Selectors.navigationsObject));
-    this.flux.on(Events.NAVIGATIONS_UPDATED, this.updateFields);
+    this.subscribe(Events.NAVIGATIONS_UPDATED, this.updateFields);
   }
 
   updateFields = (navigations: Store.Indexed<Store.Navigation>) => {

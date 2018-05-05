@@ -23,8 +23,8 @@ class RefinementPills {
   init() {
     switch (this.props.storeSection) {
       case StoreSections.PAST_PURCHASES:
-        this.flux.once(Events.PAST_PURCHASE_NAVIGATIONS_UPDATED, this.updatePastPurchaseState);
-        this.flux.on(Events.PAST_PURCHASE_PRODUCTS_UPDATED, this.updatePastPurchaseState);
+        this.subscribeOnce(Events.PAST_PURCHASE_NAVIGATIONS_UPDATED, this.updatePastPurchaseState);
+        this.subscribe(Events.PAST_PURCHASE_PRODUCTS_UPDATED, this.updatePastPurchaseState);
         break;
     }
   }

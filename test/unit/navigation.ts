@@ -26,8 +26,8 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
 
   describe('init()', () => {
     it('should set initial fields', () => {
-      navigation.flux = <any>{ on: () => null };
       const select = navigation.select = spy();
+      navigation.subscribe = () => null;
       navigation.updateFields = () => null;
 
       navigation.init();
@@ -37,21 +37,20 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
     });
 
     it('should listen for NAVIGATIONS_UPDATED', () => {
-      const on = spy();
+      const subscribe = navigation.subscribe = spy();
       navigation.updateFields = () => null;
       navigation.select = () => null;
-      navigation.flux = <any>{ on };
 
       navigation.init();
 
-      expect(on).to.be.calledWith(Events.NAVIGATIONS_UPDATED, navigation.updateFields);
+      expect(subscribe).to.be.calledWith(Events.NAVIGATIONS_UPDATED, navigation.updateFields);
     });
 
     it('should call updateFields', () => {
       const fields = [1,2,3];
       const select = navigation.select = spy(() => fields);
       const updateFields = navigation.updateFields = spy();
-      navigation.flux = <any>{ on: () => null };
+      navigation.subscribe = () => null;
 
       navigation.init();
 
