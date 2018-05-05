@@ -31,6 +31,10 @@ class NavigationDisplay {
     this.updateField(this.props.field);
   }
 
+  onUnmount() {
+    this.flux.off(`${Events.SELECTED_REFINEMENTS_UPDATED}:${this.state.value}`, this.updateNavigation);
+  }
+
   updateIsActive = ({ isActive }: NavigationDisplay.State) => this.set({ isActive });
 
   updateField(field: NavigationDisplay.Field) {

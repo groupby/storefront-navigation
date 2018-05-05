@@ -8,7 +8,7 @@ import RangeRefinementControls from './range-refinement-controls';
 import './range-selector';
 import Refinement from './refinement';
 import RefinementList from './refinement-list';
-import RefinementPill from './refinement-pill';
+import './refinement-pill';
 import RefinementPills from './refinement-pills';
 import RefinementPillsCategory from './refinement-pills-category';
 import SliderRefinementControls from './slider-refinement-controls';
@@ -24,7 +24,6 @@ export {
   RangeRefinementControls,
   Refinement,
   RefinementList,
-  RefinementPill,
   RefinementPills,
   RefinementPillsCategory,
   ValueRefinementControls
