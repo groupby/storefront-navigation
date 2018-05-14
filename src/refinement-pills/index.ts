@@ -1,17 +1,7 @@
-import {
-  alias,
-  tag,
-  Events,
-  ProductTransformer,
-  Selectors,
-  Store,
-  StoreSections,
-  Structure,
-  Tag
-} from '@storefront/core';
+import * as Core from '@storefront/core';
 
-@alias('refinementPills')
-@tag('gb-refinement-pills', require('./index.html'))
+@Core.provide('refinementPills')
+@Core.tag('gb-refinement-pills', require('./index.html'))
 class RefinementPills {
   state: RefinementPills.State = {
     navigations: [],
@@ -22,9 +12,9 @@ class RefinementPills {
 
   init() {
     switch (this.props.storeSection) {
-      case StoreSections.PAST_PURCHASES:
-        this.subscribeOnce(Events.PAST_PURCHASE_NAVIGATIONS_UPDATED, this.updatePastPurchaseState);
-        this.subscribe(Events.PAST_PURCHASE_PRODUCTS_UPDATED, this.updatePastPurchaseState);
+      case Core.StoreSections.PAST_PURCHASES:
+        this.subscribeOnce(Core.Events.PAST_PURCHASE_NAVIGATIONS_UPDATED, this.updatePastPurchaseState);
+        this.subscribe(Core.Events.PAST_PURCHASE_PRODUCTS_UPDATED, this.updatePastPurchaseState);
         break;
     }
   }
@@ -32,41 +22,43 @@ class RefinementPills {
   updatePastPurchaseState = () => {
     this.updatePastPurchaseDisplayQuery();
     this.updatePastPurchaseNavigations();
-  }
+  };
 
   updatePastPurchaseNavigations = () => {
-    const navigations = this.select(Selectors.pastPurchaseNavigations);
+    const navigations = this.select(Core.Selectors.pastPurchaseNavigations);
 
     const queryNavigation = this.buildPastPurchaseQueryNavigation();
 
     navigations.unshift(queryNavigation);
 
     this.set({ navigations, queryNavigation });
-  }
+  };
 
   updatePastPurchaseDisplayQuery = () => {
-    const displayQuery = this.select(Selectors.pastPurchaseQuery);
+    const displayQuery = this.select(Core.Selectors.pastPurchaseQuery);
     if (displayQuery) {
       this.set({
         displayQuery,
-        displayCount: this.select(Selectors.pastPurchaseCurrentRecordCount),
+        displayCount: this.select(Core.Selectors.pastPurchaseCurrentRecordCount),
       });
     }
-  }
+  };
 
   buildPastPurchaseQueryNavigation = () => {
-    const currentQuery = this.select(Selectors.pastPurchaseQuery) || '';
+    const currentQuery = this.select(Core.Selectors.pastPurchaseQuery) || '';
     const displayQuery = this.state.displayQuery;
     const queriesAreEqual = displayQuery === currentQuery;
-    const hasRefinementSelected = this.select(Selectors.pastPurchaseSelectedRefinements).length !== 0;
+    const hasRefinementSelected = this.select(Core.Selectors.pastPurchaseSelectedRefinements).length !== 0;
 
     const resetQuery = () => this.actions.updatePastPurchaseQuery('');
 
-    const refinements: any[] = [{
-      value: 'All your purchases',
-      total: this.select(Selectors.pastPurchaseAllRecordCount),
-      onClick: resetQuery,
-    }];
+    const refinements: any[] = [
+      {
+        value: 'All your purchases',
+        total: this.select(Core.Selectors.pastPurchaseAllRecordCount),
+        onClick: resetQuery,
+      },
+    ];
 
     if (displayQuery) {
       refinements.unshift({
@@ -87,16 +79,16 @@ class RefinementPills {
     return {
       field: 'query',
       label: 'Query',
-      selected: hasRefinementSelected ? [] : [(displayQuery && !queriesAreEqual) ? 1 : 0],
-      refinements
+      selected: hasRefinementSelected ? [] : [displayQuery && !queriesAreEqual ? 1 : 0],
+      refinements,
     };
-  }
+  };
 }
 
-interface RefinementPills extends Tag<Tag.Props, RefinementPills.State> { }
+interface RefinementPills extends Core.Tag<{}, RefinementPills.State> {}
 namespace RefinementPills {
   export interface State {
-    navigations: Store.Navigation[];
+    navigations: Core.Store.Navigation[];
     queryNavigation: any;
     displayQuery: string;
     displayCount: number;

@@ -1,19 +1,15 @@
-import { tag, Tag } from '@storefront/core';
+import { provide, tag, Tag } from '@storefront/core';
 import NavigationDisplay from '../navigation-display';
 
+@provide('navigationHeader', (props) => props)
 @tag('gb-navigation-header', require('./index.html'), require('./index.css'))
 class NavigationHeader {
-
   props: NavigationHeader.Props = <any>{
-    icons: {}
+    icons: {},
   };
-
-  init() {
-    this.expose('navigationHeader', this.props);
-  }
 }
 
-interface NavigationHeader extends Tag { }
+interface NavigationHeader extends Tag<NavigationHeader.Props> {}
 namespace NavigationHeader {
   export interface Props extends Tag.Props {
     icons: NavigationDisplay.Icons;

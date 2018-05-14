@@ -1,19 +1,18 @@
-import { alias, tag, Events, Selectors, Tag } from '@storefront/core';
+import { provide, tag, Events, Selectors, Tag } from '@storefront/core';
 import RefinementControls from '../refinement-controls';
 
-@alias('navigationDisplay')
+@provide('navigationDisplay')
 @tag('gb-navigation-display', require('./index.html'))
 class NavigationDisplay {
-
   props: NavigationDisplay.Props = <any>{
     icons: {
       toggleOpen: 'gb-icon__minus',
       toggleClosed: 'gb-icon__plus',
-    }
+    },
   };
 
   state: NavigationDisplay.State = <any>{
-    isActive: true
+    isActive: true,
   };
 
   init() {
@@ -22,7 +21,7 @@ class NavigationDisplay {
     this.updateField(this.props.field);
     this.state = {
       ...this.state,
-      isActive: uiState ? uiState.isActive : this.props.field.active
+      isActive: uiState ? uiState.isActive : this.props.field.active,
     };
     this.flux.on(`${Events.UI_UPDATED}:${tagName}:${this.props.field.value}`, this.updateIsActive);
   }
@@ -40,6 +39,7 @@ class NavigationDisplay {
   updateField(field: NavigationDisplay.Field) {
     const navigation = this.selectNavigation(field.value);
     const label = field.label || navigation.label || field.value;
+
     this.flux.off(`${Events.SELECTED_REFINEMENTS_UPDATED}:${this.state.value}`, this.updateNavigation);
     this.root.classList.remove(`gb-navigation-${this.state.value}`);
     this.state = { ...this.state, ...field, label, navigation };
@@ -56,18 +56,20 @@ class NavigationDisplay {
         index,
         or: navigation.or,
         range: navigation.range,
-        selected: navigation.selected.includes(index)
-      }))
+        selected: navigation.selected.includes(index),
+      })),
     };
   }
 
   updateNavigation = () => this.set({ navigation: this.selectNavigation(this.state.value) });
 
-  // tslint:disable-next-line max-line-length
-  onToggle = () => this.actions.createComponentState(Tag.getMeta(this).name, this.props.field.value, { isActive: !this.state.isActive });
+  onToggle = () =>
+    this.actions.createComponentState(Tag.getMeta(this).name, this.props.field.value, {
+      isActive: !this.state.isActive,
+    });
 }
 
-interface NavigationDisplay extends Tag<NavigationDisplay.Props, NavigationDisplay.State> { }
+interface NavigationDisplay extends Tag<NavigationDisplay.Props, NavigationDisplay.State> {}
 namespace NavigationDisplay {
   export interface Props extends Tag.Props {
     collapse: boolean;

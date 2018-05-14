@@ -1,4 +1,4 @@
-import { alias, tag } from '@storefront/core';
+import { tag } from '@storefront/core';
 import ValueRefinementControls from '../value-refinement-controls';
 
 @tag('gb-filter-refinement-controls', require('./index.html'))

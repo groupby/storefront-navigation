@@ -2,18 +2,16 @@ import { tag, Store, Tag } from '@storefront/core';
 import RefinementControls from '../refinement-controls';
 
 @tag('gb-range-refinement-controls', require('./index.html'))
-// tslint:disable-next-line max-line-length
 class RangeRefinementControls extends RefinementControls<RangeRefinementControls.Props, RangeRefinementControls.State> {
-
   tags: {
-    rangeSelector: Tag
+    rangeSelector: Tag;
   };
   props: RangeRefinementControls.Props = <any>{
     labels: {
       low: 'Min',
       high: 'Max',
-      submit: 'Submit'
-    }
+      submit: 'Submit',
+    },
   };
 
   get alias() {
@@ -25,25 +23,25 @@ class RangeRefinementControls extends RefinementControls<RangeRefinementControls
     const selected = refinements[this.props.navigation.selected[0]] || {};
     const { min, max } = this.props.navigation;
 
-    this.state = { ...this.state,
+    this.state = {
+      ...this.state,
       min,
       max,
       low: selected['low'] || min,
-      high: selected['high'] || max
+      high: selected['high'] || max,
     };
   }
 
   onChange = (event: KeyboardEvent) => {
     const rangeSelector = this.tags['gb-range-selector'];
     this.updateSelected(parseFloat(rangeSelector.refs.low.value), parseFloat(rangeSelector.refs.high.value));
-  }
+  };
 
   updateSelected = (low: number, high: number) => this.set({ low, high });
-
 }
 
-// tslint:disable-next-line max-line-length
-interface RangeRefinementControls extends RefinementControls<RangeRefinementControls.Props, RangeRefinementControls.State> { }
+interface RangeRefinementControls
+  extends RefinementControls<RangeRefinementControls.Props, RangeRefinementControls.State> {}
 namespace RangeRefinementControls {
   export interface Props extends RefinementControls.Props {
     labels: {

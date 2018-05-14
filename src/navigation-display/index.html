@@ -1,4 +1,4 @@
 <yield>
-  <gb-navigation-header is-active="{ $navigationDisplay.isActive }" label="{ $navigationDisplay.label }" collapse="{ props.collapse }" icons="{ props.icons }" on-toggle="{ onToggle }"></gb-navigation-header>
-  <div data-is="gb-{ $navigationDisplay.display || 'value' }-refinement-controls" class="gb-refinement-controls { gb-active: $navigationDisplay.isActive }" navigation="{ $navigationDisplay.navigation }"></div>
+  <gb-navigation-header is-active="{ state.isActive }" label="{ state.label }" collapse="{ props.collapse }" icons="{ props.icons }" on-toggle="{ onToggle }"></gb-navigation-header>
+  <div data-is="gb-{ state.display || 'value' }-refinement-controls" class="gb-refinement-controls { gb-active: state.isActive }" navigation="{ state.navigation }"></div>
 </yield>

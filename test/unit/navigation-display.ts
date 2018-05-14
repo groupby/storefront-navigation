@@ -2,12 +2,12 @@ import { Events, Selectors, Tag } from '@storefront/core';
 import NavigationDisplay from '../../src/navigation-display';
 import suite from './_suite';
 
-suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
+suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
   let navigationDisplay: NavigationDisplay;
 
-  beforeEach(() => navigationDisplay = new NavigationDisplay());
+  beforeEach(() => (navigationDisplay = new NavigationDisplay()));
 
-  itShouldHaveAlias(NavigationDisplay, 'navigationDisplay');
+  itShouldProvideAlias(NavigationDisplay, 'navigationDisplay');
 
   describe('constructor()', () => {
     describe('props', () => {
@@ -16,7 +16,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
           icons: {
             toggleClosed: 'gb-icon__plus',
             toggleOpen: 'gb-icon__minus',
-          }
+          },
         });
       });
     });
@@ -31,12 +31,12 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
   describe('init()', () => {
     it('should call updateField()', () => {
       const field = 'brand';
-      const updateField = navigationDisplay.updateField = spy();
+      const updateField = (navigationDisplay.updateField = spy());
       navigationDisplay.select = spy(() => ({}));
       stub(Tag, 'getMeta').returns({});
       navigationDisplay.flux = <any>{
         on: () => null,
-        store: { getState: () => null }
+        store: { getState: () => null },
       };
       navigationDisplay.props = <any>{ field };
 
@@ -49,12 +49,14 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       const globalState = { a: 'a' };
       const name = 'efgh';
       const value = 'abcd';
-      const select = navigationDisplay.select = spy(() => ({ isActive: false }));
-      stub(Tag, 'getMeta').withArgs(navigationDisplay).returns({ name });
+      const select = (navigationDisplay.select = spy(() => ({ isActive: false })));
+      stub(Tag, 'getMeta')
+        .withArgs(navigationDisplay)
+        .returns({ name });
       navigationDisplay.updateField = () => null;
       navigationDisplay.flux = <any>{
         on: () => null,
-        store: { getState: () => globalState }
+        store: { getState: () => globalState },
       };
       navigationDisplay.props = <any>{ field: { value } };
 
@@ -68,12 +70,14 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       const globalState = { a: 'a' };
       const name = 'efgh';
       const value = 'abcd';
-      const select = navigationDisplay.select = spy(() => undefined);
-      stub(Tag, 'getMeta').withArgs(navigationDisplay).returns({ name });
+      const select = (navigationDisplay.select = spy(() => undefined));
+      stub(Tag, 'getMeta')
+        .withArgs(navigationDisplay)
+        .returns({ name });
       navigationDisplay.updateField = () => null;
       navigationDisplay.flux = <any>{
         on: () => null,
-        store: { getState: () => globalState }
+        store: { getState: () => globalState },
       };
       navigationDisplay.props = <any>{ field: { value, active: false } };
 
@@ -92,7 +96,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       navigationDisplay.updateField = () => null;
       navigationDisplay.flux = <any>{
         on,
-        store: { getState: () => null }
+        store: { getState: () => null },
       };
       navigationDisplay.props = <any>{ field: { value } };
 
@@ -105,7 +109,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
   describe('onUpdate()', () => {
     it('should call updateField()', () => {
       const field = 'brand';
-      const updateField = navigationDisplay.updateField = spy();
+      const updateField = (navigationDisplay.updateField = spy());
       navigationDisplay.props = <any>{ field };
 
       navigationDisplay.onUpdate();
@@ -117,7 +121,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
   describe('updateIsActive()', () => {
     it('should set isActive', () => {
       const isActive = false;
-      const set = navigationDisplay.set = spy();
+      const set = (navigationDisplay.set = spy());
 
       navigationDisplay.updateIsActive(<any>{ isActive });
 
@@ -200,7 +204,10 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       navigationDisplay.updateField(<any>{ value: 'brand' });
 
       // tslint:disable-next-line max-line-length
-      expect(off).to.be.calledWith(`${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`, navigationDisplay.updateNavigation);
+      expect(off).to.be.calledWith(
+        `${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`,
+        navigationDisplay.updateNavigation
+      );
     });
 
     it('should listen for SELECTED_REFINEMENTS_UPDATED', () => {
@@ -214,7 +221,10 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
       navigationDisplay.updateField(<any>{ value: field });
 
       // tslint:disable-next-line max-line-length
-      expect(on).to.be.calledWith(`${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`, navigationDisplay.updateNavigation);
+      expect(on).to.be.calledWith(
+        `${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`,
+        navigationDisplay.updateNavigation
+      );
     });
   });
 
@@ -225,11 +235,11 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
         selected: [0, 2],
         or: false,
         range: true,
-        g: 'h'
+        g: 'h',
       };
       const state = { i: 'j' };
       const field = 'brand';
-      const select = navigationDisplay.select = spy(() => navigation);
+      const select = (navigationDisplay.select = spy(() => navigation));
       navigationDisplay.flux = <any>{ store: { getState: () => state } };
 
       const refinements = navigationDisplay.selectNavigation(field);
@@ -243,7 +253,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
         selected: [0, 2],
         or: false,
         range: true,
-        g: 'h'
+        g: 'h',
       });
       expect(select).to.be.calledWithExactly(Selectors.navigation, field);
     });
@@ -253,8 +263,8 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldHaveAlias }) => {
     it('should set navigation', () => {
       const extracted = { a: 'b' };
       const field = 'brand';
-      const set = navigationDisplay.set = spy();
-      const selectNavigation = navigationDisplay.selectNavigation = spy(() => extracted);
+      const set = (navigationDisplay.set = spy());
+      const selectNavigation = (navigationDisplay.selectNavigation = spy(() => extracted));
       navigationDisplay.state = <any>{ value: field };
 
       navigationDisplay.updateNavigation();

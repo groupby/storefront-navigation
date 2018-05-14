@@ -2,10 +2,10 @@ import FilterRefinementControls from '../../src/filter-refinement-controls';
 import ValueRefinementControls from '../../src/value-refinement-controls';
 import suite from './_suite';
 
-suite('FilterRefinementControls', ({ expect, itShouldHaveAlias }) => {
+suite('FilterRefinementControls', ({ expect }) => {
   let filterRefinementControls: FilterRefinementControls;
 
-  beforeEach(() => filterRefinementControls = new FilterRefinementControls());
+  beforeEach(() => (filterRefinementControls = new FilterRefinementControls()));
 
   describe('constructor()', () => {
     it('should extend ValueRefinementControls', () => {
