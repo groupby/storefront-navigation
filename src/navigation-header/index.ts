@@ -7,6 +7,11 @@ class NavigationHeader {
   props: NavigationHeader.Props = <any>{
     icons: {},
   };
+
+  toggleIcon() {
+    const { isActive, icons } = this.props;
+    return isActive ? icons.toggleOpen : icons.toggleClosed;
+  }
 }
 
 interface NavigationHeader extends Tag<NavigationHeader.Props> {}

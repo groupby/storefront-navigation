@@ -4,16 +4,21 @@ import RefinementControls from '../refinement-controls';
 @provide('navigationDisplay')
 @tag('gb-navigation-display', require('./index.html'))
 class NavigationDisplay {
-  props: NavigationDisplay.Props = <any>{
+  props: NavigationDisplay.Props = {
     icons: {
       toggleOpen: 'gb-icon__minus',
       toggleClosed: 'gb-icon__plus',
     },
-  };
-
-  state: NavigationDisplay.State = <any>{
+  } as NavigationDisplay.Props;
+  state: NavigationDisplay.State = {
     isActive: true,
-  };
+  } as NavigationDisplay.State;
+
+  headerProps() {
+    const { collapse, icons } = this.props;
+    const { isActive, label } = this.state;
+    return { collapse, icons, isActive, label, onToggle: this.onToggle };
+  }
 
   init() {
     const tagName = Tag.getMeta(this).name;

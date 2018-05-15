@@ -17,8 +17,11 @@ class Navigation {
   };
 
   init() {
-    this.updateFields(this.select(Core.Selectors.navigationsObject));
     this.subscribe(Core.Events.NAVIGATIONS_UPDATED, this.updateFields);
+  }
+
+  onBeforeMount() {
+    this.updateFields(this.select(Core.Selectors.navigationsObject));
   }
 
   updateFields = (navigations: Core.Store.Indexed<Core.Store.Navigation>) => {
@@ -27,6 +30,7 @@ class Navigation {
     if (typeof collapse !== 'boolean') {
       isActive = collapse.isActive;
     }
+
     this.set({
       fields: navigations.allIds.map((value, index) => ({
         value,
