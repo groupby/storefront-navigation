@@ -4,12 +4,12 @@ import suite from './_suite';
 suite('Refinement', ({ expect, spy, stub }) => {
   let refinement: Refinement;
 
-  beforeEach(() => refinement = new Refinement());
+  beforeEach(() => (refinement = new Refinement()));
 
   describe('onClick()', () => {
     it('should set preventUpdate', () => {
       const event: any = {};
-      refinement.$refinement = <any>{};
+      refinement.props = {} as any;
 
       refinement.onClick(event);
 
@@ -18,7 +18,7 @@ suite('Refinement', ({ expect, spy, stub }) => {
 
     it('should call $valueControls.onClick()', () => {
       const onClick = spy();
-      refinement.$refinement = <any>{ onClick };
+      refinement.props = { onClick };
 
       refinement.onClick(<any>{});
 

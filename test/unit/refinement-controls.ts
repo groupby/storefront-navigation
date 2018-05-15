@@ -12,54 +12,42 @@ class MockRefinementControls extends RefinementControls {
 suite('RefinementControls', ({ expect, spy, stub }) => {
   let refinementControls: RefinementControls;
 
-  beforeEach(() => refinementControls = new MockRefinementControls());
+  beforeEach(() => (refinementControls = new MockRefinementControls()));
 
   describe('init()', () => {
-    it('should call updateState()', () => {
-      const updateState = refinementControls.updateState = spy();
-      refinementControls.expose = () => null;
+    it('should expose alias', () => {
+      const provide = (refinementControls.provide = spy());
 
       refinementControls.init();
+
+      expect(provide).to.be.calledWithExactly(ALIAS);
+    });
+  });
+
+  describe('onBeforeMount()', () => {
+    it('should call updateState()', () => {
+      const updateState = (refinementControls.updateState = spy());
+
+      refinementControls.onBeforeMount();
 
       expect(updateState).to.be.called;
-    });
-
-    it('should expose alias', () => {
-      const state = refinementControls.state = <any>{ a: 'b' };
-      const expose = refinementControls.expose = spy();
-      refinementControls.updateState = () => null;
-
-      refinementControls.init();
-
-      expect(expose).to.be.calledWith(ALIAS, state);
     });
   });
 
   describe('onUpdate()', () => {
     it('should call updateState()', () => {
-      const updateState = refinementControls.updateState = spy();
-      refinementControls.updateAlias = () => null;
+      const updateState = (refinementControls.updateState = spy());
 
       refinementControls.onUpdate();
 
       expect(updateState).to.be.called;
-    });
-
-    it('should call updateAlias()', () => {
-      const state = refinementControls.state = <any>{ a: 'b' };
-      const updateAlias = refinementControls.updateAlias = spy();
-      refinementControls.updateState = () => null;
-
-      refinementControls.onUpdate();
-
-      expect(updateAlias).to.be.calledWith(ALIAS, state);
     });
   });
 
   describe('updateState()', () => {
     it('should set navigation', () => {
       const navigation = { c: 'd' };
-      const transformNavigation = refinementControls.transformNavigation = spy(() => ({ e: 'f' }));
+      const transformNavigation = (refinementControls.transformNavigation = spy(() => ({ e: 'f' })));
       refinementControls.state = <any>{ a: 'b' };
       refinementControls.props = <any>{ navigation };
 

@@ -2,13 +2,13 @@ import { Events, Selectors } from '@storefront/core';
 import Navigation from '../../src/navigation';
 import suite from './_suite';
 
-suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias }) => {
+suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias }) => {
   let navigation: Navigation;
 
-  beforeEach(() => navigation = new Navigation());
+  beforeEach(() => (navigation = new Navigation()));
 
   itShouldBeConfigurable(Navigation);
-  itShouldHaveAlias(Navigation, 'navigation');
+  itShouldProvideAlias(Navigation, 'navigation');
 
   describe('constructor()', () => {
     describe('props', () => {
@@ -25,34 +25,22 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
   });
 
   describe('init()', () => {
-    it('should set initial fields', () => {
-      const select = navigation.select = spy();
-      navigation.subscribe = () => null;
-      navigation.updateFields = () => null;
-
-      navigation.init();
-
-      expect(select).to.be.calledWithExactly(Selectors.navigationsObject);
-      expect(navigation.state.fields).to.eql([]);
-    });
-
     it('should listen for NAVIGATIONS_UPDATED', () => {
-      const subscribe = navigation.subscribe = spy();
-      navigation.updateFields = () => null;
-      navigation.select = () => null;
+      const subscribe = (navigation.subscribe = spy());
 
       navigation.init();
 
       expect(subscribe).to.be.calledWith(Events.NAVIGATIONS_UPDATED, navigation.updateFields);
     });
+  });
 
+  describe('onBeforeMount()', () => {
     it('should call updateFields', () => {
-      const fields = [1,2,3];
-      const select = navigation.select = spy(() => fields);
-      const updateFields = navigation.updateFields = spy();
-      navigation.subscribe = () => null;
+      const fields = [1, 2, 3];
+      const select = (navigation.select = spy(() => fields));
+      const updateFields = (navigation.updateFields = spy());
 
-      navigation.init();
+      navigation.onBeforeMount();
 
       expect(select).to.be.calledWithExactly(Selectors.navigationsObject);
       expect(updateFields).to.be.calledWithExactly(fields);
@@ -82,8 +70,8 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
         fields: [
           { value: 'a', display: 'value', label: undefined, active: true },
           { value: 'b', display: 'range', label: 'B', active: true },
-          { value: 'c', display: undefined, label: 'C', active: false }
-        ]
+          { value: 'c', display: undefined, label: 'C', active: false },
+        ],
       });
     });
 
@@ -96,8 +84,8 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
         fields: [
           { value: 'a', display: 'value', label: undefined, active: true },
           { value: 'b', display: 'range', label: 'B', active: true },
-          { value: 'c', display: undefined, label: 'C', active: true }
-        ]
+          { value: 'c', display: undefined, label: 'C', active: true },
+        ],
       });
     });
 
@@ -110,8 +98,8 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
         fields: [
           { value: 'a', display: 'value', label: undefined, active: false },
           { value: 'b', display: 'range', label: 'B', active: false },
-          { value: 'c', display: undefined, label: 'C', active: false }
-        ]
+          { value: 'c', display: undefined, label: 'C', active: false },
+        ],
       });
     });
 
@@ -124,8 +112,8 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
         fields: [
           { value: 'a', display: 'value', label: undefined, active: true },
           { value: 'b', display: 'range', label: 'B', active: true },
-          { value: 'c', display: undefined, label: 'C', active: true }
-        ]
+          { value: 'c', display: undefined, label: 'C', active: true },
+        ],
       });
     });
 
@@ -138,8 +126,8 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldHaveAlias })
         fields: [
           { value: 'a', display: 'value', label: undefined, active: true },
           { value: 'b', display: 'range', label: 'B', active: true },
-          { value: 'c', display: undefined, label: 'C', active: true }
-        ]
+          { value: 'c', display: undefined, label: 'C', active: true },
+        ],
       });
     });
   });

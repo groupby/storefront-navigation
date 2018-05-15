@@ -1,10 +1,11 @@
+import * as sinon from 'sinon';
 import RefinementList from '../../src/refinement-list';
 import suite from './_suite';
 
 suite('RefinementList', ({ expect, spy, stub }) => {
   let refinementList: RefinementList;
 
-  beforeEach(() => refinementList = new RefinementList());
+  beforeEach(() => (refinementList = new RefinementList()));
 
   describe('constructor()', () => {
     describe('props', () => {
@@ -21,8 +22,8 @@ suite('RefinementList', ({ expect, spy, stub }) => {
   });
 
   describe('init()', () => {
-    it('should expose refinements', () => {
-      const expose = refinementList.expose = spy();
+    it('should provide refinements', () => {
+      const provide = (refinementList.provide = spy());
       const refinements: any = ['a', 'b'];
       const alias = 'c';
       stub(refinementList, 'alias').get(() => alias);
@@ -30,21 +31,7 @@ suite('RefinementList', ({ expect, spy, stub }) => {
 
       refinementList.init();
 
-      expect(expose).to.be.calledWith(alias, refinements);
-    });
-  });
-
-  describe('onUpdate()', () => {
-    it('should call updateAlias()', () => {
-      const updateAlias = refinementList.updateAlias = spy();
-      const refinements: any = ['a', 'b'];
-      const alias = 'c';
-      stub(refinementList, 'alias').get(() => alias);
-      refinementList.props = { refinements };
-
-      refinementList.onUpdate();
-
-      expect(updateAlias).to.be.calledWith(alias, refinements);
+      expect(provide).to.be.calledWithExactly(alias, sinon.match.func);
     });
   });
 });

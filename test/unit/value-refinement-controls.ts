@@ -3,10 +3,10 @@ import RefinementControls from '../../src/refinement-controls';
 import ValueRefinementControls from '../../src/value-refinement-controls';
 import suite from './_suite';
 
-suite('ValueRefinementControls', ({ expect, spy, stub, itShouldHaveAlias }) => {
+suite('ValueRefinementControls', ({ expect, spy, stub }) => {
   let valueRefinementControls: ValueRefinementControls;
 
-  beforeEach(() => valueRefinementControls = new ValueRefinementControls());
+  beforeEach(() => (valueRefinementControls = new ValueRefinementControls()));
 
   describe('constructor()', () => {
     it('should extend RefinementControls', () => {

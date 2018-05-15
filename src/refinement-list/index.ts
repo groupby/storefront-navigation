@@ -2,9 +2,8 @@ import { tag, Store, Tag } from '@storefront/core';
 
 @tag('gb-refinement-list', require('./index.html'))
 class RefinementList {
-
   props: RefinementList.Props = {
-    refinements: []
+    refinements: [],
   };
 
   get alias() {
@@ -12,15 +11,11 @@ class RefinementList {
   }
 
   init() {
-    this.expose(this.alias, this.props.refinements);
-  }
-
-  onUpdate() {
-    this.updateAlias(this.alias, this.props.refinements);
+    this.provide(this.alias, ({ refinements }) => refinements);
   }
 }
 
-interface RefinementList extends Tag<RefinementList.Props> { }
+interface RefinementList extends Tag<RefinementList.Props> {}
 namespace RefinementList {
   export interface Props extends Tag.Props {
     refinements: Refinement[];

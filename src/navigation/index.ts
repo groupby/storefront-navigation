@@ -1,52 +1,57 @@
-import { alias, configurable, origin, tag, Events, Selectors, Store, Tag } from '@storefront/core';
+import * as Core from '@storefront/core';
 import NavigationDisplay from '../navigation-display';
 import NavigationList from '../navigation-list';
 
-@configurable
-@alias('navigation')
-@origin('navigation')
-@tag('gb-navigation', require('./index.html'))
+@Core.configurable
+@Core.provide('navigation')
+@Core.origin('navigation')
+@Core.tag('gb-navigation', require('./index.html'))
 class Navigation {
-
   props: Navigation.Props = {
     display: {},
     labels: {},
-    collapse: true
+    collapse: true,
   };
   state: Navigation.State = {
-    fields: []
+    fields: [],
   };
 
   init() {
-    this.updateFields(this.select(Selectors.navigationsObject));
-    this.subscribe(Events.NAVIGATIONS_UPDATED, this.updateFields);
+    this.subscribe(Core.Events.NAVIGATIONS_UPDATED, this.updateFields);
   }
 
-  updateFields = (navigations: Store.Indexed<Store.Navigation>) => {
+  onBeforeMount() {
+    this.updateFields(this.select(Core.Selectors.navigationsObject));
+  }
+
+  updateFields = (navigations: Core.Store.Indexed<Core.Store.Navigation>) => {
     const { collapse } = this.props;
     let isActive: boolean | number = true;
     if (typeof collapse !== 'boolean') {
       isActive = collapse.isActive;
     }
+
     this.set({
       fields: navigations.allIds.map((value, index) => ({
         value,
         display: this.props.display[value],
         label: this.props.labels[value],
-        active: typeof isActive === 'boolean' ? isActive : index < isActive
-      }))
+        active: typeof isActive === 'boolean' ? isActive : index < isActive,
+      })),
     });
-  }
+  };
 }
 
-interface Navigation extends Tag<Navigation.Props, Navigation.State> { }
+interface Navigation extends Core.Tag<Navigation.Props, Navigation.State> {}
 namespace Navigation {
-  export interface Props extends Tag.Props {
+  export interface Props {
     display: NavigationList.DisplayMap;
     labels: { [key: string]: string };
-    collapse: boolean | {
-      isActive: boolean | number;
-    };
+    collapse:
+      | boolean
+      | {
+          isActive: boolean | number;
+        };
   }
 
   export interface State {

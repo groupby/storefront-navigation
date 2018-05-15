@@ -1,5 +1,5 @@
-<gb-list items="{ $refinements }" item-alias="refinement">
+<gb-list items="{ props.refinements }" item-alias="refinement">
   <yield>
-    <gb-refinement class="{ gb-selected: $refinement.selected }"></gb-refinement>
+    <gb-refinement class="{ gb-selected: item.selected }" _props="{ item }"></gb-refinement>
   </yield>
 </gb-list>

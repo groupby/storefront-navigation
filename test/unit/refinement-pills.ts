@@ -2,13 +2,15 @@ import { Events, Selectors, StoreSections } from '@storefront/core';
 import RefinementPills from '../../src/refinement-pills';
 import suite from './_suite';
 
-suite('RefinementPills', ({ expect, spy, stub }) => {
+suite('RefinementPills', ({ expect, spy, stub, itShouldProvideAlias }) => {
   let refinementPills: RefinementPills;
 
   beforeEach(() => {
     refinementPills = new RefinementPills();
     refinementPills.props = { storeSection: StoreSections.PAST_PURCHASES };
   });
+
+  itShouldProvideAlias(RefinementPills, 'refinementPills');
 
   describe('constructor()', () => {
     describe('state', () => {
@@ -27,22 +29,26 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
 
   describe('init()', () => {
     it('should listen for PAST_PURCHASE_NAVIGATIONS_UPDATED', () => {
-      const subscribe = refinementPills.subscribe = spy();
-      const subscribeOnce = refinementPills.subscribeOnce = spy();
+      const subscribe = (refinementPills.subscribe = spy());
+      const subscribeOnce = (refinementPills.subscribeOnce = spy());
 
       refinementPills.init();
 
-      expect(subscribeOnce).to.be.calledWithExactly(Events.PAST_PURCHASE_NAVIGATIONS_UPDATED,
-        refinementPills.updatePastPurchaseState);
-      expect(subscribe).to.be.calledWithExactly(Events.PAST_PURCHASE_PRODUCTS_UPDATED,
-        refinementPills.updatePastPurchaseState);
+      expect(subscribeOnce).to.be.calledWithExactly(
+        Events.PAST_PURCHASE_NAVIGATIONS_UPDATED,
+        refinementPills.updatePastPurchaseState
+      );
+      expect(subscribe).to.be.calledWithExactly(
+        Events.PAST_PURCHASE_PRODUCTS_UPDATED,
+        refinementPills.updatePastPurchaseState
+      );
     });
   });
 
   describe('updatePastPurchaseState()', () => {
     it('should call updatePastPurchaseDisplayQuery and updatePastPurchaseNavigations', () => {
-      const updatePastPurchaseDisplayQuery = refinementPills.updatePastPurchaseDisplayQuery = spy();
-      const updatePastPurchaseNavigations = refinementPills.updatePastPurchaseNavigations = spy();
+      const updatePastPurchaseDisplayQuery = (refinementPills.updatePastPurchaseDisplayQuery = spy());
+      const updatePastPurchaseNavigations = (refinementPills.updatePastPurchaseNavigations = spy());
 
       refinementPills.updatePastPurchaseState();
 
@@ -54,12 +60,13 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
   describe('updatePastPurchaseNavigations()', () => {
     it('should update navigations via set', () => {
       const queryNavigation = 4;
-      const buildPastPurchaseQueryNavigation =
-        refinementPills.buildPastPurchaseQueryNavigation = spy(() => queryNavigation);
+      const buildPastPurchaseQueryNavigation = (refinementPills.buildPastPurchaseQueryNavigation = spy(
+        () => queryNavigation
+      ));
       const navigations = [1, 2, 3];
       const newNavigations = [4, 1, 2, 3];
-      const select = refinementPills.select = spy(() => navigations);
-      const set = refinementPills.set = spy();
+      const select = (refinementPills.select = spy(() => navigations));
+      const set = (refinementPills.set = spy());
 
       refinementPills.updatePastPurchaseNavigations();
 
@@ -73,8 +80,8 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
   describe('updatePastPurchaseDisplayQuery()', () => {
     it('should update displayQuery and displayCount if new query is not empty', () => {
       const query = 'giraffe';
-      const select = refinementPills.select = spy(() => query);
-      const set = refinementPills.set = spy();
+      const select = (refinementPills.select = spy(() => query));
+      const set = (refinementPills.set = spy());
 
       refinementPills.updatePastPurchaseDisplayQuery();
 
@@ -88,7 +95,7 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
 
     it('should not update displayQuery and displayCount if new query is empty', () => {
       const query = '';
-      const select = refinementPills.select = spy();
+      const select = (refinementPills.select = spy());
       refinementPills.state.displayCount = 3;
       refinementPills.state.displayQuery = 'giraffe';
 
@@ -104,11 +111,11 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
   describe('buildPastPurchaseQueryNavigation()', () => {
     it('should update queryNavigation', () => {
       const currentQuery = '';
-      const displayQuery = refinementPills.state.displayQuery = 'monkey';
-      const displayCount = refinementPills.state.displayCount = 5;
+      const displayQuery = (refinementPills.state.displayQuery = 'monkey');
+      const displayCount = (refinementPills.state.displayCount = 5);
       const allRecordCount = 3;
       const storeRefinements = [];
-      const select = refinementPills.select = stub();
+      const select = (refinementPills.select = stub());
       select.withArgs(Selectors.pastPurchaseQuery).returns(currentQuery);
       select.withArgs(Selectors.pastPurchaseAllRecordCount).returns(allRecordCount);
       select.withArgs(Selectors.pastPurchaseSelectedRefinements).returns(storeRefinements);
@@ -126,17 +133,15 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
         field: 'query',
         label: 'Query',
         selected: [1],
-        refinements
+        refinements,
       };
       refinementPills.actions = <any>{};
-      const updatePastPurchaseQuery = refinementPills.actions.updatePastPurchaseQuery = spy();
-      const updatePastPurchaseState = refinementPills.updatePastPurchaseState = spy();
+      const updatePastPurchaseQuery = (refinementPills.actions.updatePastPurchaseQuery = spy());
+      const updatePastPurchaseState = (refinementPills.updatePastPurchaseState = spy());
 
       const queryNavigation = refinementPills.buildPastPurchaseQueryNavigation();
 
-      expect(JSON.stringify(queryNavigation)).to.eql(
-        JSON.stringify(navigation)
-      );
+      expect(JSON.stringify(queryNavigation)).to.eql(JSON.stringify(navigation));
       queryNavigation.refinements[1]['onClick']();
       expect(updatePastPurchaseQuery).to.be.calledWith('');
       queryNavigation.refinements[0]['onClose']();
@@ -146,10 +151,10 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
     });
 
     it('should not add a refinement for displayquery and should set selected to 0 when displayQuery is falsy', () => {
-      const displayCount = refinementPills.state.displayCount = 5;
+      const displayCount = (refinementPills.state.displayCount = 5);
       const allRecordCount = 3;
       const storeRefinements = [];
-      const select = refinementPills.select = stub();
+      const select = (refinementPills.select = stub());
       select.withArgs(Selectors.pastPurchaseQuery).returns(undefined);
       select.withArgs(Selectors.pastPurchaseAllRecordCount).returns(allRecordCount);
       select.withArgs(Selectors.pastPurchaseSelectedRefinements).returns(storeRefinements);
@@ -163,7 +168,7 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
         field: 'query',
         label: 'Query',
         selected: [0],
-        refinements
+        refinements,
       };
 
       const queryNavigation = refinementPills.buildPastPurchaseQueryNavigation();
@@ -174,11 +179,11 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
     // tslint:disable-next-line max-line-length
     it('should not set selected when there exists refinements in the store and should reset query when onclose is clicked and queries are equal', () => {
       const currentQuery = 'giraffe';
-      const displayQuery = refinementPills.state.displayQuery = 'giraffe';
-      const displayCount = refinementPills.state.displayCount = 5;
+      const displayQuery = (refinementPills.state.displayQuery = 'giraffe');
+      const displayCount = (refinementPills.state.displayCount = 5);
       const allRecordCount = 3;
       const storeRefinements = [1, 2];
-      const select = refinementPills.select = stub();
+      const select = (refinementPills.select = stub());
       select.withArgs(Selectors.pastPurchaseQuery).returns(currentQuery);
       select.withArgs(Selectors.pastPurchaseAllRecordCount).returns(allRecordCount);
       select.withArgs(Selectors.pastPurchaseSelectedRefinements).returns(storeRefinements);
@@ -196,16 +201,14 @@ suite('RefinementPills', ({ expect, spy, stub }) => {
         field: 'query',
         label: 'Query',
         selected: [],
-        refinements
+        refinements,
       };
       refinementPills.actions = <any>{};
-      const updatePastPurchaseQuery = refinementPills.actions.updatePastPurchaseQuery = spy();
+      const updatePastPurchaseQuery = (refinementPills.actions.updatePastPurchaseQuery = spy());
 
       const queryNavigation = refinementPills.buildPastPurchaseQueryNavigation();
 
-      expect(JSON.stringify(queryNavigation)).to.be.eql(
-        JSON.stringify(navigation)
-      );
+      expect(JSON.stringify(queryNavigation)).to.be.eql(JSON.stringify(navigation));
       queryNavigation.refinements[0]['onClose']();
       expect(updatePastPurchaseQuery).to.be.calledWith('');
     });
