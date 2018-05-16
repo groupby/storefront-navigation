@@ -11,7 +11,7 @@ suite('NavigationList', ({ expect, spy, stub, itShouldProvideAlias }) => {
   describe('constructor()', () => {
     describe('props', () => {
       it('should set initial values', () => {
-        expect(navigationList.props).eql(<any>{ fields: [] });
+        expect(navigationList.props).eql(<any>{ fields: [], itemProps: {} });
       });
     });
   });
