@@ -6,13 +6,20 @@ import NavigationDisplay from '../navigation-display';
 class NavigationList {
   props: NavigationList.Props = <any>{
     fields: [],
+    itemProps: {},
   };
+
+  childProps() {
+    const { itemProps, collapse } = this.props;
+    return { collapse, ...itemProps };
+  }
 }
 
 interface NavigationList extends Tag<NavigationList.Props> {}
 namespace NavigationList {
   export interface Props extends Tag.Props {
     collapse: boolean;
+    itemProps: object;
     fields: NavigationDisplay.Field[];
   }
 

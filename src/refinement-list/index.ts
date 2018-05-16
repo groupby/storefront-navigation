@@ -4,6 +4,7 @@ import { tag, Store, Tag } from '@storefront/core';
 class RefinementList {
   props: RefinementList.Props = {
     refinements: [],
+    itemProps: {},
   };
 
   get alias() {
@@ -17,8 +18,9 @@ class RefinementList {
 
 interface RefinementList extends Tag<RefinementList.Props> {}
 namespace RefinementList {
-  export interface Props extends Tag.Props {
+  export interface Props {
     refinements: Refinement[];
+    itemProps?: object;
   }
 
   export type Refinement = Store.Refinement & { selected: boolean };

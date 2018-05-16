@@ -1,4 +1,4 @@
-<gb-list items="{ props.fields }" item-props="{{ collapse: props.collapse }}">
+<gb-list items="{ props.fields }" item-props="{ childProps() }">
   <yield>
     <gb-navigation-display field="{ item }" collapse="{ props.collapse }"></gb-navigation-display>
   </yield>
