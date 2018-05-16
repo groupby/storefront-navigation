@@ -1,4 +1,4 @@
-<gb-list items="{ props.refinements }" item-alias="refinement">
+<gb-list items="{ props.refinements }" item-alias="refinement" item-props="{ props.itemProps }">
   <yield>
     <gb-refinement class="{ gb-selected: item.selected }" _props="{ item }"></gb-refinement>
   </yield>

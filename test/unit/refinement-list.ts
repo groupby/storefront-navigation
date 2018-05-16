@@ -10,7 +10,7 @@ suite('RefinementList', ({ expect, spy, stub }) => {
   describe('constructor()', () => {
     describe('props', () => {
       it('should set initial value', () => {
-        expect(refinementList.props).eql(<any>{ refinements: [] });
+        expect(refinementList.props).eql(<any>{ refinements: [], itemProps: {} });
       });
     });
   });
