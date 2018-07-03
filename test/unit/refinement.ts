@@ -16,7 +16,7 @@ suite('Refinement', ({ expect, spy, stub }) => {
       expect(event.preventUpdate).to.be.true;
     });
 
-    it('should call $valueControls.onClick()', () => {
+    it('should call props.onClick()', () => {
       const onClick = spy();
       refinement.props = { onClick };
 
