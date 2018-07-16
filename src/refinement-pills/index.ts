@@ -15,13 +15,15 @@ class RefinementPills {
       case Core.StoreSections.PAST_PURCHASES:
         this.subscribeOnce(Core.Events.PAST_PURCHASE_NAVIGATIONS_UPDATED, this.updatePastPurchaseState);
         this.subscribe(Core.Events.PAST_PURCHASE_PRODUCTS_UPDATED, this.updatePastPurchaseState);
+        this.updatePastPurchaseState();
         break;
     }
   }
 
   updatePastPurchaseState = () => {
-    this.updatePastPurchaseDisplayQuery();
-    this.updatePastPurchaseNavigations();
+    const navState = this.updatePastPurchaseDisplayQuery();
+    const displayState = this.updatePastPurchaseNavigations();
+    this.set({ ...navState, ...displayState });
   };
 
   updatePastPurchaseNavigations = () => {
@@ -31,16 +33,18 @@ class RefinementPills {
 
     navigations.unshift(queryNavigation);
 
-    this.set({ navigations, queryNavigation });
+    return { navigations, queryNavigation };
   };
 
   updatePastPurchaseDisplayQuery = () => {
     const displayQuery = this.select(Core.Selectors.pastPurchaseQuery);
     if (displayQuery) {
-      this.set({
+      return {
         displayQuery,
         displayCount: this.select(Core.Selectors.pastPurchaseCurrentRecordCount),
-      });
+      };
+    } else {
+      return {};
     }
   };
 

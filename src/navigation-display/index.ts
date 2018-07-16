@@ -23,12 +23,14 @@ class NavigationDisplay {
   init() {
     const tagName = Tag.getMeta(this).name;
     const uiState = this.select(Selectors.uiTagState, tagName, this.props.field.value);
+
+    this.flux.on(`${Events.UI_UPDATED}:${tagName}:${this.props.field.value}`, this.updateIsActive);
+
     this.updateField(this.props.field);
     this.state = {
       ...this.state,
       isActive: uiState ? uiState.isActive : this.props.field.active,
     };
-    this.flux.on(`${Events.UI_UPDATED}:${tagName}:${this.props.field.value}`, this.updateIsActive);
   }
 
   onUpdate() {

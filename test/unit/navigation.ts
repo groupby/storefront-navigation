@@ -25,23 +25,15 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
   });
 
   describe('init()', () => {
-    it('should listen for NAVIGATIONS_UPDATED', () => {
+    it('should listen for NAVIGATIONS_UPDATED and set up initial state', () => {
       const subscribe = (navigation.subscribe = spy());
-
-      navigation.init();
-
-      expect(subscribe).to.be.calledWith(Events.NAVIGATIONS_UPDATED, navigation.updateFields);
-    });
-  });
-
-  describe('onBeforeMount()', () => {
-    it('should call updateFields', () => {
       const fields = [1, 2, 3];
       const select = (navigation.select = spy(() => fields));
       const updateFields = (navigation.updateFields = spy());
 
-      navigation.onBeforeMount();
+      navigation.init();
 
+      expect(subscribe).to.be.calledWith(Events.NAVIGATIONS_UPDATED, navigation.updateFields);
       expect(select).to.be.calledWithExactly(Selectors.navigationsObject);
       expect(updateFields).to.be.calledWithExactly(fields);
       expect(updateFields).to.be.calledOnce;
