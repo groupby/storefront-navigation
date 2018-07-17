@@ -38,14 +38,9 @@ class RefinementPills {
 
   updatePastPurchaseDisplayQuery = () => {
     const displayQuery = this.select(Core.Selectors.pastPurchaseQuery);
-    if (displayQuery) {
-      return {
-        displayQuery,
-        displayCount: this.select(Core.Selectors.pastPurchaseCurrentRecordCount),
-      };
-    } else {
-      return {};
-    }
+    return displayQuery
+      ? { displayQuery, displayCount: this.select(Core.Selectors.pastPurchaseCurrentRecordCount) }
+      : {};
   };
 
   buildPastPurchaseQueryNavigation = () => {
