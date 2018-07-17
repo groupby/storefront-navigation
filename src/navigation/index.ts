@@ -18,9 +18,7 @@ class Navigation {
 
   init() {
     this.subscribe(Core.Events.NAVIGATIONS_UPDATED, this.updateFields);
-  }
 
-  onBeforeMount() {
     this.updateFields(this.select(Core.Selectors.navigationsObject));
   }
 

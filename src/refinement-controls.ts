@@ -5,9 +5,6 @@ abstract class RefinementControls<P extends RefinementControls.Props, S extends 
 
   init() {
     this.provide(this.alias);
-  }
-
-  onBeforeMount() {
     this.updateState();
   }
 

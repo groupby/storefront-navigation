@@ -15,21 +15,13 @@ suite('RefinementControls', ({ expect, spy, stub }) => {
   beforeEach(() => (refinementControls = new MockRefinementControls()));
 
   describe('init()', () => {
-    it('should expose alias', () => {
+    it('should expose alias and call updateState()', () => {
       const provide = (refinementControls.provide = spy());
+      const updateState = (refinementControls.updateState = spy());
 
       refinementControls.init();
 
       expect(provide).to.be.calledWithExactly(ALIAS);
-    });
-  });
-
-  describe('onBeforeMount()', () => {
-    it('should call updateState()', () => {
-      const updateState = (refinementControls.updateState = spy());
-
-      refinementControls.onBeforeMount();
-
       expect(updateState).to.be.called;
     });
   });
