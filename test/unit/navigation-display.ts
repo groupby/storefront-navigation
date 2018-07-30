@@ -257,6 +257,37 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
       });
       expect(select).to.be.calledWithExactly(Selectors.navigation, field);
     });
+
+    it('should extract show refinements and mark them as selected', () => {
+      const navigation = {
+        refinements: [{ a: 'b' }, { c: 'd' }, { e: 'f' }, { g: 'h' }],
+        selected: [0, 2],
+        show: [0, 2, 1],
+        or: false,
+        range: true,
+        g: 'h',
+      };
+      const state = { i: 'j' };
+      const field = 'brand';
+      const select = (navigationDisplay.select = spy(() => navigation));
+      navigationDisplay.flux = <any>{ store: { getState: () => state } };
+
+      const refinements = navigationDisplay.selectNavigation(field);
+
+      expect(refinements).to.eql({
+        refinements: [
+          { a: 'b', index: 0, selected: true, or: false, range: true },
+          { e: 'f', index: 2, selected: true, or: false, range: true },
+          { c: 'd', index: 1, selected: false, or: false, range: true },
+        ],
+        selected: [0, 2],
+        show: [0, 2, 1],
+        or: false,
+        range: true,
+        g: 'h',
+      });
+      expect(select).to.be.calledWithExactly(Selectors.navigation, field);
+    });
   });
 
   describe('updateNavigation()', () => {
