@@ -55,16 +55,22 @@ class NavigationDisplay {
   }
 
   selectNavigation(field: string): RefinementControls.SelectedNavigation {
+    const transformRefinement = (refinement, index) => ({
+      ...refinement,
+      index,
+      or: navigation.or,
+      range: navigation.range,
+      selected: navigation.selected.includes(index),
+    });
+
     const navigation = this.select(Selectors.navigation, field);
+    const refinements = navigation.show
+      ? navigation.show.map((i) => transformRefinement(navigation.refinements[i], i))
+      : navigation.refinements.map(transformRefinement);
+
     return <any>{
       ...navigation,
-      refinements: navigation.refinements.map((value, index) => ({
-        ...value,
-        index,
-        or: navigation.or,
-        range: navigation.range,
-        selected: navigation.selected.includes(index),
-      })),
+      refinements
     };
   }
 
