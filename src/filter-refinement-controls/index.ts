@@ -6,6 +6,12 @@ class FilterRefinementControls extends ValueRefinementControls {
   get alias() {
     return 'filterControls';
   }
+
+  fetchMoreRefinements = () => {
+    if (this.state.more) {
+      this.state.moreRefinements();
+    }
+  }
 }
 
 export default FilterRefinementControls;
