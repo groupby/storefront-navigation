@@ -34,8 +34,8 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
       const updateField = (navigationDisplay.updateField = spy());
       navigationDisplay.select = spy(() => ({}));
       stub(Tag, 'getMeta').returns({});
+      navigationDisplay.subscribe = () => null;
       navigationDisplay.flux = <any>{
-        on: () => null,
         store: { getState: () => null },
       };
       navigationDisplay.props = <any>{ field };
@@ -54,8 +54,8 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         .withArgs(navigationDisplay)
         .returns({ name });
       navigationDisplay.updateField = () => null;
+      navigationDisplay.subscribe = () => null;
       navigationDisplay.flux = <any>{
-        on: () => null,
         store: { getState: () => globalState },
       };
       navigationDisplay.props = <any>{ field: { value } };
@@ -75,8 +75,8 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         .withArgs(navigationDisplay)
         .returns({ name });
       navigationDisplay.updateField = () => null;
+      navigationDisplay.subscribe = () => null;
       navigationDisplay.flux = <any>{
-        on: () => null,
         store: { getState: () => globalState },
       };
       navigationDisplay.props = <any>{ field: { value, active: false } };
@@ -88,21 +88,20 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
     });
 
     it('should listen for UI_UPDATED', () => {
-      const on = spy();
+      const subscribe = navigationDisplay.subscribe = spy();
       const name = 'efgh';
       const value = 'abcd';
       navigationDisplay.select = () => undefined;
       stub(Tag, 'getMeta').returns({ name });
       navigationDisplay.updateField = () => null;
       navigationDisplay.flux = <any>{
-        on,
         store: { getState: () => null },
       };
       navigationDisplay.props = <any>{ field: { value } };
 
       navigationDisplay.init();
 
-      expect(on).to.be.calledWith(`${Events.UI_UPDATED}:${name}:${value}`);
+      expect(subscribe).to.be.calledWith(`${Events.UI_UPDATED}:${name}:${value}`);
     });
   });
 
