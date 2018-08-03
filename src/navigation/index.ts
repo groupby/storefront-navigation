@@ -11,6 +11,7 @@ class Navigation {
     display: {},
     labels: {},
     collapse: true,
+    showOnlyAvailableNavHeaders: false,
   };
   state: Navigation.State = {
     fields: [],
@@ -28,9 +29,12 @@ class Navigation {
     if (typeof collapse !== 'boolean') {
       isActive = collapse.isActive;
     }
+    const navs = this.props.showOnlyAvailableNavHeaders
+      ? this.select(Core.Selectors.availableNavigations).map((nav) => nav.field)
+      : navigations.allIds;
 
     this.set({
-      fields: navigations.allIds.map((value, index) => ({
+      fields: navs.map((value, index) => ({
         value,
         display: this.props.display[value],
         label: this.props.labels[value],
@@ -50,6 +54,7 @@ namespace Navigation {
       | {
           isActive: boolean | number;
         };
+    showOnlyAvailableNavHeaders: boolean;
   }
 
   export interface State {

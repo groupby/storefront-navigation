@@ -13,7 +13,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
   describe('constructor()', () => {
     describe('props', () => {
       it('should set initial values', () => {
-        expect(navigation.props).to.eql({ display: {}, labels: {}, collapse: true });
+        expect(navigation.props).to.eql({ display: {}, labels: {}, collapse: true, showOnlyAvailableNavHeaders: false });
       });
     });
 
@@ -119,6 +119,26 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
           { value: 'a', display: 'value', label: undefined, active: true },
           { value: 'b', display: 'range', label: 'B', active: true },
           { value: 'c', display: undefined, label: 'C', active: true },
+        ],
+      });
+    });
+
+    it('should use only available navigations if showOnlyAvailableNavHeaders is true', () => {
+      const navigationSelect = navigation.select = spy(() => [{ field: 'd' }, { field: 'e' }]);
+      navigation.props = <any>{
+        display: { d: 'value', e: 'range' },
+        labels: { d: undefined, e: 'B' },
+        collapse: false,
+        showOnlyAvailableNavHeaders: true,
+      };
+
+      navigation.updateFields(navigationsObject);
+
+      expect(navigationSelect).to.be.calledWith(Selectors.availableNavigations);
+      expect(set).to.be.calledWith({
+        fields: [
+          { value: 'd', display: 'value', label: undefined, active: true },
+          { value: 'e', display: 'range', label: 'B', active: true },
         ],
       });
     });
