@@ -12,7 +12,7 @@ suite('Refinement', ({ expect, spy, stub, itShouldProvideAlias }) => {
   describe('constructor()', () => {
     describe('props', () => {
       it('should set initial values', () => {
-        expect(refinement.props).to.eql({ alwaysShowCount: false });
+        expect(refinement.props).to.eql({ alwaysShowTotal: false });
       });
     });
 

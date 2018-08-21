@@ -7,7 +7,7 @@ import ValueRefinementControls from '../value-refinement-controls';
 @tag('gb-refinement', require('./index.html'))
 class Refinement {
   props: Refinement.Props = <Refinement.Props>{
-    alwaysShowCount: false,
+    alwaysShowTotal: false,
   };
 
   state: Refinement.State = {
@@ -40,7 +40,7 @@ class Refinement {
 interface Refinement extends Tag<Refinement.Props> {}
 namespace Refinement {
   export interface Props {
-    alwaysShowCount: boolean;
+    alwaysShowTotal: boolean;
     onClick: () => void;
     or: boolean;
     selected: boolean;
