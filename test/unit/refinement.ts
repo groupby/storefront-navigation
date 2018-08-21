@@ -18,11 +18,20 @@ suite('Refinement', ({ expect, spy, stub }) => {
 
     it('should call props.onClick()', () => {
       const onClick = spy();
-      refinement.props = { onClick };
+      refinement.props = <any>{ onClick };
 
       refinement.onClick(<any>{});
 
       expect(onClick).to.be.called;
+    });
+  });
+
+  describe('getTotal()', () => {
+    it('should return the total if it exists', () => {
+      const total = 1024;
+      refinement.props = <any>{ total };
+
+      expect(refinement.getTotal()).to.eq(total);
     });
   });
 });
