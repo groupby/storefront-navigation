@@ -1,11 +1,11 @@
-import { tag, Tag } from '@storefront/core';
+import { tag, Selectors, Tag } from '@storefront/core';
 import RefinementList from '../refinement-list';
 import ValueRefinementControls from '../value-refinement-controls';
 
 @tag('gb-refinement', require('./index.html'))
 class Refinement {
   getTotal() {
-    return this.props.total;
+    return this.props.selected && !this.props.or ? this.select(Selectors.recordCount) : this.props.total;
   }
 
   onClick(event: Refinement.IndexedClickEvent) {
@@ -20,6 +20,8 @@ interface Refinement extends Tag<Refinement.Props> {}
 namespace Refinement {
   export interface Props {
     onClick: () => void;
+    or: boolean;
+    selected: boolean;
     total: number;
   }
 

@@ -1,3 +1,4 @@
+import { Selectors } from '@storefront/core';
 import Refinement from '../../src/refinement';
 import suite from './_suite';
 
@@ -32,6 +33,17 @@ suite('Refinement', ({ expect, spy, stub }) => {
       refinement.props = <any>{ total };
 
       expect(refinement.getTotal()).to.eq(total);
+    });
+
+    it('should return the record count if the refinement is selected and not or-able', () => {
+      const count = 1024;
+      refinement.select = spy(() => count);
+      refinement.props = <any>{
+        or: false,
+        selected: true,
+      };
+
+      expect(refinement.getTotal()).to.eq(count);
     });
   });
 });
