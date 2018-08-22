@@ -1,4 +1,4 @@
-import { configurable, provide, tag, Selectors, Store, Tag } from '@storefront/core';
+import { provide, tag, Selectors, Store, Tag } from '@storefront/core';
 import RefinementList from '../refinement-list';
 import ValueRefinementControls from '../value-refinement-controls';
 
@@ -44,7 +44,7 @@ class Refinement {
   }
 
   shouldShowTotal() {
-    return this.state.total > 0 && (this.props.alwaysShowTotal || !this.props.selected);
+    return this.getTotal() > 0 && (this.props.alwaysShowTotal || !this.props.selected);
   }
 
   getLabel() {

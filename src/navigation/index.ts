@@ -8,6 +8,7 @@ import NavigationList from '../navigation-list';
 @Core.tag('gb-navigation', require('./index.html'))
 class Navigation {
   props: Navigation.Props = {
+    alwaysShowTotals: false,
     display: {},
     labels: {},
     collapse: true,
@@ -39,6 +40,7 @@ class Navigation {
         display: this.props.display[value],
         label: this.props.labels[value],
         active: typeof isActive === 'boolean' ? isActive : index < isActive,
+        alwaysShowTotal: this.props.alwaysShowTotals,
       })),
     });
   };
@@ -47,6 +49,7 @@ class Navigation {
 interface Navigation extends Core.Tag<Navigation.Props, Navigation.State> {}
 namespace Navigation {
   export interface Props {
+    alwaysShowTotals: boolean;
     display: NavigationList.DisplayMap;
     labels: { [key: string]: string };
     collapse:

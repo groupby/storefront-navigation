@@ -133,7 +133,7 @@ suite('Refinement', ({ expect, spy, stub, itShouldProvideAlias }) => {
     truthTable.forEach(({ total, alwaysShowTotal, selected, or, expected}) => {
       it(`should return ${expected} for total: ${total ? '>0' : '0'}, alwaysShowTotal: ${alwaysShowTotal}, selected: ${selected}, or: ${or}`, () => {
         refinement.props = { alwaysShowTotal, selected, or };
-        refinement.state = <any>{ total };
+        refinement.getTotal = () => total;
 
         expect(refinement.shouldShowTotal()).to.eq(expected);
       });
