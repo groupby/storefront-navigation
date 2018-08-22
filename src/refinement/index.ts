@@ -9,12 +9,6 @@ class Refinement {
     alwaysShowTotal: false,
   };
 
-  state: Refinement.State = {
-    total: 0,
-    showTotal: false,
-    label: '',
-  };
-
   init() {
     this.updateState();
   }
@@ -27,28 +21,24 @@ class Refinement {
     this.state = {
       ...this.state,
       total: this.getTotal(),
-      showTotal: this.shouldShowTotal(),
+      showTotal: this.getShowTotal(),
       label: this.getLabel(),
+      orType: this.getOrType(),
+      cancelDisplay: this.getCancelDisplay(),
     };
   }
+
+  getTotal = () => (this.props.selected && !this.props.or ? this.select(Selectors.recordCount) : this.props.total);
+  getShowTotal = () => this.getTotal() > 0 && (this.props.alwaysShowTotal || !this.props.selected);
+  getLabel = () => (this.props.range ? this.props.low + ' - ' + this.props.high : this.props.value);
+  getOrType = () => (this.props.or ? 'checkbox' : 'button');
+  getCancelDisplay = () => !this.props.or && !!this.props.selected;
 
   onClick(event: Refinement.IndexedClickEvent) {
     event.preventUpdate = true;
     if (this.props.onClick) {
       this.props.onClick();
     }
-  }
-
-  getTotal() {
-    return this.props.selected && !this.props.or ? this.select(Selectors.recordCount) : this.props.total;
-  }
-
-  shouldShowTotal() {
-    return this.getTotal() > 0 && (this.props.alwaysShowTotal || !this.props.selected);
-  }
-
-  getLabel() {
-    return this.props.range ? this.props.low + ' - ' + this.props.high : this.props.value;
   }
 }
 
@@ -70,6 +60,8 @@ namespace Refinement {
     total: number;
     showTotal: boolean;
     label: string;
+    orType: string;
+    cancelDisplay: boolean;
   }
 
   export interface IndexedClickEvent extends Event, Tag.Event {

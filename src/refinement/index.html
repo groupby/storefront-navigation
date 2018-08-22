@@ -1,7 +1,7 @@
 <yield>
   <label>
-    <span if="{!props.or && props.selected}">&times;</span>
-    <input show="{props.or}" type="{props.or ? 'checkbox' : 'button'}" checked="{props.selected}" onclick="{onClick}">
+    <span if="{state.cancelDisplay}">&times;</span>
+    <input show="{props.or}" type="{state.orType}" checked="{props.selected}" onclick="{onClick}">
     <span class="gb-refinement__label">{state.label}</span>
     <gb-badge if="{state.showTotal}"  _consumes="refinementDisplay">{$refinementDisplay.total}</gb-badge>
   </label>

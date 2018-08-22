@@ -13,7 +13,13 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
   describe('constructor()', () => {
     describe('props', () => {
       it('should set initial values', () => {
-        expect(navigation.props).to.eql({ alwaysShowTotals: false, display: {}, labels: {}, collapse: true, showOnlyAvailableNavHeaders: false });
+        expect(navigation.props).to.eql({
+          alwaysShowTotals: true,
+          display: {},
+          labels: {},
+          collapse: true,
+          showOnlyAvailableNavHeaders: false,
+        });
       });
     });
 
@@ -124,7 +130,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
     });
 
     it('should use only available navigations if showOnlyAvailableNavHeaders is true', () => {
-      const navigationSelect = navigation.select = spy(() => [{ field: 'd' }, { field: 'e' }]);
+      const navigationSelect = (navigation.select = spy(() => [{ field: 'd' }, { field: 'e' }]));
       navigation.props = <any>{
         display: { d: 'value', e: 'range' },
         labels: { d: undefined, e: 'B' },

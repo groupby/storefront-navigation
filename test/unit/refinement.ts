@@ -15,22 +15,12 @@ suite('Refinement', ({ expect, spy, stub, itShouldProvideAlias }) => {
         expect(refinement.props).to.eql({ alwaysShowTotal: false });
       });
     });
-
-    describe('state', () => {
-      it('should set initial value', () => {
-        expect(refinement.state).to.eql({
-          total: 0,
-          showTotal: false,
-          label: '',
-        });
-      });
-    });
   });
 
   describe('init()', () => {
     it('should set state', () => {
       const total = 1024;
-      const updateState = refinement.updateState = spy();
+      const updateState = (refinement.updateState = spy());
 
       refinement.init();
 
@@ -41,7 +31,7 @@ suite('Refinement', ({ expect, spy, stub, itShouldProvideAlias }) => {
   describe('onUpdate()', () => {
     it('should update the total', () => {
       const total = 1024;
-      const updateState = refinement.updateState = spy();
+      const updateState = (refinement.updateState = spy());
 
       refinement.onUpdate();
 
@@ -51,18 +41,28 @@ suite('Refinement', ({ expect, spy, stub, itShouldProvideAlias }) => {
 
   describe('updateState()', () => {
     it('should update the state', () => {
-      const total = 1024;
+      const total = 100;
       const showTotal = true;
-      const label = 'value'
-      const getTotal = refinement.getTotal = () => total;
-      const shouldShowTotal = refinement.shouldShowTotal = () => showTotal;
-      const getLabel = refinement.getLabel = () => label;
-      refinement.props = <any>{ value: label };
+      const label = 'ok';
+      const orType = 'button';
+      const cancelDisplay = true;
+      stub(refinement, 'getTotal').returns(total);
+      stub(refinement, 'getShowTotal').returns(showTotal);
+      stub(refinement, 'getLabel').returns(label);
+      stub(refinement, 'getOrType').returns(orType);
+      stub(refinement, 'getCancelDisplay').returns(cancelDisplay);
       refinement.state = <any>{ a: 'b' };
 
       refinement.updateState();
 
-      expect(refinement.state).to.eql({ a: 'b', total, showTotal, label });
+      expect(refinement.state).to.eql({
+        a: 'b',
+        total,
+        showTotal,
+        label,
+        orType,
+        cancelDisplay,
+      });
     });
   });
 
@@ -90,7 +90,7 @@ suite('Refinement', ({ expect, spy, stub, itShouldProvideAlias }) => {
     it('should return the total if it exists', () => {
       const total = 1024;
       refinement.props = <any>{ total };
-      refinement.shouldShowTotal = () => true;
+      refinement.getShowTotal = () => true;
 
       expect(refinement.getTotal()).to.eq(total);
     });
@@ -98,7 +98,7 @@ suite('Refinement', ({ expect, spy, stub, itShouldProvideAlias }) => {
     it('should return the record count if the refinement is selected and not or-able', () => {
       const count = 1024;
       refinement.select = () => count;
-      refinement.shouldShowTotal = () => true;
+      refinement.getShowTotal = () => true;
       refinement.props = <any>{
         or: false,
         selected: true,
@@ -108,34 +108,36 @@ suite('Refinement', ({ expect, spy, stub, itShouldProvideAlias }) => {
     });
   });
 
-  describe('shouldShowTotal()', () => {
+  describe('getShowTotal()', () => {
     const truthTable = [
       { total: 0, alwaysShowTotal: false, selected: false, or: false, expected: false },
-      { total: 0, alwaysShowTotal: false, selected: false, or:  true, expected: false },
-      { total: 0, alwaysShowTotal: false, selected:  true, or: false, expected: false },
-      { total: 0, alwaysShowTotal: false, selected:  true, or:  true, expected: false },
-      { total: 0, alwaysShowTotal:  true, selected: false, or: false, expected: false },
-      { total: 0, alwaysShowTotal:  true, selected: false, or:  true, expected: false },
-      { total: 0, alwaysShowTotal:  true, selected:  true, or: false, expected: false },
-      { total: 0, alwaysShowTotal:  true, selected: false, or:  true, expected: false },
-      { total: 0, alwaysShowTotal:  true, selected:  true, or: false, expected: false },
-      { total: 0, alwaysShowTotal:  true, selected:  true, or:  true, expected: false },
-      { total: 1, alwaysShowTotal: false, selected: false, or: false, expected:  true },
-      { total: 1, alwaysShowTotal: false, selected: false, or:  true, expected:  true },
-      { total: 1, alwaysShowTotal: false, selected:  true, or: false, expected: false },
-      { total: 1, alwaysShowTotal: false, selected:  true, or:  true, expected: false },
-      { total: 1, alwaysShowTotal:  true, selected: false, or: false, expected:  true },
-      { total: 1, alwaysShowTotal:  true, selected: false, or:  true, expected:  true },
-      { total: 1, alwaysShowTotal:  true, selected:  true, or: false, expected:  true },
-      { total: 1, alwaysShowTotal:  true, selected:  true, or:  true, expected:  true },
+      { total: 0, alwaysShowTotal: false, selected: false, or: true, expected: false },
+      { total: 0, alwaysShowTotal: false, selected: true, or: false, expected: false },
+      { total: 0, alwaysShowTotal: false, selected: true, or: true, expected: false },
+      { total: 0, alwaysShowTotal: true, selected: false, or: false, expected: false },
+      { total: 0, alwaysShowTotal: true, selected: false, or: true, expected: false },
+      { total: 0, alwaysShowTotal: true, selected: true, or: false, expected: false },
+      { total: 0, alwaysShowTotal: true, selected: false, or: true, expected: false },
+      { total: 0, alwaysShowTotal: true, selected: true, or: false, expected: false },
+      { total: 0, alwaysShowTotal: true, selected: true, or: true, expected: false },
+      { total: 1, alwaysShowTotal: false, selected: false, or: false, expected: true },
+      { total: 1, alwaysShowTotal: false, selected: false, or: true, expected: true },
+      { total: 1, alwaysShowTotal: false, selected: true, or: false, expected: false },
+      { total: 1, alwaysShowTotal: false, selected: true, or: true, expected: false },
+      { total: 1, alwaysShowTotal: true, selected: false, or: false, expected: true },
+      { total: 1, alwaysShowTotal: true, selected: false, or: true, expected: true },
+      { total: 1, alwaysShowTotal: true, selected: true, or: false, expected: true },
+      { total: 1, alwaysShowTotal: true, selected: true, or: true, expected: true },
     ];
 
-    truthTable.forEach(({ total, alwaysShowTotal, selected, or, expected}) => {
-      it(`should return ${expected} for total: ${total ? '>0' : '0'}, alwaysShowTotal: ${alwaysShowTotal}, selected: ${selected}, or: ${or}`, () => {
+    truthTable.forEach(({ total, alwaysShowTotal, selected, or, expected }) => {
+      it(`should return ${expected} for total: ${
+        total ? '>0' : '0'
+      }, alwaysShowTotal: ${alwaysShowTotal}, selected: ${selected}, or: ${or}`, () => {
         refinement.props = { alwaysShowTotal, selected, or };
         refinement.getTotal = () => total;
 
-        expect(refinement.shouldShowTotal()).to.eq(expected);
+        expect(refinement.getShowTotal()).to.eq(expected);
       });
     });
   });
@@ -156,6 +158,42 @@ suite('Refinement', ({ expect, spy, stub, itShouldProvideAlias }) => {
       };
 
       expect(refinement.getLabel()).to.eq('4 - 10');
+    });
+  });
+
+  describe('getOrType()', () => {
+    it('should return "checkbox"', () => {
+      refinement.props = { or: true };
+
+      expect(refinement.getOrType()).to.eq('checkbox');
+    });
+
+    it('should return "button"', () => {
+      refinement.props = { or: false };
+
+      expect(refinement.getOrType()).to.eq('button');
+    });
+  });
+
+  describe('getCancelDisplay()', () => {
+    it('should return true', () => {
+      refinement.props = { or: false, selected: true };
+
+      expect(refinement.getCancelDisplay()).to.eq(true);
+    });
+
+    it('should return false', () => {
+      refinement.props = { or: true, selected: true };
+
+      expect(refinement.getCancelDisplay()).to.eq(false);
+
+      refinement.props = { or: true, selected: false };
+
+      expect(refinement.getCancelDisplay()).to.eq(false);
+
+      refinement.props = { or: false, selected: false };
+
+      expect(refinement.getCancelDisplay()).to.eq(false);
     });
   });
 });
