@@ -2,7 +2,7 @@
   <label>
     <span if="{!props.or && props.selected}">&times;</span>
     <input show="{props.or}" type="{props.or ? 'checkbox' : 'button'}" checked="{props.selected}" onclick="{onClick}">
-    <span class="gb-refinement__label">{props.range ? props.low + ' - ' + props.high : props.value}</span>
-    <gb-badge if="{state.total > 0 && (props.alwaysShowCount || !props.selected)}"  _consumes="refinementDisplay">{$refinementDisplay.total}</gb-badge>
+    <span class="gb-refinement__label">{state.label}</span>
+    <gb-badge if="{state.showTotal}"  _consumes="refinementDisplay">{$refinementDisplay.total}</gb-badge>
   </label>
 </yield>

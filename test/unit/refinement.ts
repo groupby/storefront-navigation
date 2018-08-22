@@ -18,7 +18,11 @@ suite('Refinement', ({ expect, spy, stub, itShouldProvideAlias }) => {
 
     describe('state', () => {
       it('should set initial value', () => {
-        expect(refinement.state).to.eql({ total: 0 });
+        expect(refinement.state).to.eql({
+          total: 0,
+          showTotal: false,
+          label: '',
+        });
       });
     });
   });
@@ -26,23 +30,39 @@ suite('Refinement', ({ expect, spy, stub, itShouldProvideAlias }) => {
   describe('init()', () => {
     it('should set state', () => {
       const total = 1024;
-      const updateTotal = refinement.updateTotal = spy();
+      const updateState = refinement.updateState = spy();
 
       refinement.init();
 
-      expect(updateTotal).to.be.called;
+      expect(updateState).to.be.called;
     });
   });
 
   describe('onUpdate()', () => {
     it('should update the total', () => {
       const total = 1024;
-      const updateTotal = refinement.updateTotal = spy();
-      refinement.state = <any>{ total: 1 };
+      const updateState = refinement.updateState = spy();
 
       refinement.onUpdate();
 
-      expect(updateTotal).to.be.called;
+      expect(updateState).to.be.called;
+    });
+  });
+
+  describe('updateState()', () => {
+    it('should update the state', () => {
+      const total = 1024;
+      const showTotal = true;
+      const label = 'value'
+      const getTotal = refinement.getTotal = () => total;
+      const shouldShowTotal = refinement.shouldShowTotal = () => showTotal;
+      const getLabel = refinement.getLabel = () => label;
+      refinement.props = <any>{ value: label };
+      refinement.state = <any>{ a: 'b' };
+
+      refinement.updateState();
+
+      expect(refinement.state).to.eql({ a: 'b', total, showTotal, label });
     });
   });
 
@@ -66,27 +86,76 @@ suite('Refinement', ({ expect, spy, stub, itShouldProvideAlias }) => {
     });
   });
 
-  describe('updateTotal()', () => {
+  describe('getTotal()', () => {
     it('should return the total if it exists', () => {
       const total = 1024;
       refinement.props = <any>{ total };
+      refinement.shouldShowTotal = () => true;
 
-      refinement.updateTotal();
-
-      expect(refinement.state).to.eql({ total });
+      expect(refinement.getTotal()).to.eq(total);
     });
 
     it('should return the record count if the refinement is selected and not or-able', () => {
       const count = 1024;
-      refinement.select = spy(() => count);
+      refinement.select = () => count;
+      refinement.shouldShowTotal = () => true;
       refinement.props = <any>{
         or: false,
         selected: true,
       };
 
-      refinement.updateTotal();
+      expect(refinement.getTotal()).to.eql(count);
+    });
+  });
 
-      expect(refinement.state).to.eql({ total: count });
+  describe('shouldShowTotal()', () => {
+    const truthTable = [
+      { total: 0, alwaysShowTotal: false, selected: false, or: false, expected: false },
+      { total: 0, alwaysShowTotal: false, selected: false, or:  true, expected: false },
+      { total: 0, alwaysShowTotal: false, selected:  true, or: false, expected: false },
+      { total: 0, alwaysShowTotal: false, selected:  true, or:  true, expected: false },
+      { total: 0, alwaysShowTotal:  true, selected: false, or: false, expected: false },
+      { total: 0, alwaysShowTotal:  true, selected: false, or:  true, expected: false },
+      { total: 0, alwaysShowTotal:  true, selected:  true, or: false, expected: false },
+      { total: 0, alwaysShowTotal:  true, selected: false, or:  true, expected: false },
+      { total: 0, alwaysShowTotal:  true, selected:  true, or: false, expected: false },
+      { total: 0, alwaysShowTotal:  true, selected:  true, or:  true, expected: false },
+      { total: 1, alwaysShowTotal: false, selected: false, or: false, expected:  true },
+      { total: 1, alwaysShowTotal: false, selected: false, or:  true, expected:  true },
+      { total: 1, alwaysShowTotal: false, selected:  true, or: false, expected: false },
+      { total: 1, alwaysShowTotal: false, selected:  true, or:  true, expected: false },
+      { total: 1, alwaysShowTotal:  true, selected: false, or: false, expected:  true },
+      { total: 1, alwaysShowTotal:  true, selected: false, or:  true, expected:  true },
+      { total: 1, alwaysShowTotal:  true, selected:  true, or: false, expected:  true },
+      { total: 1, alwaysShowTotal:  true, selected:  true, or:  true, expected:  true },
+    ];
+
+    truthTable.forEach(({ total, alwaysShowTotal, selected, or, expected}) => {
+      it(`should return ${expected} for total: ${total ? '>0' : '0'}, alwaysShowTotal: ${alwaysShowTotal}, selected: ${selected}, or: ${or}`, () => {
+        refinement.props = { alwaysShowTotal, selected, or };
+        refinement.state = <any>{ total };
+
+        expect(refinement.shouldShowTotal()).to.eq(expected);
+      });
+    });
+  });
+
+  describe('getLabel()', () => {
+    it('should return the value', () => {
+      const value = 'value';
+      refinement.props = { range: false, value };
+
+      expect(refinement.getLabel()).to.eq(value);
+    });
+
+    it('should return a range', () => {
+      refinement.props = {
+        range: true,
+        low: 4,
+        high: 10,
+      };
+
+      expect(refinement.getLabel()).to.eq('4 - 10');
     });
   });
 });
