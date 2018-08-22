@@ -14,7 +14,7 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
     describe('props', () => {
       it('should set initial values', () => {
         expect(navigation.props).to.eql({
-          alwaysShowTotals: true,
+          alwaysShowTotals: false,
           display: {},
           labels: {},
           collapse: true,

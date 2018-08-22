@@ -8,7 +8,7 @@ import NavigationList from '../navigation-list';
 @Core.tag('gb-navigation', require('./index.html'))
 class Navigation {
   props: Navigation.Props = {
-    alwaysShowTotals: true,
+    alwaysShowTotals: false,
     display: {},
     labels: {},
     collapse: true,
