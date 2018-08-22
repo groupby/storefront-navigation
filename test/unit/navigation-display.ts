@@ -239,15 +239,16 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
       const state = { i: 'j' };
       const field = 'brand';
       const select = (navigationDisplay.select = spy(() => navigation));
+      navigationDisplay.props.field = <any>{ alwaysShowTotals: false };
       navigationDisplay.flux = <any>{ store: { getState: () => state } };
 
       const refinements = navigationDisplay.selectNavigation(field);
 
       expect(refinements).to.eql({
         refinements: [
-          { a: 'b', index: 0, selected: true, or: false, range: true },
-          { c: 'd', index: 1, selected: false, or: false, range: true },
-          { e: 'f', index: 2, selected: true, or: false, range: true },
+          { a: 'b', index: 0, selected: true, or: false, range: true, alwaysShowTotal: false },
+          { c: 'd', index: 1, selected: false, or: false, range: true, alwaysShowTotal: false },
+          { e: 'f', index: 2, selected: true, or: false, range: true, alwaysShowTotal: false },
         ],
         selected: [0, 2],
         or: false,
@@ -269,18 +270,50 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
       const state = { i: 'j' };
       const field = 'brand';
       const select = (navigationDisplay.select = spy(() => navigation));
+      navigationDisplay.props.field = <any>{ alwaysShowTotals: false };
       navigationDisplay.flux = <any>{ store: { getState: () => state } };
 
       const refinements = navigationDisplay.selectNavigation(field);
 
       expect(refinements).to.eql({
         refinements: [
-          { a: 'b', index: 0, selected: true, or: false, range: true },
-          { e: 'f', index: 2, selected: true, or: false, range: true },
-          { c: 'd', index: 1, selected: false, or: false, range: true },
+          { a: 'b', index: 0, selected: true, or: false, range: true, alwaysShowTotal: false },
+          { e: 'f', index: 2, selected: true, or: false, range: true, alwaysShowTotal: false },
+          { c: 'd', index: 1, selected: false, or: false, range: true, alwaysShowTotal: false },
         ],
         selected: [0, 2],
         show: [0, 2, 1],
+        or: false,
+        range: true,
+        g: 'h',
+      });
+      expect(select).to.be.calledWithExactly(Selectors.navigation, field);
+    });
+
+    it('should mark the refinement to always show total if it is marked as such on the field', () => {
+      const navigation = {
+        refinements: [{ a: 'b' }, { c: 'd' }, { e: 'f' }],
+        selected: [0, 2],
+        or: false,
+        range: true,
+        g: 'h',
+      };
+      const state = { i: 'j' };
+      const field = 'brand';
+      const select = (navigationDisplay.select = spy(() => navigation));
+      const alwaysShowTotal = true;
+      navigationDisplay.props.field = <any>{ alwaysShowTotals: alwaysShowTotal };
+      navigationDisplay.flux = <any>{ store: { getState: () => state } };
+
+      const refinements = navigationDisplay.selectNavigation(field);
+
+      expect(refinements).to.eql({
+        refinements: [
+          { a: 'b', index: 0, selected: true, or: false, range: true, alwaysShowTotal },
+          { c: 'd', index: 1, selected: false, or: false, range: true, alwaysShowTotal },
+          { e: 'f', index: 2, selected: true, or: false, range: true, alwaysShowTotal },
+        ],
+        selected: [0, 2],
         or: false,
         range: true,
         g: 'h',

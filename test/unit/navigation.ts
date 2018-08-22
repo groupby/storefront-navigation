@@ -13,7 +13,13 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
   describe('constructor()', () => {
     describe('props', () => {
       it('should set initial values', () => {
-        expect(navigation.props).to.eql({ display: {}, labels: {}, collapse: true, showOnlyAvailableNavHeaders: false });
+        expect(navigation.props).to.eql({
+          alwaysShowTotals: false,
+          display: {},
+          labels: {},
+          collapse: true,
+          showOnlyAvailableNavHeaders: false,
+        });
       });
     });
 
@@ -54,82 +60,83 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
     });
 
     it('should set fields, with active set for the first x number of fields based on isActive', () => {
-      navigation.props = <any>{ display, labels, collapse: { isActive: 2 } };
+      navigation.props = <any>{ display, labels, collapse: { isActive: 2 }, alwaysShowTotals: false };
 
       navigation.updateFields(navigationsObject);
 
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'a', display: 'value', label: undefined, active: true },
-          { value: 'b', display: 'range', label: 'B', active: true },
-          { value: 'c', display: undefined, label: 'C', active: false },
+          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotals: false },
+          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotals: false },
+          { value: 'c', display: undefined, label: 'C', active: false, alwaysShowTotals: false },
         ],
       });
     });
 
     it('should set fields with active true when isActive true', () => {
-      navigation.props = <any>{ display, labels, collapse: { isActive: true } };
+      navigation.props = <any>{ display, labels, collapse: { isActive: true }, alwaysShowTotals: false };
 
       navigation.updateFields(navigationsObject);
 
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'a', display: 'value', label: undefined, active: true },
-          { value: 'b', display: 'range', label: 'B', active: true },
-          { value: 'c', display: undefined, label: 'C', active: true },
+          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotals: false },
+          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotals: false },
+          { value: 'c', display: undefined, label: 'C', active: true, alwaysShowTotals: false },
         ],
       });
     });
 
     it('should set fields with active false when isActive false', () => {
-      navigation.props = <any>{ display, labels, collapse: { isActive: false } };
+      navigation.props = <any>{ display, labels, collapse: { isActive: false }, alwaysShowTotals: false };
 
       navigation.updateFields(navigationsObject);
 
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'a', display: 'value', label: undefined, active: false },
-          { value: 'b', display: 'range', label: 'B', active: false },
-          { value: 'c', display: undefined, label: 'C', active: false },
+          { value: 'a', display: 'value', label: undefined, active: false, alwaysShowTotals: false },
+          { value: 'b', display: 'range', label: 'B', active: false, alwaysShowTotals: false },
+          { value: 'c', display: undefined, label: 'C', active: false, alwaysShowTotals: false },
         ],
       });
     });
 
     it('should set fields with active true when collapse true', () => {
-      navigation.props = <any>{ display, labels, collapse: true };
+      navigation.props = <any>{ display, labels, collapse: true, alwaysShowTotals: false };
 
       navigation.updateFields(navigationsObject);
 
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'a', display: 'value', label: undefined, active: true },
-          { value: 'b', display: 'range', label: 'B', active: true },
-          { value: 'c', display: undefined, label: 'C', active: true },
+          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotals: false },
+          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotals: false },
+          { value: 'c', display: undefined, label: 'C', active: true, alwaysShowTotals: false },
         ],
       });
     });
 
     it('should set fields with active true when collapse false', () => {
-      navigation.props = <any>{ display, labels, collapse: false };
+      navigation.props = <any>{ display, labels, collapse: false, alwaysShowTotals: false };
 
       navigation.updateFields(navigationsObject);
 
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'a', display: 'value', label: undefined, active: true },
-          { value: 'b', display: 'range', label: 'B', active: true },
-          { value: 'c', display: undefined, label: 'C', active: true },
+          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotals: false },
+          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotals: false },
+          { value: 'c', display: undefined, label: 'C', active: true, alwaysShowTotals: false },
         ],
       });
     });
 
     it('should use only available navigations if showOnlyAvailableNavHeaders is true', () => {
-      const navigationSelect = navigation.select = spy(() => [{ field: 'd' }, { field: 'e' }]);
+      const navigationSelect = (navigation.select = spy(() => [{ field: 'd' }, { field: 'e' }]));
       navigation.props = <any>{
         display: { d: 'value', e: 'range' },
         labels: { d: undefined, e: 'B' },
         collapse: false,
         showOnlyAvailableNavHeaders: true,
+        alwaysShowTotals: false,
       };
 
       navigation.updateFields(navigationsObject);
@@ -137,8 +144,23 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
       expect(navigationSelect).to.be.calledWith(Selectors.availableNavigations);
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'd', display: 'value', label: undefined, active: true },
-          { value: 'e', display: 'range', label: 'B', active: true },
+          { value: 'd', display: 'value', label: undefined, active: true, alwaysShowTotals: false },
+          { value: 'e', display: 'range', label: 'B', active: true, alwaysShowTotals: false },
+        ],
+      });
+    });
+
+    it('should add', () => {
+      const alwaysShowTotals = true;
+      navigation.props = <any>{ display, labels, collapse: { isActive: 2 }, alwaysShowTotals };
+
+      navigation.updateFields(navigationsObject);
+
+      expect(set).to.be.calledWith({
+        fields: [
+          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotals },
+          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotals },
+          { value: 'c', display: undefined, label: 'C', active: false, alwaysShowTotals },
         ],
       });
     });
