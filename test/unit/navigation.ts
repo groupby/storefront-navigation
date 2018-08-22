@@ -60,9 +60,9 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
 
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotal: false },
-          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotal: false },
-          { value: 'c', display: undefined, label: 'C', active: false, alwaysShowTotal: false },
+          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotals: false },
+          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotals: false },
+          { value: 'c', display: undefined, label: 'C', active: false, alwaysShowTotals: false },
         ],
       });
     });
@@ -74,9 +74,9 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
 
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotal: false },
-          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotal: false },
-          { value: 'c', display: undefined, label: 'C', active: true, alwaysShowTotal: false },
+          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotals: false },
+          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotals: false },
+          { value: 'c', display: undefined, label: 'C', active: true, alwaysShowTotals: false },
         ],
       });
     });
@@ -88,9 +88,9 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
 
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'a', display: 'value', label: undefined, active: false, alwaysShowTotal: false },
-          { value: 'b', display: 'range', label: 'B', active: false, alwaysShowTotal: false },
-          { value: 'c', display: undefined, label: 'C', active: false, alwaysShowTotal: false },
+          { value: 'a', display: 'value', label: undefined, active: false, alwaysShowTotals: false },
+          { value: 'b', display: 'range', label: 'B', active: false, alwaysShowTotals: false },
+          { value: 'c', display: undefined, label: 'C', active: false, alwaysShowTotals: false },
         ],
       });
     });
@@ -102,9 +102,9 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
 
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotal: false },
-          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotal: false },
-          { value: 'c', display: undefined, label: 'C', active: true, alwaysShowTotal: false },
+          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotals: false },
+          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotals: false },
+          { value: 'c', display: undefined, label: 'C', active: true, alwaysShowTotals: false },
         ],
       });
     });
@@ -116,9 +116,9 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
 
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotal: false },
-          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotal: false },
-          { value: 'c', display: undefined, label: 'C', active: true, alwaysShowTotal: false },
+          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotals: false },
+          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotals: false },
+          { value: 'c', display: undefined, label: 'C', active: true, alwaysShowTotals: false },
         ],
       });
     });
@@ -138,24 +138,23 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
       expect(navigationSelect).to.be.calledWith(Selectors.availableNavigations);
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'd', display: 'value', label: undefined, active: true, alwaysShowTotal: false },
-          { value: 'e', display: 'range', label: 'B', active: true, alwaysShowTotal: false },
+          { value: 'd', display: 'value', label: undefined, active: true, alwaysShowTotals: false },
+          { value: 'e', display: 'range', label: 'B', active: true, alwaysShowTotals: false },
         ],
       });
     });
 
     it('should add', () => {
       const alwaysShowTotals = true;
-      const alwaysShowTotal = alwaysShowTotals;
       navigation.props = <any>{ display, labels, collapse: { isActive: 2 }, alwaysShowTotals };
 
       navigation.updateFields(navigationsObject);
 
       expect(set).to.be.calledWith({
         fields: [
-          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotal },
-          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotal },
-          { value: 'c', display: undefined, label: 'C', active: false, alwaysShowTotal },
+          { value: 'a', display: 'value', label: undefined, active: true, alwaysShowTotals },
+          { value: 'b', display: 'range', label: 'B', active: true, alwaysShowTotals },
+          { value: 'c', display: undefined, label: 'C', active: false, alwaysShowTotals },
         ],
       });
     });

@@ -61,6 +61,7 @@ class NavigationDisplay {
       or: navigation.or,
       range: navigation.range,
       selected: navigation.selected.includes(index),
+      alwaysShowTotal: this.props.field.alwaysShowTotals,
     });
 
     const navigation = this.select(Selectors.navigation, field);
@@ -107,6 +108,7 @@ namespace NavigationDisplay {
     display: Display;
     label: string;
     active: boolean;
+    alwaysShowTotals: boolean;
   }
 }
 

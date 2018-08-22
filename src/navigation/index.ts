@@ -40,7 +40,7 @@ class Navigation {
         display: this.props.display[value],
         label: this.props.labels[value],
         active: typeof isActive === 'boolean' ? isActive : index < isActive,
-        alwaysShowTotal: this.props.alwaysShowTotals,
+        alwaysShowTotals: this.props.alwaysShowTotals,
       })),
     });
   };
