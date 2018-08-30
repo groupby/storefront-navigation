@@ -18,21 +18,17 @@ class Refinement {
   }
 
   updateState() {
+    const total = this.props.selected && !this.props.or ? this.select(Selectors.recordCount) : this.props.total;
+
     this.state = {
       ...this.state,
-      total: this.getTotal(),
-      showTotal: this.getShowTotal(),
-      label: this.getLabel(),
-      orType: this.getOrType(),
-      cancelDisplay: this.getCancelDisplay(),
+      total,
+      showTotal: total > 0 && (this.props.alwaysShowTotal || !this.props.selected),
+      label: this.props.range ? this.props.low + ' - ' + this.props.high : this.props.value,
+      orType: this.props.or ? 'checkbox' : 'button',
+      cancelDisplay: !this.props.or && !!this.props.selected,
     };
   }
-
-  getTotal = () => (this.props.selected && !this.props.or ? this.select(Selectors.recordCount) : this.props.total);
-  getShowTotal = () => this.getTotal() > 0 && (this.props.alwaysShowTotal || !this.props.selected);
-  getLabel = () => (this.props.range ? this.props.low + ' - ' + this.props.high : this.props.value);
-  getOrType = () => (this.props.or ? 'checkbox' : 'button');
-  getCancelDisplay = () => !this.props.or && !!this.props.selected;
 
   onClick(event: Refinement.IndexedClickEvent) {
     event.preventUpdate = true;
