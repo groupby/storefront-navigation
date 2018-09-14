@@ -1,6 +1,7 @@
 import * as pkg from '../../src';
 import Navigation from '../../src/navigation';
 import NavigationDisplay from '../../src/navigation-display';
+import NavigationHeader from '../../src/navigation-header';
 import NavigationList from '../../src/navigation-list';
 import Refinement from '../../src/refinement';
 import RefinementList from '../../src/refinement-list';
@@ -15,6 +16,10 @@ suite('package', ({ expect }) => {
 
   it('should expose NavigationDisplay', () => {
     expect(pkg.NavigationDisplay).to.eq(NavigationDisplay);
+  });
+
+  it('should expose NavigationHeader', () => {
+    expect(pkg.NavigationHeader).to.eq(NavigationHeader);
   });
 
   it('should expose NavigationList', () => {
