@@ -2,7 +2,7 @@ import FilterRefinementControls from './filter-refinement-controls';
 import FilteredRefinementList from './filtered-refinement-list';
 import Navigation from './navigation';
 import NavigationDisplay from './navigation-display';
-import './navigation-header';
+import NavigationHeader from './navigation-header';
 import NavigationList from './navigation-list';
 import RangeRefinementControls from './range-refinement-controls';
 import './range-selector';
@@ -19,6 +19,7 @@ export {
   FilteredRefinementList,
   Navigation,
   NavigationDisplay,
+  NavigationHeader,
   NavigationList,
   SliderRefinementControls,
   RangeRefinementControls,
