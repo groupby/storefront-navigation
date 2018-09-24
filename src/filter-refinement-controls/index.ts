@@ -7,6 +7,8 @@ class FilterRefinementControls extends ValueRefinementControls {
     return 'filterControls';
   }
 
+  selectAllRefinements = () => this.actions.selectAllRefinements(this.props.navigation.field)
+
   fetchMoreRefinements = () => {
     if (this.state.more) {
       this.state.moreRefinements();
