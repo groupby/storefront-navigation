@@ -5,6 +5,7 @@ import RefinementControls from '../refinement-controls';
 class ValueRefinementControls extends RefinementControls<RefinementControls.Props, ValueRefinementControls.State> {
   state: ValueRefinementControls.State = {
     moreRefinements: () => this.actions.fetchMoreRefinements(this.props.navigation.field),
+    selectAllRefinements: () => this.actions.selectAllRefinements(this.props.navigation.field)
   };
 
   get alias() {
@@ -32,6 +33,7 @@ namespace ValueRefinementControls {
   export interface State {
     more?: boolean;
     moreRefinements(): void;
+    selectAllRefinements(): void;
   }
 
   export interface ActionableNavigation extends RefinementControls.SelectedNavigation {
