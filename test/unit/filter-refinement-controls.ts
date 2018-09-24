@@ -22,7 +22,8 @@ suite('FilterRefinementControls', ({ expect, spy }) => {
   describe('fetchMoreRefinements()', () => {
     it('should fetch more refinements if there are more to fetch', () => {
       const moreRefinements = spy();
-      filterRefinementControls.state = { more: true, moreRefinements };
+      const selectAllRefinements = spy();
+      filterRefinementControls.state = { more: true, moreRefinements, selectAllRefinements };
 
       filterRefinementControls.fetchMoreRefinements();
 

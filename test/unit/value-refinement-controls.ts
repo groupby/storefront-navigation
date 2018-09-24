@@ -26,6 +26,19 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
           expect(fetchMoreRefinements).to.be.calledWith(field);
         });
       });
+
+      describe('selectAllRefinements()', () => {
+        it('should call actions.selectAllRefinements()', () => {
+          const selectAllRefinements = spy();
+          const field = 'myfield';
+          valueRefinementControls.props = { navigation: { field } };
+          valueRefinementControls.actions = <any>{ selectAllRefinements };
+
+          valueRefinementControls.state.selectAllRefinements();
+
+          expect(selectAllRefinements).to.be.calledWith(field);
+        });
+      });
     });
   });
 
