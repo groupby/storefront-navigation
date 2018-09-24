@@ -1,5 +1,7 @@
-<gb-list items="{props.refinements}" item-alias="refinement" item-props="{props.itemProps}">
+<input oninput="{this.handleChange}" onkeydown="{this.handleSelect}"/>
+<gb-list if="{state.filteredRefinements.length}" items="{state.filteredRefinements}" item-alias="refinement" item-props="{props.itemProps}">
   <yield>
     <gb-refinement class="{gb-selected: item.selected}" _props="{item}"></gb-refinement>
   </yield>
 </gb-list>
+<div if="{!state.filteredRefinements.length}">{props.notFoundLabel || "Sorry, no matches found"}</div>
