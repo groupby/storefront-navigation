@@ -1,4 +1,4 @@
-import { Events, Selectors, Tag } from '@storefront/core';
+import { Events, Selectors, Tag, StoreSections } from '@storefront/core';
 import NavigationDisplay from '../../src/navigation-display';
 import suite from './_suite';
 
@@ -17,6 +17,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
             toggleClosed: 'gb-icon__plus',
             toggleOpen: 'gb-icon__minus',
           },
+          storeSection: StoreSections.DEFAULT,
         });
       });
     });
@@ -29,12 +30,18 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
   });
 
   describe('init()', () => {
-    it('should call updateField()', () => {
-      const field = 'brand';
-      const updateField = (navigationDisplay.updateField = spy());
+    let value, field;
+
+    beforeEach(() => {
+      field = 'brand';
+      value = 'abcd';
       navigationDisplay.select = spy(() => ({}));
-      stub(Tag, 'getMeta').returns({});
       navigationDisplay.subscribe = () => null;
+    });
+
+    it('should call updateField()', () => {
+      const updateField = (navigationDisplay.updateField = spy());
+      stub(Tag, 'getMeta').returns({});
       navigationDisplay.flux = <any>{
         store: { getState: () => null },
       };
@@ -48,13 +55,11 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
     it('should set isActive based on ui', () => {
       const globalState = { a: 'a' };
       const name = 'efgh';
-      const value = 'abcd';
       const select = (navigationDisplay.select = spy(() => ({ isActive: false })));
       stub(Tag, 'getMeta')
         .withArgs(navigationDisplay)
         .returns({ name });
       navigationDisplay.updateField = () => null;
-      navigationDisplay.subscribe = () => null;
       navigationDisplay.flux = <any>{
         store: { getState: () => globalState },
       };
@@ -69,13 +74,11 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
     it('should set isActive based on active if UI state does not exist', () => {
       const globalState = { a: 'a' };
       const name = 'efgh';
-      const value = 'abcd';
       const select = (navigationDisplay.select = spy(() => undefined));
       stub(Tag, 'getMeta')
         .withArgs(navigationDisplay)
         .returns({ name });
       navigationDisplay.updateField = () => null;
-      navigationDisplay.subscribe = () => null;
       navigationDisplay.flux = <any>{
         store: { getState: () => globalState },
       };
@@ -90,8 +93,6 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
     it('should listen for UI_UPDATED', () => {
       const subscribe = navigationDisplay.subscribe = spy();
       const name = 'efgh';
-      const value = 'abcd';
-      navigationDisplay.select = () => undefined;
       stub(Tag, 'getMeta').returns({ name });
       navigationDisplay.updateField = () => null;
       navigationDisplay.flux = <any>{
@@ -102,6 +103,39 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
       navigationDisplay.init();
 
       expect(subscribe).to.be.calledWith(`${Events.UI_UPDATED}:${name}:${value}`);
+    });
+
+    it('should set the _selector function to select navigation if the storeSection is search', () => {
+      navigationDisplay.props = <any>{
+        field: { value },
+        storeSection: StoreSections.SEARCH,
+      };
+      navigationDisplay.updateField = () => null;
+      const select = (navigationDisplay.select = spy(() => undefined));
+
+      navigationDisplay.init();
+      navigationDisplay._selector(field);
+
+      expect(select).to.be.calledWithExactly(Selectors.navigation, field);
+    });
+
+    it('should set the _selector function to select pastPurchaseNavigationsObject if the storeSection is pastPurchases', () => {
+      navigationDisplay.props = <any>{
+        field: { value },
+        storeSection: StoreSections.PAST_PURCHASES,
+      };
+      navigationDisplay.updateField = () => null;
+      const navigation = {
+        allIds: [field],
+        byId: { field },
+        sort: [],
+      };
+      const select = (navigationDisplay.select = spy(() => navigation));
+
+      navigationDisplay.init();
+      navigationDisplay._selector(field);
+
+      expect(select).to.be.calledWithExactly(Selectors.pastPurchaseNavigationsObject);
     });
   });
 
@@ -204,12 +238,12 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
 
       // tslint:disable-next-line max-line-length
       expect(off).to.be.calledWith(
-        `${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`,
+        `${navigationDisplay._event}:${field}`,
         navigationDisplay.updateNavigation
       );
     });
 
-    it('should listen for SELECTED_REFINEMENTS_UPDATED', () => {
+    it('should listen for refinements updated event', () => {
       const on = spy();
       const field = 'brand';
       navigationDisplay.selectNavigation = () => ({});
@@ -221,13 +255,20 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
 
       // tslint:disable-next-line max-line-length
       expect(on).to.be.calledWith(
-        `${Events.SELECTED_REFINEMENTS_UPDATED}:${field}`,
+        `${navigationDisplay._event}:${field}`,
         navigationDisplay.updateNavigation
       );
     });
   });
 
   describe('selectNavigation()', () => {
+    let state, field;
+
+    beforeEach(() => {
+      state = { i: 'j' };
+      field = 'brand';
+    });
+
     it('should extract refinements and mark them as selected', () => {
       const navigation = {
         refinements: [{ a: 'b' }, { c: 'd' }, { e: 'f' }],
@@ -236,9 +277,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         range: true,
         g: 'h',
       };
-      const state = { i: 'j' };
-      const field = 'brand';
-      const select = (navigationDisplay.select = spy(() => navigation));
+      navigationDisplay._selector = spy(() => navigation);
       navigationDisplay.props.field = <any>{ alwaysShowTotals: false };
       navigationDisplay.flux = <any>{ store: { getState: () => state } };
 
@@ -255,7 +294,6 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         range: true,
         g: 'h',
       });
-      expect(select).to.be.calledWithExactly(Selectors.navigation, field);
     });
 
     it('should extract show refinements and mark them as selected', () => {
@@ -267,9 +305,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         range: true,
         g: 'h',
       };
-      const state = { i: 'j' };
-      const field = 'brand';
-      const select = (navigationDisplay.select = spy(() => navigation));
+      navigationDisplay._selector = spy(() => navigation);
       navigationDisplay.props.field = <any>{ alwaysShowTotals: false };
       navigationDisplay.flux = <any>{ store: { getState: () => state } };
 
@@ -287,7 +323,6 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         range: true,
         g: 'h',
       });
-      expect(select).to.be.calledWithExactly(Selectors.navigation, field);
     });
 
     it('should mark the refinement to always show total if it is marked as such on the field', () => {
@@ -298,10 +333,8 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         range: true,
         g: 'h',
       };
-      const state = { i: 'j' };
-      const field = 'brand';
-      const select = (navigationDisplay.select = spy(() => navigation));
       const alwaysShowTotal = true;
+      navigationDisplay._selector = spy(() => navigation);
       navigationDisplay.props.field = <any>{ alwaysShowTotals: alwaysShowTotal };
       navigationDisplay.flux = <any>{ store: { getState: () => state } };
 
@@ -318,7 +351,6 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         range: true,
         g: 'h',
       });
-      expect(select).to.be.calledWithExactly(Selectors.navigation, field);
     });
   });
 

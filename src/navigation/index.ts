@@ -1,11 +1,11 @@
-import * as Core from '@storefront/core';
+import { configurable, provide, origin, tag, StoreSections, Events, Selectors, Store, Tag } from '@storefront/core';
 import NavigationDisplay from '../navigation-display';
 import NavigationList from '../navigation-list';
 
-@Core.configurable
-@Core.provide('navigation')
-@Core.origin('navigation')
-@Core.tag('gb-navigation', require('./index.html'))
+@configurable
+@provide('navigation')
+@origin('navigation')
+@tag('gb-navigation', require('./index.html'))
 class Navigation {
   props: Navigation.Props = {
     alwaysShowTotals: false,
@@ -13,25 +13,33 @@ class Navigation {
     labels: {},
     collapse: true,
     showOnlyAvailableNavHeaders: false,
+    storeSection: StoreSections.DEFAULT,
   };
   state: Navigation.State = {
     fields: [],
   };
 
   init() {
-    this.subscribe(Core.Events.NAVIGATIONS_UPDATED, this.updateFields);
-
-    this.updateFields(this.select(Core.Selectors.navigationsObject));
+    switch (this.props.storeSection) {
+      case StoreSections.PAST_PURCHASES:
+        this.subscribe(Events.PAST_PURCHASE_NAVIGATIONS_UPDATED, this.updateFields);
+        this.updateFields(this.select(Selectors.pastPurchaseNavigationsObject));
+        break;
+      case StoreSections.SEARCH:
+        this.subscribe(Events.NAVIGATIONS_UPDATED, this.updateFields);
+        this.updateFields(this.select(Selectors.navigationsObject));
+        break;
+    }
   }
 
-  updateFields = (navigations: Core.Store.Indexed<Core.Store.Navigation>) => {
+  updateFields = (navigations: Store.Indexed<Store.Navigation>) => {
     const { collapse } = this.props;
     let isActive: boolean | number = true;
     if (typeof collapse !== 'boolean') {
       isActive = collapse.isActive;
     }
-    const navs = this.props.showOnlyAvailableNavHeaders
-      ? this.select(Core.Selectors.availableNavigations).map((nav) => nav.field)
+    const navs = this.props.showOnlyAvailableNavHeaders && this.props.storeSection === StoreSections.SEARCH
+      ? this.select(Selectors.availableNavigations).map((nav) => nav.field)
       : navigations.allIds;
 
     this.set({
@@ -46,7 +54,7 @@ class Navigation {
   };
 }
 
-interface Navigation extends Core.Tag<Navigation.Props, Navigation.State> {}
+interface Navigation extends Tag<Navigation.Props, Navigation.State> {}
 namespace Navigation {
   export interface Props {
     alwaysShowTotals: boolean;
@@ -58,6 +66,7 @@ namespace Navigation {
           isActive: boolean | number;
         };
     showOnlyAvailableNavHeaders: boolean;
+    storeSection: string;
   }
 
   export interface State {
