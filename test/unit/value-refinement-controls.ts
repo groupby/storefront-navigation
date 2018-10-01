@@ -1,4 +1,4 @@
-import { Selectors } from '@storefront/core';
+import { Selectors, StoreSections } from '@storefront/core';
 import RefinementControls from '../../src/refinement-controls';
 import ValueRefinementControls from '../../src/value-refinement-controls';
 import suite from './_suite';
@@ -34,6 +34,40 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
       expect(valueRefinementControls.alias).to.eq('valueControls');
     });
   });
+
+  describe('selectRefinement', () => {
+    beforeEach(() => {
+      const field = 'myfield';
+      valueRefinementControls.props = { navigation: { field } };
+    });
+
+    it('should return `selectRefinement` if storeSection is search', () => {
+      valueRefinementControls.props.storeSection = StoreSections.SEARCH;
+      expect(valueRefinementControls.selectRefinement).to.eq('selectRefinement');
+    });
+
+    it('should return `selectPastPurchaseRefinement` if storeSection is past purchases', () => {
+      valueRefinementControls.props.storeSection = StoreSections.PAST_PURCHASES;
+      expect(valueRefinementControls.selectRefinement).to.eq('selectPastPurchaseRefinement');
+    });
+  })
+
+  describe('deselectRefinement', () => {
+    beforeEach(() => {
+      const field = 'myfield';
+      valueRefinementControls.props = { navigation: { field } };
+    });
+
+    it('should return `selectRefinement` if storeSection is search', () => {
+      valueRefinementControls.props.storeSection = StoreSections.SEARCH;
+      expect(valueRefinementControls.deselectRefinement).to.eq('deselectRefinement');
+    });
+
+    it('should return `deselectPastPurchaseRefinement` if storeSection is past purchases', () => {
+      valueRefinementControls.props.storeSection = StoreSections.PAST_PURCHASES;
+      expect(valueRefinementControls.deselectRefinement).to.eq('deselectPastPurchaseRefinement');
+    });
+  })
 
   describe('transformNavigation()', () => {
     it('should add onClick() handlers', () => {
