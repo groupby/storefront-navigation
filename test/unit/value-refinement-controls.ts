@@ -70,6 +70,11 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
   })
 
   describe('transformNavigation()', () => {
+    beforeEach(() => {
+      stub(valueRefinementControls, 'selectRefinement').value('selectRefinement');
+      stub(valueRefinementControls, 'deselectRefinement').value('deselectRefinement');
+    });
+
     it('should add onClick() handlers', () => {
       const navigation: any = { a: 'b', refinements: [{ c: 'd' }, { e: 'f' }] };
 

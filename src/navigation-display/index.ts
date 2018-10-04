@@ -4,15 +4,11 @@ import RefinementControls from '../refinement-controls';
 @provide('navigationDisplay')
 @tag('gb-navigation-display', require('./index.html'))
 class NavigationDisplay {
-  _event: string;
-  _selector: Function;
-
   props: NavigationDisplay.Props = {
     icons: {
       toggleOpen: 'gb-icon__minus',
       toggleClosed: 'gb-icon__plus',
     },
-    storeSection: StoreSections.DEFAULT,
   } as NavigationDisplay.Props;
   state: NavigationDisplay.State = {
     isActive: true,
@@ -37,12 +33,12 @@ class NavigationDisplay {
 
     switch (this.props.storeSection) {
       case StoreSections.PAST_PURCHASES:
-        this._event = Events.PAST_PURCHASE_SELECTED_REFINEMENTS_UPDATED;
-        this._selector = (field) => this.select(Selectors.pastPurchaseNavigationsObject).byId[field];
+        this.state.selectedRefinementsUpdated = Events.PAST_PURCHASE_SELECTED_REFINEMENTS_UPDATED;
+        this.state.navigationSelector = (field) => this.select(Selectors.pastPurchaseNavigationsObject).byId[field];
         break;
-      default:
-        this._event = Events.SELECTED_REFINEMENTS_UPDATED;
-        this._selector = (field) => this.select(Selectors.navigation, field);
+      case StoreSections.SEARCH:
+        this.state.selectedRefinementsUpdated = Events.SELECTED_REFINEMENTS_UPDATED;
+        this.state.navigationSelector = (field) => this.select(Selectors.navigation, field);
         break;
     }
 
@@ -54,7 +50,7 @@ class NavigationDisplay {
   }
 
   onUnmount() {
-    this.flux.off(`${this._event}:${this.state.value}`, this.updateNavigation);
+    this.flux.off(`${this.state.selectedRefinementsUpdated}:${this.state.value}`, this.updateNavigation);
   }
 
   updateIsActive = ({ isActive }: NavigationDisplay.State) => this.set({ isActive });
@@ -63,11 +59,11 @@ class NavigationDisplay {
     const navigation = this.selectNavigation(field.value);
     const label = field.label || navigation.label || field.value;
 
-    this.flux.off(`${this._event}:${this.state.value}`, this.updateNavigation);
+    this.flux.off(`${this.state.selectedRefinementsUpdated}:${this.state.value}`, this.updateNavigation);
     this.root.classList.remove(`gb-navigation-${this.state.value}`);
     this.state = { ...this.state, ...field, label, navigation };
     this.root.classList.add(`gb-navigation-${field.value}`);
-    this.flux.on(`${this._event}:${field.value}`, this.updateNavigation);
+    this.flux.on(`${this.state.selectedRefinementsUpdated}:${field.value}`, this.updateNavigation);
   }
 
   selectNavigation(field: string): RefinementControls.SelectedNavigation {
@@ -80,7 +76,7 @@ class NavigationDisplay {
       alwaysShowTotal: this.props.field.alwaysShowTotals,
     });
 
-    const navigation = this._selector(field);
+    const navigation = this.state.navigationSelector(field);
 
     const refinements = navigation.show
       ? navigation.show.map((i) => transformRefinement(navigation.refinements[i], i))
@@ -106,12 +102,13 @@ namespace NavigationDisplay {
     collapse: boolean;
     field: Field;
     icons: Icons;
-    storeSection: string,
   }
 
   export interface State extends Field {
     isActive: boolean;
     navigation: RefinementControls.SelectedNavigation;
+    navigationSelector?: Function;
+    selectedRefinementsUpdated?: string;
   }
 
   export interface Icons {

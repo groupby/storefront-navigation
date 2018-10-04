@@ -13,7 +13,6 @@ class Navigation {
     labels: {},
     collapse: true,
     showOnlyAvailableNavHeaders: false,
-    storeSection: StoreSections.DEFAULT,
   };
   state: Navigation.State = {
     fields: [],
@@ -22,10 +21,12 @@ class Navigation {
   init() {
     switch (this.props.storeSection) {
       case StoreSections.PAST_PURCHASES:
+        this.state.availableNavigationSelector = () => this.select(Selectors.availablePastPurchaseNavigations);
         this.subscribe(Events.PAST_PURCHASE_NAVIGATIONS_UPDATED, this.updateFields);
         this.updateFields(this.select(Selectors.pastPurchaseNavigationsObject));
         break;
       case StoreSections.SEARCH:
+        this.state.availableNavigationSelector = () => this.select(Selectors.availableNavigations);
         this.subscribe(Events.NAVIGATIONS_UPDATED, this.updateFields);
         this.updateFields(this.select(Selectors.navigationsObject));
         break;
@@ -38,8 +39,8 @@ class Navigation {
     if (typeof collapse !== 'boolean') {
       isActive = collapse.isActive;
     }
-    const navs = this.props.showOnlyAvailableNavHeaders && this.props.storeSection === StoreSections.SEARCH
-      ? this.select(Selectors.availableNavigations).map((nav) => nav.field)
+    const navs = this.props.showOnlyAvailableNavHeaders
+      ? this.state.availableNavigationSelector().map((nav) => nav.field)
       : navigations.allIds;
 
     this.set({
@@ -56,7 +57,7 @@ class Navigation {
 
 interface Navigation extends Tag<Navigation.Props, Navigation.State> {}
 namespace Navigation {
-  export interface Props {
+  export interface Props extends Tag.Props {
     alwaysShowTotals: boolean;
     display: NavigationList.DisplayMap;
     labels: { [key: string]: string };
@@ -66,11 +67,11 @@ namespace Navigation {
           isActive: boolean | number;
         };
     showOnlyAvailableNavHeaders: boolean;
-    storeSection: string;
   }
 
   export interface State {
     fields: NavigationDisplay.Field[];
+    availableNavigationSelector?: Function;
   }
 }
 

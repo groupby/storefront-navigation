@@ -17,7 +17,6 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
             toggleClosed: 'gb-icon__plus',
             toggleOpen: 'gb-icon__minus',
           },
-          storeSection: StoreSections.DEFAULT,
         });
       });
     });
@@ -105,7 +104,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
       expect(subscribe).to.be.calledWith(`${Events.UI_UPDATED}:${name}:${value}`);
     });
 
-    it('should set the _selector function to select navigation if the storeSection is search', () => {
+    it('should set the navigationSelector function to select navigation if the storeSection is search', () => {
       navigationDisplay.props = <any>{
         field: { value },
         storeSection: StoreSections.SEARCH,
@@ -114,12 +113,12 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
       const select = (navigationDisplay.select = spy(() => undefined));
 
       navigationDisplay.init();
-      navigationDisplay._selector(field);
+      navigationDisplay.state.navigationSelector(field);
 
       expect(select).to.be.calledWithExactly(Selectors.navigation, field);
     });
 
-    it('should set the _selector function to select pastPurchaseNavigationsObject if the storeSection is pastPurchases', () => {
+    it('should set the navigationSelector function to select pastPurchaseNavigationsObject if the storeSection is pastPurchases', () => {
       navigationDisplay.props = <any>{
         field: { value },
         storeSection: StoreSections.PAST_PURCHASES,
@@ -133,7 +132,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
       const select = (navigationDisplay.select = spy(() => navigation));
 
       navigationDisplay.init();
-      navigationDisplay._selector(field);
+      navigationDisplay.state.navigationSelector(field);
 
       expect(select).to.be.calledWithExactly(Selectors.pastPurchaseNavigationsObject);
     });
@@ -238,7 +237,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
 
       // tslint:disable-next-line max-line-length
       expect(off).to.be.calledWith(
-        `${navigationDisplay._event}:${field}`,
+        `${navigationDisplay.state.selectedRefinementsUpdated}:${field}`,
         navigationDisplay.updateNavigation
       );
     });
@@ -255,7 +254,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
 
       // tslint:disable-next-line max-line-length
       expect(on).to.be.calledWith(
-        `${navigationDisplay._event}:${field}`,
+        `${navigationDisplay.state.selectedRefinementsUpdated}:${field}`,
         navigationDisplay.updateNavigation
       );
     });
@@ -277,7 +276,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         range: true,
         g: 'h',
       };
-      navigationDisplay._selector = spy(() => navigation);
+      navigationDisplay.state.navigationSelector = spy(() => navigation);
       navigationDisplay.props.field = <any>{ alwaysShowTotals: false };
       navigationDisplay.flux = <any>{ store: { getState: () => state } };
 
@@ -294,6 +293,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         range: true,
         g: 'h',
       });
+      expect(navigationDisplay.state.navigationSelector).to.be.calledWithExactly(field);
     });
 
     it('should extract show refinements and mark them as selected', () => {
@@ -305,7 +305,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         range: true,
         g: 'h',
       };
-      navigationDisplay._selector = spy(() => navigation);
+      navigationDisplay.state.navigationSelector = spy(() => navigation);
       navigationDisplay.props.field = <any>{ alwaysShowTotals: false };
       navigationDisplay.flux = <any>{ store: { getState: () => state } };
 
@@ -323,6 +323,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         range: true,
         g: 'h',
       });
+      expect(navigationDisplay.state.navigationSelector).to.be.calledWithExactly(field);
     });
 
     it('should mark the refinement to always show total if it is marked as such on the field', () => {
@@ -334,7 +335,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         g: 'h',
       };
       const alwaysShowTotal = true;
-      navigationDisplay._selector = spy(() => navigation);
+      navigationDisplay.state.navigationSelector = spy(() => navigation);
       navigationDisplay.props.field = <any>{ alwaysShowTotals: alwaysShowTotal };
       navigationDisplay.flux = <any>{ store: { getState: () => state } };
 
@@ -351,6 +352,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
         range: true,
         g: 'h',
       });
+      expect(navigationDisplay.state.navigationSelector).to.be.calledWithExactly(field);
     });
   });
 

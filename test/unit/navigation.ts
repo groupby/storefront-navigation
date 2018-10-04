@@ -19,7 +19,6 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
           labels: {},
           collapse: true,
           showOnlyAvailableNavHeaders: false,
-          storeSection: StoreSections.DEFAULT,
         });
       });
     });
@@ -32,13 +31,16 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
   });
 
   describe('init()', () => {
-    it('should listen for NAVIGATIONS_UPDATED when storeSection is search and set up initial state', () => {
-      const subscribe = (navigation.subscribe = spy());
-      const fields = [1, 2, 3];
-      const select = (navigation.select = spy(() => fields));
-      const updateFields = (navigation.updateFields = spy());
-      navigation.props.storeSection = StoreSections.SEARCH;
+    let subscribe, fields, select, updateFields;
+    beforeEach(() => {
+      subscribe = (navigation.subscribe = spy());
+      fields = [1, 2, 3];
+      select = (navigation.select = spy(() => fields));
+      updateFields = (navigation.updateFields = spy());
+    });
 
+    it('should listen for NAVIGATIONS_UPDATED when storeSection is search and set up initial state', () => {
+      navigation.props.storeSection = StoreSections.SEARCH;
       navigation.init();
 
       expect(subscribe).to.be.calledWith(Events.NAVIGATIONS_UPDATED, navigation.updateFields);
@@ -48,18 +50,31 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
     });
 
     it('should listen for PAST_PURCHASE_NAVIGATIONS_UPDATED when storeSection is pastPurchases and set up initial state', () => {
-      const subscribe = (navigation.subscribe = spy());
-      const fields = [1, 2, 3];
-      const select = (navigation.select = spy(() => fields));
-      const updateFields = (navigation.updateFields = spy());
       navigation.props.storeSection = StoreSections.PAST_PURCHASES;
-
       navigation.init();
 
       expect(subscribe).to.be.calledWith(Events.PAST_PURCHASE_NAVIGATIONS_UPDATED, navigation.updateFields);
       expect(select).to.be.calledWithExactly(Selectors.pastPurchaseNavigationsObject);
       expect(updateFields).to.be.calledWithExactly(fields);
       expect(updateFields).to.be.calledOnce;
+    });
+
+    it('should set the navigationSelector function to select navigation if the storeSection is search', () => {
+      navigation.props.storeSection = StoreSections.SEARCH;
+
+      navigation.init();
+      navigation.state.availableNavigationSelector();
+
+      expect(select).to.be.calledWithExactly(Selectors.availableNavigations);
+    });
+
+    it('should set the navigationSelector function to select pastPurchaseNavigationsObject if the storeSection is pastPurchases', () => {
+      navigation.props.storeSection = StoreSections.PAST_PURCHASES;
+
+      navigation.init();
+      navigation.state.availableNavigationSelector();
+
+      expect(select).to.be.calledWithExactly(Selectors.availablePastPurchaseNavigations);
     });
   });
 
@@ -146,20 +161,19 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
       });
     });
 
-    it('should use only available navigations if showOnlyAvailableNavHeaders is true and storeSection is search', () => {
-      const navigationSelect = (navigation.select = spy(() => [{ field: 'd' }, { field: 'e' }]));
+    it('should use only available navigations if showOnlyAvailableNavHeaders', () => {
+      const navigationSelect = (navigation.state.availableNavigationSelector = spy(() => [{ field: 'd' }, { field: 'e' }]));
       navigation.props = <any>{
         display: { d: 'value', e: 'range' },
         labels: { d: undefined, e: 'B' },
         collapse: false,
         showOnlyAvailableNavHeaders: true,
         alwaysShowTotals: false,
-        storeSection: StoreSections.SEARCH,
       };
 
       navigation.updateFields(navigationsObject);
 
-      expect(navigationSelect).to.be.calledWith(Selectors.availableNavigations);
+      expect(navigation.state.availableNavigationSelector).to.be.called;
       expect(set).to.be.calledWith({
         fields: [
           { value: 'd', display: 'value', label: undefined, active: true, alwaysShowTotals: false },
