@@ -46,16 +46,10 @@ class ValueRefinementControls extends RefinementControls<RefinementControls.Prop
 }
 
 namespace ValueRefinementControls {
-  export interface Props extends Tag.Props {}
-
   export interface State {
     more?: boolean;
     moreRefinements(): void;
   }
-
-  export type SelectRefinement = Function;
-
-  export type DeselectRefinement = Function;
 
   export interface ActionableNavigation extends RefinementControls.SelectedNavigation {
     refinements: ActionableRefinement[];
