@@ -97,8 +97,8 @@
     sayt "^0.1.8"
 
 "@storefront/structure@^1.16.0":
-  version "1.40.2"
-  resolved "https://registry.yarnpkg.com/@storefront/structure/-/structure-1.40.2.tgz#d46d35c8991c0f6f079bc000e1e4e744ba0a943f"
+  version "1.40.4"
+  resolved "https://registry.yarnpkg.com/@storefront/structure/-/structure-1.40.4.tgz#381efe31bc6514f67770ad71717fd7c6a7cc2a70"
 
 "@storefront/testing@1.1.0":
   version "1.1.0"
@@ -3884,8 +3884,8 @@ redux-persist@5.4.0:
   resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-5.4.0.tgz#a1062313546a9d4ca6f9271464d18f736e8ca394"
 
 redux-saga@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.16.0.tgz#0a231db0a1489301dd980f6f2f88d8ced418f724"
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.16.2.tgz#993662e86bc945d8509ac2b8daba3a8c615cc971"
 
 redux-undo@^0.6.1:
   version "0.6.1"

@@ -1,11 +1,11 @@
-import * as Core from '@storefront/core';
+import { configurable, origin, provide, tag, Events, Selectors, Store, StoreSections, Tag } from '@storefront/core';
 import NavigationDisplay from '../navigation-display';
 import NavigationList from '../navigation-list';
 
-@Core.configurable
-@Core.provide('navigation')
-@Core.origin('navigation')
-@Core.tag('gb-navigation', require('./index.html'))
+@configurable
+@provide('navigation')
+@origin('navigation')
+@tag('gb-navigation', require('./index.html'))
 class Navigation {
   props: Navigation.Props = {
     alwaysShowTotals: false,
@@ -19,19 +19,28 @@ class Navigation {
   };
 
   init() {
-    this.subscribe(Core.Events.NAVIGATIONS_UPDATED, this.updateFields);
-
-    this.updateFields(this.select(Core.Selectors.navigationsObject));
+    switch (this.props.storeSection) {
+      case StoreSections.PAST_PURCHASES:
+        this.state.availableNavigationSelector = () => this.select(Selectors.availablePastPurchaseNavigations);
+        this.subscribe(Events.PAST_PURCHASE_NAVIGATIONS_UPDATED, this.updateFields);
+        this.updateFields(this.select(Selectors.pastPurchaseNavigationsObject));
+        break;
+      case StoreSections.SEARCH:
+        this.state.availableNavigationSelector = () => this.select(Selectors.availableNavigations);
+        this.subscribe(Events.NAVIGATIONS_UPDATED, this.updateFields);
+        this.updateFields(this.select(Selectors.navigationsObject));
+        break;
+    }
   }
 
-  updateFields = (navigations: Core.Store.Indexed<Core.Store.Navigation>) => {
+  updateFields = (navigations: Store.Indexed<Store.Navigation>) => {
     const { collapse } = this.props;
     let isActive: boolean | number = true;
     if (typeof collapse !== 'boolean') {
       isActive = collapse.isActive;
     }
     const navs = this.props.showOnlyAvailableNavHeaders
-      ? this.select(Core.Selectors.availableNavigations).map((nav) => nav.field)
+      ? this.state.availableNavigationSelector().map((nav) => nav.field)
       : navigations.allIds;
 
     this.set({
@@ -46,9 +55,9 @@ class Navigation {
   };
 }
 
-interface Navigation extends Core.Tag<Navigation.Props, Navigation.State> {}
+interface Navigation extends Tag<Navigation.Props, Navigation.State> {}
 namespace Navigation {
-  export interface Props {
+  export interface Props extends Tag.Props {
     alwaysShowTotals: boolean;
     display: NavigationList.DisplayMap;
     labels: { [key: string]: string };
@@ -62,6 +71,7 @@ namespace Navigation {
 
   export interface State {
     fields: NavigationDisplay.Field[];
+    availableNavigationSelector?: () => Store.Navigation[];
   }
 }
 
