@@ -1,4 +1,4 @@
-import { Events, Selectors, Tag, StoreSections } from '@storefront/core';
+import { Events, Selectors, StoreSections, Tag } from '@storefront/core';
 import NavigationDisplay from '../../src/navigation-display';
 import suite from './_suite';
 
@@ -29,7 +29,8 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
   });
 
   describe('init()', () => {
-    let value, field;
+    let value
+    let field;
 
     beforeEach(() => {
       field = 'brand';
@@ -118,7 +119,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
       expect(select).to.be.calledWithExactly(Selectors.navigation, field);
     });
 
-    it('should set the navigationSelector function to select pastPurchaseNavigationsObject if the storeSection is pastPurchases', () => {
+    it('should set the navigationSelector function to select pastPurchaseNavigation if the storeSection is pastPurchases', () => {
       navigationDisplay.props = <any>{
         field: { value },
         storeSection: StoreSections.PAST_PURCHASES,
@@ -134,7 +135,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
       navigationDisplay.init();
       navigationDisplay.state.navigationSelector(field);
 
-      expect(select).to.be.calledWithExactly(Selectors.pastPurchaseNavigationsObject);
+      expect(select).to.be.calledWithExactly(Selectors.pastPurchaseNavigation, field);
     });
   });
 

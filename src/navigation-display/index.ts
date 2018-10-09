@@ -1,4 +1,4 @@
-import { provide, tag, Events, Selectors, Tag, StoreSections } from '@storefront/core';
+import { provide, tag, Events, Selectors, Store, StoreSections, Tag } from '@storefront/core';
 import RefinementControls from '../refinement-controls';
 
 @provide('navigationDisplay')
@@ -34,7 +34,7 @@ class NavigationDisplay {
     switch (this.props.storeSection) {
       case StoreSections.PAST_PURCHASES:
         this.state.selectedRefinementsUpdated = Events.PAST_PURCHASE_SELECTED_REFINEMENTS_UPDATED;
-        this.state.navigationSelector = (field) => this.select(Selectors.pastPurchaseNavigationsObject).byId[field];
+        this.state.navigationSelector = (field) => this.select(Selectors.pastPurchaseNavigation, field);
         break;
       case StoreSections.SEARCH:
         this.state.selectedRefinementsUpdated = Events.SELECTED_REFINEMENTS_UPDATED;
@@ -107,7 +107,7 @@ namespace NavigationDisplay {
   export interface State extends Field {
     isActive: boolean;
     navigation: RefinementControls.SelectedNavigation;
-    navigationSelector?: Function;
+    navigationSelector?: (field: string) => Store.Navigation;
     selectedRefinementsUpdated?: string;
   }
 
