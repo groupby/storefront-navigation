@@ -33,7 +33,7 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
     const field = 'brand';
 
     beforeEach(() => {
-      navigationDisplay.select = spy(() => ({}));
+      navigationDisplay.select = () => null;
       navigationDisplay.subscribe = () => null;
     });
 
