@@ -29,12 +29,10 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
   });
 
   describe('init()', () => {
-    let value
-    let field;
+    const value = 'abcd';
+    const field = 'brand';
 
     beforeEach(() => {
-      field = 'brand';
-      value = 'abcd';
       navigationDisplay.select = spy(() => ({}));
       navigationDisplay.subscribe = () => null;
     });
