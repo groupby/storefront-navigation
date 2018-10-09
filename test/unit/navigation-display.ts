@@ -260,12 +260,8 @@ suite('NavigationDisplay', ({ expect, spy, stub, itShouldProvideAlias }) => {
   });
 
   describe('selectNavigation()', () => {
-    let state, field;
-
-    beforeEach(() => {
-      state = { i: 'j' };
-      field = 'brand';
-    });
+    const state = { i: 'j' };
+    const field = 'brand';
 
     it('should extract refinements and mark them as selected', () => {
       const navigation = {
