@@ -31,10 +31,13 @@ suite('Navigation', ({ expect, spy, itShouldBeConfigurable, itShouldProvideAlias
   });
 
   describe('init()', () => {
-    let subscribe, fields, select, updateFields;
+    const fields = [1, 2, 3];
+    let subscribe;
+    let select;
+    let updateFields;
+
     beforeEach(() => {
       subscribe = (navigation.subscribe = spy());
-      fields = [1, 2, 3];
       select = (navigation.select = spy(() => fields));
       updateFields = (navigation.updateFields = spy());
     });

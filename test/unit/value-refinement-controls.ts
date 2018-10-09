@@ -4,6 +4,7 @@ import ValueRefinementControls from '../../src/value-refinement-controls';
 import suite from './_suite';
 
 suite('ValueRefinementControls', ({ expect, spy, stub }) => {
+  const field = 'myfield';
   let valueRefinementControls: ValueRefinementControls;
 
   beforeEach(() => (valueRefinementControls = new ValueRefinementControls()));
@@ -17,7 +18,6 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
       describe('moreRefinements()', () => {
         it('should call actions.fetchMoreRefinements()', () => {
           const fetchMoreRefinements = spy();
-          const field = 'myfield';
           valueRefinementControls.props = { navigation: { field } };
           valueRefinementControls.actions = <any>{ fetchMoreRefinements };
 
@@ -36,35 +36,25 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
   });
 
   describe('selectRefinement', () => {
-    beforeEach(() => {
-      const field = 'myfield';
-      valueRefinementControls.props = { navigation: { field } };
-    });
-
     it('should return `selectRefinement` if storeSection is search', () => {
-      valueRefinementControls.props.storeSection = StoreSections.SEARCH;
+      valueRefinementControls.props = <any>{ storeSection: StoreSections.SEARCH };
       expect(valueRefinementControls.selectRefinement).to.eq('selectRefinement');
     });
 
     it('should return `selectPastPurchaseRefinement` if storeSection is past purchases', () => {
-      valueRefinementControls.props.storeSection = StoreSections.PAST_PURCHASES;
+      valueRefinementControls.props = <any>{ storeSection: StoreSections.PAST_PURCHASES };
       expect(valueRefinementControls.selectRefinement).to.eq('selectPastPurchaseRefinement');
     });
   })
 
   describe('deselectRefinement', () => {
-    beforeEach(() => {
-      const field = 'myfield';
-      valueRefinementControls.props = { navigation: { field } };
-    });
-
     it('should return `selectRefinement` if storeSection is search', () => {
-      valueRefinementControls.props.storeSection = StoreSections.SEARCH;
+      valueRefinementControls.props = <any>{ storeSection: StoreSections.SEARCH };
       expect(valueRefinementControls.deselectRefinement).to.eq('deselectRefinement');
     });
 
     it('should return `deselectPastPurchaseRefinement` if storeSection is past purchases', () => {
-      valueRefinementControls.props.storeSection = StoreSections.PAST_PURCHASES;
+      valueRefinementControls.props = <any>{ storeSection: StoreSections.PAST_PURCHASES };
       expect(valueRefinementControls.deselectRefinement).to.eq('deselectPastPurchaseRefinement');
     });
   })
@@ -88,7 +78,6 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
 
     it('should call actions.selectRefinement() when onClick() called', () => {
       const index = 8;
-      const field = 'price';
       const navigation: any = { refinements: [{ index }] };
       const selectRefinement = spy();
       valueRefinementControls.actions = <any>{ selectRefinement };
@@ -102,7 +91,6 @@ suite('ValueRefinementControls', ({ expect, spy, stub }) => {
 
     it('should call actions.deselectRefinement() when onClick() called', () => {
       const index = 8;
-      const field = 'price';
       const navigation: any = { refinements: [{ index, selected: true }] };
       const deselectRefinement = spy();
       valueRefinementControls.actions = <any>{ deselectRefinement };
