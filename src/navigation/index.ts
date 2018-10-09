@@ -1,4 +1,4 @@
-import { configurable, provide, origin, tag, StoreSections, Events, Selectors, Store, Tag } from '@storefront/core';
+import { configurable, origin, provide, tag, Events, Selectors, Store, StoreSections, Tag } from '@storefront/core';
 import NavigationDisplay from '../navigation-display';
 import NavigationList from '../navigation-list';
 
@@ -71,7 +71,7 @@ namespace Navigation {
 
   export interface State {
     fields: NavigationDisplay.Field[];
-    availableNavigationSelector?: Function;
+    availableNavigationSelector?: () => Store.Navigation[];
   }
 }
 
