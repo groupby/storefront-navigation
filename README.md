@@ -1,4 +1,10 @@
-# StoreFront navigation
+# [MOVED] StoreFront navigation
+
+* * *
+
+**This repository has been moved to <https://github.com/groupby/storefront>.**
+
+* * *
 
 StoreFront `<gb-navigation>` component
 
